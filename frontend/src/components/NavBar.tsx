@@ -12,7 +12,7 @@ function BarraBusqueda() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="#home" style={{ color: '#ede8da'}}>Nosotros</Nav.Link>
-            <Nav.Link href="#link" style={{ color: '#ede8da'}}>Catálogo</Nav.Link>
+            <Nav.Link href="/Catalogo" style={{ color: '#ede8da'}}>Catálogo</Nav.Link>
             <Nav.Link href="#link" style={{ color: '#ede8da'}}>Carrito</Nav.Link>
           </Nav>
         </Navbar.Collapse>
