@@ -28,14 +28,14 @@ function CrearOrden() {
         street_address,
         order_products
       });
-      console.log('Orden creada:', response.data);
+      console.log('Orden creada:', response.data.data);
     } catch (error) {
       console.error('Error al crear la orden:', error);
     }
   };
 
   return (
-    <Form onSubmit={guardarDatos} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px'}}>
+    <Form onSubmit={guardarDatos} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
       <h1>Crear Orden</h1>
       <Form.Group controlId="formClientId">
         <Form.Label>ID del Cliente:</Form.Label>
@@ -53,17 +53,19 @@ function CrearOrden() {
       {order_products.map((order_product, index) => (
         <div key={index}>
           <Form.Group controlId={`formProductId${index}`}>
-            <Form.Label>ID del Producto:</Form.Label>
+            <Form.Label>ID del Producto {index + 1}:</Form.Label>
             <Form.Control type="text" value={order_product.product_id} onChange={(e) => handleOrderProductChange(index, 'product_id', e.target.value)} placeholder="ID del Producto" />
           </Form.Group>
           <Form.Group controlId={`formQuantity${index}`}>
-            <Form.Label>Cantidad:</Form.Label>
+            <Form.Label>Cantidad del Producto {index + 1}:</Form.Label>
             <Form.Control type="number" value={order_product.quantity} onChange={(e) => handleOrderProductChange(index, 'quantity', e.target.value)} placeholder="Cantidad" />
           </Form.Group>
         </div>
       ))}
-      <Button variant="primary" type="button" onClick={agregarProducto}>Agregar Producto</Button>
-      <Button variant="primary" type="submit">Crear Orden</Button>
+      <div style={{display: 'flex', margin: '30px 0 0 0'}}>
+        <Button variant="primary" type="button" onClick={agregarProducto} style={{ margin: '0 auto' }}>Agregar Producto</Button>
+        <Button variant="primary" type="submit" style={{ margin: '0 auto' }}>Crear Orden</Button>
+      </div>
     </Form>
   );
 }

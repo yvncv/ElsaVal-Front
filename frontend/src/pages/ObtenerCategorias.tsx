@@ -15,8 +15,8 @@ const ObtenerCategorias: React.FC = () => {
   useEffect(() => {
     const obtenerCategorias = async () => {
       try {
-        const response = await axios.get<Categoria[]>('https://elsaval.com.pe/api/elsaval/categories');
-        setCategorias(response.data);
+        const response = await axios.get('https://elsaval.com.pe/api/elsaval/categories');
+        setCategorias(response.data.data);
         setLoading(false);
       } catch (error) {
         setError('Error al cargar las categorías');

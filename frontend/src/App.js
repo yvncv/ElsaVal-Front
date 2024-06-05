@@ -1,9 +1,7 @@
 import React from "react";
 import BarraBusqueda from "./components/BarraBusqueda.tsx";
+import LandingPage from "./pages/LandingPage.tsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import CarruselLanding from "./components/CarruselLanding.tsx";
-import Novedades from "./components/NovedadesListado.tsx";
-import Footer from "./components/Footer.tsx";
 import Categorias from "./pages/Categorias.tsx";
 import CrearCliente from "./pages/CrearCliente.tsx";
 import ObtenerCliente from "./pages/ObtenerCliente.tsx";
@@ -14,6 +12,7 @@ import OrdenesCliente from "./pages/OrdenesCliente.tsx";
 import Ordenes from "./pages/Ordenes.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import Productos from "./pages/Productos.tsx";
 
 function App() {
   return (
@@ -22,49 +21,7 @@ function App() {
       <Router>
         <div className="App">
           <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <p
-                    style={{
-                      fontSize: "50px",
-                      padding: "50px",
-                      textAlign: "center",
-                      fontWeight: "bolder",
-                      color: "#fff",
-                    }}
-                  >
-                    ELIGE. ORDENA. DISFRUTA.
-                  </p>
-                  <CarruselLanding />
-                  <p
-                    style={{
-                      fontSize: "50px",
-                      padding: "50px",
-                      textAlign: "center",
-                      fontWeight: "bolder",
-                      color: "#fff",
-                    }}
-                  >
-                    Novedades
-                  </p>
-                  <Novedades />
-                  <p
-                    style={{
-                      fontSize: "50px",
-                      padding: "50px",
-                      textAlign: "center",
-                      fontWeight: "bolder",
-                      color: "#fff",
-                    }}
-                  >
-                    ¿QUÉ ESPERAS? ¡COTIZA YA!
-                  </p>
-                  <Footer />
-                </>
-              }
-            />
+            <Route path="/" element={<LandingPage />} />
             <Route path="/categories" element={<Categorias />} />
             <Route path="/create-client" element={<CrearCliente />} />
             <Route path="/clients/:clientId" element={<ObtenerCliente />} />
@@ -75,6 +32,7 @@ function App() {
             <Route path="/create-order" element={<CrearOrden />} />
             <Route path="/orders/:orderId" element={<DetallesOrden />} />
             <Route path="/orders/" element={<Ordenes />} />
+            <Route path="/products/" element={<Productos />} />
             <Route
               path="/client-orders/:clientId"
               element={<OrdenesCliente />}

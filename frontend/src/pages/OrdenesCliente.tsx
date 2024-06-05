@@ -13,18 +13,20 @@ interface Order {
 }
 
 function OrdenesCliente({ clientId }) {
-  const [orders, setOrders] = useState<Order[]>([]);
+  const [orders, setOrders] = useState<Order[] | null>([]);
 
   useEffect(() => {
     axios.get('https://elsaval.com.pe/api/elsaval/orders/', { params: { client_id: clientId } })
-      .then(res => setOrders(res.data))
+      .then(res => setOrders(res.data.data))
       .catch(error => console.error('Error obteniendo ordenes:', error));
   }, [clientId]);
 
   return (
     <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px'}}>
       <h1>Órdenes del Cliente</h1>
-      {orders.length === 0 ? (
+      {orders === null ? (
+        <p>Cargando...</p>
+      ) : orders.length === 0 ? (
         <p>No se han creado órdenes aún.</p>
       ) : (
         orders.map(order => (
@@ -48,10 +50,5 @@ function OrdenesCliente({ clientId }) {
 }
 
 export default OrdenesCliente;
-
-
-
-
-
 
 

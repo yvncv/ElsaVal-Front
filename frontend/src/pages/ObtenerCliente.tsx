@@ -1,35 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import "../App.css";
 import { Card } from 'react-bootstrap';
 
-interface Cliente {
-  name: string;
-  email: string;
+interface Client {
+    id: number;
+    name: string;
+    email: string;
 }
 
-function ObtenerCliente({ idCliente }) {
-  const [cliente, setCliente] = useState<Cliente | null>(null);
+const ObtenerCliente: React.FC<{ clientId?: number }> = ({ clientId }) => {
+    const [cliente, setCliente] = useState<Client | null>(null);
+    const [error, setError] = useState<string>('');
 
-  useEffect(() => {
-    axios.get(`https://elsaval.com.pe/api/elsaval/clients/${idCliente}`)
-      .then(response => setCliente(response.data))
-      .catch(error => console.error('Error obteniendo cliente:', error));
-  }, [idCliente]);
+    useEffect(() => {
+        if (clientId !== undefined) {
+            axios.get(`https://elsaval.com.pe/api/elsaval/clients/${clientId}`)
+                .then(res => setCliente(res.data.data))
+                .catch(error => {
+                    console.error('Error obteniendo cliente:', error);
+                    setError('Hubo un error al obtener el cliente. Por favor, inténtalo de nuevo.');
+                });
+        }
+    }, [clientId]);
 
-  if (!cliente) return <div>Cargando...</div>;
+    if (error) {
+        return <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>Error obteniendo cliente: {error}</div>;
+    }
 
-  return (
-    <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px'}}>
-      <h1>Detalles del Cliente</h1>
-      <Card>
-        <Card.Body>
-          <Card.Title>Nombre: {cliente.name}</Card.Title>
-          <Card.Text>Email: {cliente.email}</Card.Text>
-        </Card.Body>
-      </Card>
-    </div>
-  );
-}
+    if (!cliente) {
+        return <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>No se ha proporcionado un ID de cliente válido.</div>;
+    }
+
+    return (
+        <Card style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
+            <Card.Body>
+                <Card.Title>Detalles del Cliente</Card.Title>
+                <Card.Text>Nombre: {cliente.name}</Card.Text>
+                <Card.Text>Email: {cliente.email}</Card.Text>
+            </Card.Body>
+        </Card>
+    );
+};
 
 export default ObtenerCliente;

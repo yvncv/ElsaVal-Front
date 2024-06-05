@@ -29,7 +29,6 @@ function Categorias() {
           <Card key={index} style={{ width: '18rem', margin: '10px' }}>
             <Card.Body>
               <Card.Title>{categoria.name}</Card.Title>
-              {/* Puedes incluir más detalles de la categoría aquí */}
               <Button variant="primary">Ver productos</Button>
             </Card.Body>
           </Card>

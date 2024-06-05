@@ -11,24 +11,23 @@ function CrearCliente() {
 
   const guardarDatos = async (event) => {
     event.preventDefault();
-
+  
     try {
-      // Hacer la solicitud POST a la API para crear un cliente
       const response = await axios.post('https://elsaval.com.pe/api/elsaval/clients/', {
         name: nombre,
         email: email,
         password: password
       });
-
-      // Verificar el estado de la respuesta
+  
       if (response.status === 200) {
-        console.log('Cliente creado:', response.data);
+        console.log('Cliente creado:', response.data.data);
         alert('Cliente creado exitosamente.');
       } else {
         throw new Error('Error al crear el cliente. Por favor, inténtalo de nuevo.');
       }
     } catch (error) {
       console.error('Error al crear el cliente:', error);
+      console.log('Detalles del error:', error.response); // Agregar esta línea para ver más detalles del error
       setError('Hubo un error al crear el cliente. Por favor, inténtalo de nuevo.');
     }
   };
