@@ -63,9 +63,9 @@ function Categorias() {
   };
    //definicion para el button
   return (
-    <div className="main-container">
+    <div className="categorias-main-container">
       <div className="categorias-column">
-        <h1>Buscar por</h1>
+        <h1 className='categorias-title'>Buscar por</h1>
         <div className="categorias-container">
           {categorias.map((categoria, index) => (
             <Card className="categorias-card" key={index}>
@@ -89,15 +89,15 @@ function Categorias() {
       </div>
       
       {categoriaSeleccionada !== null && (
-        <div className="productos-column">
-          <h2>Resultados de: {categorias.find(categoria => categoria.id === categoriaSeleccionada)?.name}</h2>
-          <div className="row">
+        <div className="categorias-productos-column">
+          <h1 className='categorias-title'>Resultados de: {categorias.find(categoria => categoria.id === categoriaSeleccionada)?.name}</h1>
+          <div className="categorias-productos-row">
             {productos.map(producto => (
               <div key={producto.id} className="col-md-4">
-                <Card className="productos-card">
-                  <Carousel className="productos-carousel" interval={1000} fade={true}>
+                <Card className="categorias-productos-card">
+                  <Carousel className="categorias-productos-carousel" interval={1000} fade={true}>
                     {producto.images.map((image, index) => (
-                      <Carousel.Item className="productos-carousel-item" key={index}>
+                      <Carousel.Item className="categorias-productos-carousel-item" key={index}>
                         <img
                           className="d-block w-100 h-100"
                           src={image} // Usar image directamente

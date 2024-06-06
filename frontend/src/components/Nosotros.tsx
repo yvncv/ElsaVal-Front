@@ -1,5 +1,5 @@
 import React from 'react';
-import './Texto.css'; // Archivo de estilos para Texto
+import './Nosotros.css'; // Archivo de estilos para Texto
 
 const Texto = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Acercade.css';
-import Texto from '../components/Texto.tsx';
+import Texto from '../components/Nosotros.tsx';
 
 const Acercade = () => {
   return (
