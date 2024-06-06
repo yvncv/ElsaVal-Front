@@ -13,6 +13,8 @@ import Ordenes from "./pages/Ordenes.tsx";
 import Productos from "./pages/Productos.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import Acercade from "./pages/Acercade.tsx";
+import Login from "./pages/Login.tsx";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route path="/update-client/:clientId" element={<ActualizarCliente />} />
           <Route path="/clients/:clientId" element={<ObtenerCliente />} />
           <Route path="/" element={<LandingPage />} />
+          <Route path="/Acercade" element={<Acercade/>}/>
+          <Route path="/Login" element={<Login/>}/>
         </Routes>
       </div>
     </Router>
