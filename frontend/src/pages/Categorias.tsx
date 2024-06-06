@@ -5,6 +5,7 @@ import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
 import { Product } from '../types/Product';
+import './Categorias.css'
 
 interface Categoria {
   id: number;

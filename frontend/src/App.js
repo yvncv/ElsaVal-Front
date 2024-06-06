@@ -2,7 +2,7 @@ import React from "react";
 import BarraBusqueda from "./components/BarraBusqueda.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import CategoriasPage from "./pages/CategoriasPage.tsx";
+import Categorias from "./pages/Categorias.tsx";
 import CrearCliente from "./pages/CrearCliente.tsx";
 import ObtenerCliente from "./pages/ObtenerCliente.tsx";
 import ActualizarCliente from "./pages/ActualizarCliente.tsx";
@@ -23,7 +23,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/products/" element={<Productos />} />
-          <Route path="/categories" element={<CategoriasPage />} />
+          <Route path="/categories" element={<Categorias />} />
           <Route path="/create-order" element={<CrearOrden />} />
           <Route path="/client-orders/:clientId" element={<OrdenesCliente />} />
           <Route path="/orders/" element={<Ordenes />} />
