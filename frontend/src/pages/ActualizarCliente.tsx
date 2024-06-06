@@ -4,32 +4,45 @@ import { useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 
 const ActualizarCliente = () => {
-    const { clientId } = useParams<{ clientId: string }>();
+    const { clientId } = useParams<{ clientId?: string }>();
     const [cliente, setCliente] = useState<any>();
     const [error, setError] = useState<string>('');
-    const [formData, setFormData] = useState<any>({ // Inicializar con un objeto vacío
+    const [formData, setFormData] = useState<any>({
         name: '',
         email: ''
     });
+    const [inputClientId, setInputClientId] = useState<string>(clientId || '');
+
+    const obtenerCliente = async (id: string) => {
+        try {
+            const response = await axios.get(`https://elsaval.com.pe/api/elsaval/clients/${id}`);
+            setCliente(response.data.data);
+            setFormData(response.data.data.user);
+            setError('');
+        } catch (error) {
+            console.error('Error al obtener el cliente:', error);
+            setError('Por favor, introduce un ID de cliente válido.');
+        }
+    };
 
     useEffect(() => {
-        const obtenerCliente = async () => {
-            try {
-                const response = await axios.get(`https://elsaval.com.pe/api/elsaval/clients/${clientId}`);
-                setCliente(response.data.data);
-                setFormData(response.data.data.user);
-            } catch (error) {
-                console.error('Error al obtener el cliente:', error);
-                setError('No se pudo obtener la información del cliente. Inténtalo de nuevo más tarde.');
-            }
-        };
-
         if (clientId) {
-            obtenerCliente();
-        } else {
-            setError('ID de cliente no válido.');
+            obtenerCliente(clientId);
         }
     }, [clientId]);
+
+    const handleIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputClientId(e.target.value);
+    };
+
+    const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (inputClientId) {
+            obtenerCliente(inputClientId);
+        } else {
+            setError('Por favor, introduce un ID de cliente válido.');
+        }
+    };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -38,7 +51,7 @@ const ActualizarCliente = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await axios.put(`https://elsaval.com.pe/api/elsaval/clients/${clientId}`, formData);
+            await axios.put(`https://elsaval.com.pe/api/elsaval/clients/${inputClientId}`, formData);
             alert('Cliente actualizado correctamente');
         } catch (error) {
             console.error('Error al actualizar el cliente:', error);
@@ -46,8 +59,19 @@ const ActualizarCliente = () => {
         }
     };
 
-    if (error) {
-        return <p>{error}</p>;
+    if (!clientId || error) {
+        return (
+            <div>
+                <Form onSubmit={handleSearch} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
+                    <p>{error}</p>
+                    <Form.Group controlId="formClientId">
+                        <Form.Label>Introduce el ID del Cliente:</Form.Label>
+                        <Form.Control type="text" value={inputClientId} onChange={handleIdChange} />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">Buscar Cliente</Button>
+                </Form>
+            </div>
+        );
     }
 
     if (!cliente) {
