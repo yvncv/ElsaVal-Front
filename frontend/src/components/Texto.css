@@ -1,0 +1,76 @@
+.acercade-container {
+    display: flex;
+    flex-direction: column; /* Cambiar la dirección de los elementos en dispositivos pequeños */
+    align-items: center;
+  }
+  
+  .text-container {
+    background-color: black;
+    padding: 30px;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    color: white;
+    margin-right: 40px;
+    max-width: 600px; /* Establecer un ancho máximo para evitar que el texto se vuelva demasiado ancho */
+    width: 100%; /* Ajustar el ancho al 100% del contenedor */
+    margin-bottom: 20px; /* Agregar margen inferior para separarlo de la imagen */
+  }
+  
+  .image-section {
+    flex: 1;
+  }
+  
+  .text-container h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .text-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .text-container p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .acercade-container {
+      flex-direction: row; /* Volver a la dirección de fila en dispositivos más grandes */
+    }
+  
+    .text-container {
+      margin-bottom: 0; /* Eliminar el margen inferior para dispositivos más grandes */
+    }
+  }
+/* Agregar estilos para dispositivos móviles */
+@media screen and (max-width: 767px) {
+    .text-container {
+      padding: 20px; /* Reducir el padding en dispositivos móviles */
+      margin-right: 0; /* Eliminar el margen derecho en dispositivos móviles */
+      border-radius: 0; /* Eliminar el borde redondeado en dispositivos móviles */
+    }
+  
+    .text-container h1 {
+      font-size: 30px; /* Reducir el tamaño del título en dispositivos móviles */
+      margin-bottom: 15px; /* Reducir el espacio entre elementos en dispositivos móviles */
+    }
+  
+    .text-container h2 {
+      font-size: 20px; /* Reducir el tamaño del subtítulo en dispositivos móviles */
+      margin-bottom: 10px; /* Reducir el espacio entre elementos en dispositivos móviles */
+    }
+  
+    .text-container p {
+      font-size: 16px; /* Reducir el tamaño del texto en dispositivos móviles */
+      margin-bottom: 10px; /* Reducir el espacio entre elementos en dispositivos móviles */
+    }
+  }
+    
+  
+  

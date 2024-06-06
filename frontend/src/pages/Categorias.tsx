@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import "../App.css";
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import { Form, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
 import { Product } from '../types/Product';
 
@@ -37,62 +37,60 @@ function Categorias() {
   };
 
   return (
-    <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px', display: 'flex', flexDirection: 'column' }}>
-      <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>Categorías</h1>
-      <div className="categorias-container d-flex flex-wrap">
-        {categorias.map((categoria, index) => (
-          <Card key={index} style={{ width: '18rem', margin: '10px' }}>
-            <Card.Body>
-              <Card.Title className='mx-auto w-100'>{categoria.name}</Card.Title>
-              <Button className='btn btn-warning w-100' onClick={() => handleClickVerProductos(categoria.id)}>Ver productos</Button>
-            </Card.Body>
-          </Card>
-        ))}
+    <div className="main-container">
+      <div className="categorias-column">
+        <h1>Buscar por</h1>
+        <div className="categorias-container">
+          {categorias.map((categoria, index) => (
+            <Card className="categorias-card" key={index}>
+              <Card.Body className="categorias-card-body">
+                <Form.Check
+                  className="categorias-checkbtn"
+                  type="radio"
+                  name="categorias"
+                  id={`categoria-${categoria.id}`}
+                  onChange={() => handleClickVerProductos(categoria.id)}
+                  checked={categoriaSeleccionada === categoria.id}
+                />
+                <Card.Title className="categorias-card-title">
+                  {categoria.name}
+                </Card.Title>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
       </div>
 
-      {categoriaSeleccionada !== null ? (
-        productos.length > 0 ? (
-          <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
-            <h2>Productos de la categoría {categorias.find(categoria => categoria.id === categoriaSeleccionada)?.name}</h2>
-            <h4 style={{ marginBottom: '50px' }}>Cantidad {categorias.filter(categoria => categoria.id === categoriaSeleccionada)?.length}</h4>
-            <div className="row">
-              {productos.map(producto => (
-                <div key={producto.id} className="col-md-4">
-                  <Card style={{ width: '18rem', marginBottom: '10px' }}>
-                    <Carousel style={{ width: '290px' }} interval={1000} fade={true}>
-                      {producto.images.map((image, index) => (
-                        <Carousel.Item key={index} style={{ height: '300px' }}>
-                          <img
-                            className="d-block w-100 h-100"
-                            src={image} // Usar image directamente
-                            alt={`Slide ${index + 1}`}
-                            style={{ borderRadius: '25px', border: '6px dotted white', padding: '10px' }}
-                          />
-                        </Carousel.Item>
-                      ))}
-                    </Carousel>
-                    <Card.Body>
-                      <Card.Title>{producto.name}</Card.Title>
-                      <Card.Subtitle>{producto.description}</Card.Subtitle>
-                      <Card.Text>{producto.price}</Card.Text>
-                      <Card.Text>Categoría: {producto.category.name}</Card.Text>
-                      <Card.Text>Hecho de: {producto.material.name}</Card.Text>
-                      <Card.Text>Stock: {producto.stock}</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </div>
-              ))}
-            </div>
+      {categoriaSeleccionada !== null && productos.length > 0 && (
+        <div className="productos-column">
+          <h2>Resultados de: {categorias.find(categoria => categoria.id === categoriaSeleccionada)?.name}</h2>
+          <div className="row">
+            {productos.map(producto => (
+              <div key={producto.id} className="col-md-4">
+                <Card className="productos-card">
+                  <Carousel className="productos-carousel" interval={1000} fade={true}>
+                    {producto.images.map((image, index) => (
+                      <Carousel.Item className="productos-carousel-item" key={index}>
+                        <img
+                          className="d-block w-100 h-100"
+                          src={image} // Usar image directamente
+                          alt={`Slide ${index + 1}`}
+                        />
+                      </Carousel.Item>
+                    ))}
+                  </Carousel>
+                  <Card.Body>
+                    <Card.Title>{producto.name}</Card.Title>
+                    <Card.Subtitle>{producto.description}</Card.Subtitle>
+                    <Card.Text>Precio: S./{producto.price}</Card.Text>
+                    <Button variant="primary">Ver detalles</Button>
+                  </Card.Body>
+                </Card>
+              </div>
+            ))}
           </div>
-        ) : (
-          <div>
-            <h2>Productos de la categoría {categorias.find(categoria => categoria.id === categoriaSeleccionada)?.name}</h2>
-            <div className="row">
-              <h4>Parece que aún no hay productos de esta categoría.</h4>
-            </div>
-          </div>
-        )
-      ) : null}
+        </div>
+      )}
     </div>
   );
 }

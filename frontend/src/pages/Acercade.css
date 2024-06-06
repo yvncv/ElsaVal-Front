@@ -1,0 +1,31 @@
+/* Acercade.css */
+.acercade-container {
+  display: flex;
+  align-items: center;
+  margin: 20px; /* Añade margen al contenedor principal */
+}
+
+.text-container {
+  flex: 1;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  color: black;
+  margin-right: 10px; /* Ajusta el margen derecho */
+}
+
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.image {
+  max-width: 100%;
+  margin-top: 20px; /* Añade margen superior a la imagen */
+  margin-left: 10px; /* Ajusta el margen izquierdo */
+}
+
+
+  

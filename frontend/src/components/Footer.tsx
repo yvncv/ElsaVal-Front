@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { FaFacebookF, FaTwitter, FaGoogle, FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
     return (
@@ -60,16 +61,16 @@ export default function Footer() {
                                 <h5 className='text-uppercase'>Enlaces</h5>
                                 <ul className='list-unstyled'>
                                     <li>
-                                        <a href='#!' className='text-white'>Tienda</a>
+                                        <Link to='/' className='text-white'>Tienda</Link>
                                     </li>
                                     <li>
-                                        <a href='#!' className='text-white'>Acerca de</a>
+                                        <Link to='/Acercade' className='text-white'>Acerca de</Link>
                                     </li>
                                     <li>
-                                        <a href='#!' className='text-white'>Blog</a>
+                                        <Link to='#!' className='text-white'>Blog</Link>
                                     </li>
                                     <li>
-                                        <a href='#!' className='text-white'>Dónde comprar</a>
+                                        <Link to='#!' className='text-white'>Dónde comprar</Link>
                                     </li>
                                 </ul>
                             </Col>
