@@ -27,7 +27,7 @@ export default function LandingPage() {
                     color: "#fff",
                 }}
             >
-                Novedades
+                Próximas novedades
             </p>
             <Novedades />
             <p

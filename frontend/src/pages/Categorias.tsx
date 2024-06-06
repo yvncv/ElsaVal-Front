@@ -97,7 +97,7 @@ function Categorias() {
                   <Card.Body>
                     <Card.Title>{producto.name}</Card.Title>
                     <Card.Subtitle>{producto.description}</Card.Subtitle>
-                    <Card.Text>Precio: {producto.price}</Card.Text>
+                    <Card.Text>Precio: S./{producto.price}</Card.Text>
                     <Button variant="primary">Ver detalles</Button>
                   </Card.Body>
                 </Card>
