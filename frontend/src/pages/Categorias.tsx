@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import "../App.css";
+import "./CategoriaEstilo.css";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Carousel } from 'react-bootstrap';
@@ -62,21 +62,23 @@ function Categorias() {
   };
 
   return (
-    <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
-      <h1>Categorías</h1>
-      <div className="categorias-container">
-        {categorias.map((categoria, index) => (
-          <Card key={index} style={{ width: '18rem', margin: '10px' }}>
-            <Card.Body>
-              <Card.Title>{categoria.name}</Card.Title>
-              <Button variant="primary" onClick={() => handleClickVerProductos(categoria.id)}>Ver productos</Button>
-            </Card.Body>
-          </Card>
-        ))}
+    <div className="main-container">
+      <div className="categorias-column">
+        <h1>Categorías</h1>
+        <div className="categorias-container">
+          {categorias.map((categoria, index) => (
+            <Card key={index} style={{ width: '18rem', margin: '10px' }}>
+              <Card.Body>
+                <Card.Title>{categoria.name}</Card.Title>
+                <Button variant="primary" onClick={() => handleClickVerProductos(categoria.id)}>Ver productos</Button>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
       </div>
 
       {categoriaSeleccionada !== null && (
-        <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
+        <div className="productos-column">
           <h2 style={ {marginBottom: '50px' }}>Productos de la categoría {categorias.find(categoria => categoria.id === categoriaSeleccionada)?.name}</h2>
           <div className="row">
             {productos.map(producto => (
