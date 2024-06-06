@@ -73,7 +73,7 @@ const Productos: React.FC = () => {
                                             className="d-block w-100 h-100"
                                             src={image} // Usar image directamente
                                             alt={`Slide ${index + 1}`}
-                                            style={{ borderRadius: '60px', border: '6px dotted white', padding: '10px' }}
+                                            style={{ borderRadius: '25px', border: '6px dotted white', padding: '10px' }}
                                         />
                                     </Carousel.Item>
                                 ))}
