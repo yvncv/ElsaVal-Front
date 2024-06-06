@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 
 function BarraBusqueda() {
   return (
@@ -20,8 +22,9 @@ function BarraBusqueda() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto" style={{ marginLeft: 'auto' }}>
+            <Nav.Link as={Link} to="/Acercade" style={{ color: '#ede8da' }}>Nosotros</Nav.Link>
             <Nav.Link as={Link} to="/products" style={{ color: '#ede8da' }}>Productos</Nav.Link>
-            <Nav.Link as={Link} to="/categories" style={{ color: '#ede8da' }}>Categorías</Nav.Link>
+            <Nav.Link as={Link} to="/categories" style={{ color: '#ede8da' }}>Categorias</Nav.Link>
             <Nav.Link as={Link} to="/create-client" style={{ color: '#ede8da' }}>Crear Cliente</Nav.Link>
             <Nav.Link as={Link} to="/update-client/:clientId" style={{ color: '#ede8da' }}>Actualizar Cliente</Nav.Link>
             <Nav.Link as={Link} to="/orders" style={{ color: '#ede8da' }}>Órdenes</Nav.Link>

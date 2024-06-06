@@ -42,7 +42,6 @@ function Categorias() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number | null>(null);
 
   useEffect(() => {
-    // Obtener las categorías de la API
     axios.get('https://elsaval.com.pe/api/elsaval/categories')
       .then(response => {
         setCategorias(response.data.data);
@@ -89,7 +88,7 @@ function Categorias() {
                       <Carousel.Item key={index} style={{ height: '300px' }}>
                         <img
                           className="d-block w-100 h-100"
-                          src={image} // Usar image directamente
+                          src={image}
                           alt={`Slide ${index + 1}`}
                           style={{ borderRadius: '25px', border: '6px dotted white', padding: '10px' }}
                         />

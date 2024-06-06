@@ -1,53 +1,30 @@
+/* Acercade.css */
 .acercade-container {
-  background-color: white; /* Fondo blanco */
-  padding: 20px; /* Espacio alrededor del contenido */
-  border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-.acercade-container .company-presentation {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  font-family: Arial, sans-serif;
+  margin: 20px; /* Añade margen al contenedor principal */
 }
 
-.acercade-container .text-section {
+.text-container {
   flex: 1;
-  margin-right: 20px;
-  text-align: center;
-}
-
-.acercade-container .text-section h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
   color: black;
+  margin-right: 10px; /* Ajusta el margen derecho */
 }
 
-.acercade-container .text-section h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
-  color: black;
-}
-
-.acercade-container .text-section p {
-  font-size: 18px;
-  line-height: 1.6;
-  margin-bottom: 10px;
-  color: black;
-}
-
-.acercade-container .image-section {
+.image-section {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: flex-end;
 }
 
-.acercade-container .image-section img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
+.image {
+  max-width: 100%;
+  margin-top: 20px; /* Añade margen superior a la imagen */
+  margin-left: 10px; /* Ajusta el margen izquierdo */
 }
 
 
