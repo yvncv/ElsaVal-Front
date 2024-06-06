@@ -36,12 +36,12 @@ const Productos: React.FC = () => {
     useEffect(() => {
         axios.get('https://elsaval.com.pe/api/elsaval/products/?populate=*')
             .then(response => {
-                console.log('Respuesta de la API:', response.data); // Añadimos este console.log
-                setProductos(response.data.data); // Utilizar response.data directamente
+                console.log('Respuesta completa de la API:', response); // Ver la respuesta completa
+                setProductos(response.data.data); // Usar response.data.data
                 setCargando(false);
             })
             .catch(error => {
-                console.error('Error al cargar los productos:', error); // Añadimos este console.error
+                console.error('Error al cargar los productos:', error); // Añadir este console.error
                 setError('Error al cargar los productos');
                 setCargando(false);
             });

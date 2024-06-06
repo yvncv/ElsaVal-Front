@@ -24,11 +24,8 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/categories" element={<Categorias />} />
             <Route path="/create-client" element={<CrearCliente />} />
-            <Route path="/clients/:clientId" element={<ObtenerCliente />} />
-            <Route
-              path="/update-client/:clientId"
-              element={<ActualizarCliente />}
-            />
+            <Route path="/clients/:id" element={<ObtenerCliente />} />
+            <Route path="/update-client/:id" element={<ActualizarCliente />} />
             <Route path="/create-order" element={<CrearOrden />} />
             <Route path="/orders/:orderId" element={<DetallesOrden />} />
             <Route path="/orders/" element={<Ordenes />} />

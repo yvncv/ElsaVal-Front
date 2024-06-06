@@ -19,19 +19,20 @@ function Ordenes() {
   
     useEffect(() => {
       axios.get('https://elsaval.com.pe/api/elsaval/orders/')
-        .then(res => {
-          if (res.data.length === 0) {
-            setError('La lista de órdenes está vacía');
-          } else {
-            setOrders(res.data.data);
-            setError('');
-          }
-        })
-        .catch(error => {
-          console.error('Error obteniendo ordenes:', error);
-          setError('Hubo un error al obtener las órdenes. Por favor, inténtalo de nuevo.');
-        });
-    }, []);
+          .then(res => {
+              console.log('Respuesta completa de la API:', res); // Ver la respuesta completa
+              if (res.data.data.length === 0) { // Usar res.data.data.length
+                  setError('La lista de órdenes está vacía');
+              } else {
+                  setOrders(res.data.data); // Usar res.data.data
+                  setError('');
+              }
+          })
+          .catch(error => {
+              console.error('Error obteniendo órdenes:', error);
+              setError('Hubo un error al obtener las órdenes. Por favor, inténtalo de nuevo.');
+          });
+  }, []);
   
     return (
       <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px'}}>

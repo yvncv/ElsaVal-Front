@@ -1,64 +1,74 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, Form } from 'react-bootstrap';
-import "../App.css";
+import { useParams } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
 
-function ActualizarCliente({ clientId }) {
-  const [name, setNombre] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setContraseña] = useState('');
-  const [error, setError] = useState('');
+const ActualizarCliente = () => {
+    const { id } = useParams<{ id: string }>();
+    const [cliente, setCliente] = useState<any>();
+    const [error, setError] = useState<string>('');
+    const [formData, setFormData] = useState<any>({ // Inicializar con un objeto vacío
+        name: '',
+        email: ''
+    });
 
-  useEffect(() => {
-    if (!clientId) {
-      setError('ID de cliente no válido.');
-      return;
+    useEffect(() => {
+        const obtenerCliente = async (clienteId: string) => {
+            try {
+                const response = await axios.get(`https://elsaval.com.pe/api/elsaval/clients/${clienteId}`);
+                setCliente(response.data.data);
+                setFormData(response.data.data.user);
+            } catch (error) {
+                console.error('Error al obtener el cliente:', error);
+                setError('No se pudo obtener la información del cliente. Inténtalo de nuevo más tarde.');
+            }
+        };
+
+        if (id) {
+            obtenerCliente(id);
+        } else {
+            setError('ID de cliente no válido.');
+        }
+    }, [id]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            await axios.put(`https://elsaval.com.pe/api/elsaval/clients/${id}`, formData);
+            alert('Cliente actualizado correctamente');
+        } catch (error) {
+            console.error('Error al actualizar el cliente:', error);
+            alert('Error al actualizar el cliente');
+        }
+    };
+
+    if (error) {
+        return <p>{error}</p>;
     }
 
-    axios.get(`https://elsaval.com.pe/api/elsaval/api/clients/${clientId}`)
-      .then(response => {
-        const clienteData = response.data.data ? response.data.data : response.data;
-        setNombre(clienteData.data);
-        setEmail(clienteData.email);
-        setError('');
-      })
-      .catch(error => {
-        console.error('Error al obtener cliente:', error);
-        setError('No se pudo obtener la información del cliente. Inténtalo de nuevo más tarde.');
-      });
-  }, [clientId]);
-
-  const guardarDatos = (e) => {
-    e.preventDefault();
-    if (!name || !email) {
-      setError('Por favor, introduce un nombre y un correo electrónico válidos.');
-      return;
+    if (!cliente) {
+        return <p>Cargando...</p>;
     }
-    axios.patch(`https://elsaval.com.pe/api/elsaval/api/clients/${clientId}`, { name, email, password })
-      .then(response => {
-        console.log('Cliente actualizado:', response.data);
-        setContraseña('');
-        setError('');
-      })
-      .catch(error => {
-        console.error('Error actualizando cliente:', error);
-        setError('Hubo un error al actualizar el cliente. Por favor, inténtalo de nuevo.');
-      });
-  };
 
-  return (
-    <>
-      {error ? (<>{error && <p className="error-message" style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>{error}</p>}</>) : (
-        <Form onSubmit={guardarDatos} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
-          <h1>Actualizar Cliente</h1>
-          <Form.Control type="text" value={name} onChange={(e) => setNombre(e.target.value)} placeholder="Nombre" className='m-2' />
-          <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className='m-2' />
-          <Form.Control type="password" value={password} onChange={(e) => setContraseña(e.target.value)} placeholder="Contraseña" className='m-2' />
-          <Button type="submit">Actualizar Cliente</Button>
-        </Form>
-      )}
-    </>
-  );
-}
+    return (
+        <div>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="formNombre">
+                    <Form.Label>Nombre:</Form.Label>
+                    <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} />
+                </Form.Group>
+                <Form.Group controlId="formEmail">
+                    <Form.Label>Email:</Form.Label>
+                    <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} />
+                </Form.Group>
+                <Button variant="primary" type="submit">Actualizar</Button>
+            </Form>
+        </div>
+    );
+};
 
 export default ActualizarCliente;

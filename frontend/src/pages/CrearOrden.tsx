@@ -22,17 +22,25 @@ function CrearOrden() {
   const guardarDatos = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://elsaval.com.pe/api/elsaval/orders', {
-        client_id,
-        status,
-        street_address,
-        order_products
-      });
-      console.log('Orden creada:', response.data.data);
+        const response = await axios.post('https://elsaval.com.pe/api/elsaval/orders', {
+            client_id,
+            status,
+            street_address,
+            order_products
+        });
+        
+        console.log('Respuesta completa de la API:', response); // Ver la respuesta completa
+        console.log('Datos de la orden:', response.data.data); // Ver los datos específicos de la orden
+
+        if (response.status === 200 || response.status === 201) {
+            console.log('Orden creada:', response.data.data); // Usar response.data.data
+        } else {
+            throw new Error('Error al crear la orden. Por favor, inténtalo de nuevo.');
+        }
     } catch (error) {
-      console.error('Error al crear la orden:', error);
+        console.error('Error al crear la orden:', error);
     }
-  };
+};
 
   return (
     <Form onSubmit={guardarDatos} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>

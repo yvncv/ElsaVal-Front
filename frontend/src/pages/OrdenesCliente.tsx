@@ -17,9 +17,12 @@ function OrdenesCliente({ clientId }) {
 
   useEffect(() => {
     axios.get('https://elsaval.com.pe/api/elsaval/orders/', { params: { client_id: clientId } })
-      .then(res => setOrders(res.data.data))
-      .catch(error => console.error('Error obteniendo ordenes:', error));
-  }, [clientId]);
+        .then(res => {
+            console.log('Respuesta completa de la API:', res); // Ver la respuesta completa
+            setOrders(res.data.data); // Usar res.data.data
+        })
+        .catch(error => console.error('Error obteniendo órdenes:', error));
+}, [clientId]);
 
   return (
     <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px'}}>

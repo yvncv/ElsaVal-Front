@@ -15,17 +15,20 @@ function DetallesOrden({ orderId }: { orderId: number }) {
 
   useEffect(() => {
     if (!orderId || isNaN(orderId)) {
-      setError('ID de orden no válido.');
-      return;
+        setError('ID de orden no válido.');
+        return;
     }
 
     axios.get(`https://elsaval.com.pe/api/elsaval/orders/${orderId}`)
-      .then(res => setOrder(res.data.data))
-      .catch(error => {
-        console.error('Error obteniendo la orden:', error);
-        setError('Error al obtener la orden.');
-      }); // Maneja errores de solicitud GET
-  }, [orderId]);
+        .then(res => {
+            console.log('Respuesta completa de la API:', res); // Ver la respuesta completa
+            setOrder(res.data.data); // Usar res.data.data
+        })
+        .catch(error => {
+            console.error('Error obteniendo la orden:', error);
+            setError('Error al obtener la orden.');
+        });
+}, [orderId]);
 
   return (
     <>
