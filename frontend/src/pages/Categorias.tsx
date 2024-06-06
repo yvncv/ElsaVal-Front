@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import "./CategoriaEstilo.css";
+import "./Categorias.css";
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import { Form, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
 
 interface Categoria {
@@ -42,6 +43,7 @@ function Categorias() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number | null>(null);
 
   useEffect(() => {
+    // Obtener las categorías de la API
     axios.get('https://elsaval.com.pe/api/elsaval/categories')
       .then(response => {
         setCategorias(response.data.data);
@@ -59,38 +61,47 @@ function Categorias() {
       console.error('Error al obtener productos de la categoría:', error);
     }
   };
-
+   //definicion para el button
   return (
     <div className="main-container">
       <div className="categorias-column">
-        <h1>Categorías</h1>
+        <h1>Buscar por</h1>
         <div className="categorias-container">
           {categorias.map((categoria, index) => (
-            <Card key={index} style={{ width: '18rem', margin: '10px' }}>
-              <Card.Body>
-                <Card.Title>{categoria.name}</Card.Title>
-                <Button variant="primary" onClick={() => handleClickVerProductos(categoria.id)}>Ver productos</Button>
+            <Card className="categorias-card" key={index}>
+              <Card.Body className="categorias-card-body">
+                <Form.Check
+                    className="categorias-checkbtn"
+                    type="radio" 
+                    name="categorias" 
+                    id={`categoria-${categoria.id}`} 
+                    onClick={() => handleClickVerProductos(categoria.id)}
+                    checked={categoriaSeleccionada === categoria.id}
+                    onChange={() => setCategoriaSeleccionada(categoria.id)}
+                />
+                <Card.Title className="categorias-card-title">
+                    {categoria.name}
+                </Card.Title>
               </Card.Body>
             </Card>
           ))}
         </div>
       </div>
-
+      
       {categoriaSeleccionada !== null && (
         <div className="productos-column">
-          <h2 style={ {marginBottom: '50px' }}>Productos de la categoría {categorias.find(categoria => categoria.id === categoriaSeleccionada)?.name}</h2>
+          <h2>Resultados de: {categorias.find(categoria => categoria.id === categoriaSeleccionada)?.name}</h2>
           <div className="row">
             {productos.map(producto => (
               <div key={producto.id} className="col-md-4">
-                <Card style={{ width: '18rem', marginBottom: '10px' }}>
-                  <Carousel style={{ width: '290px' }} interval={1000} fade={true}>
+                <Card className="productos-card">
+                  <Carousel className="productos-carousel" interval={1000} fade={true}>
                     {producto.images.map((image, index) => (
-                      <Carousel.Item key={index} style={{ height: '300px' }}>
+                      <Carousel.Item className="productos-carousel-item" key={index}>
                         <img
                           className="d-block w-100 h-100"
-                          src={image}
+                          src={image} // Usar image directamente
                           alt={`Slide ${index + 1}`}
-                          style={{ borderRadius: '25px', border: '6px dotted white', padding: '10px' }}
                         />
                       </Carousel.Item>
                     ))}
@@ -112,3 +123,4 @@ function Categorias() {
 }
 
 export default Categorias;
+

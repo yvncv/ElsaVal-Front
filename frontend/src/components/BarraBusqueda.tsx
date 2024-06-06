@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 function BarraBusqueda() {
   return (
@@ -32,6 +32,10 @@ function BarraBusqueda() {
             <Nav.Link as={Link} to="/create-order" style={{ color: '#ede8da' }}>Crear Orden</Nav.Link>
             <Nav.Link as={Link} to="/orders/:orderId" style={{ color: '#ede8da' }}>Detalles de Orden</Nav.Link>
             <Nav.Link as={Link} to="/client-orders/:clientId" style={{ color: '#ede8da' }}>Órdenes de cliente</Nav.Link>
+            <Nav.Link as={Link} to="/Login">
+              <FontAwesomeIcon icon={faUser} />
+            </Nav.Link>
+
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -1,0 +1,36 @@
+/* En Login.css */
+.form-content {
+    background-color: rgba(23, 23, 23, 0.811);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(252, 252, 252, 0);
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.title {
+    font-weight: bold;
+    color: white;
+}
+.text-white {
+    color: white;
+}
+@media (max-width: 576px) {
+    .form-content {
+        padding: 10px;
+    }
+}
+
+/* Ajustes de estilo para Form.Label */
+.form-label {
+    font-size: 1.2em; /* Aumentar el tamaño de la fuente */
+    text-align: left; /* Alinear al extremo izquierdo */
+    width: 100%; /* Ocupar todo el ancho disponible */
+    display: block; /* Mostrar como un bloque para ocupar toda la línea */
+    color: white; /* Cambiar el color del texto a blanco */
+}
+
+
+  
