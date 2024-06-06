@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Button, Form } from 'react-bootstrap';
 
 const CrearCliente: React.FC = () => {
     const [nombre, setNombre] = useState<string>('');
@@ -22,7 +23,7 @@ const CrearCliente: React.FC = () => {
 
     const guardarDatos = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-  
+
         try {
             const response = await axios.post('https://elsaval.com.pe/api/elsaval/clients/', {
                 name: nombre,
@@ -50,37 +51,22 @@ const CrearCliente: React.FC = () => {
 
     return (
         <div>
-            <h1>Crear Cliente</h1>
-            <form onSubmit={guardarDatos}>
-                <div>
-                    <label htmlFor="nombre">Nombre:</label>
-                    <input
-                        type="text"
-                        id="nombre"
-                        value={nombre}
-                        onChange={handleNombreChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={handleEmailChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                    />
-                </div>
-                <button type="submit">Crear Cliente</button>
-            </form>
+            <Form onSubmit={guardarDatos} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
+                <h1>Crear Cliente</h1>
+                <Form.Group controlId="formNombre">
+                    <Form.Label>Nombre:</Form.Label>
+                    <Form.Control type="text" value={nombre} onChange={handleNombreChange} />
+                </Form.Group>
+                <Form.Group controlId="formEmail">
+                    <Form.Label>Email:</Form.Label>
+                    <Form.Control type="email" value={email} onChange={handleEmailChange} />
+                </Form.Group>
+                <Form.Group controlId="formPassword">
+                    <Form.Label>Password:</Form.Label>
+                    <Form.Control type="password" value={password} onChange={handlePasswordChange} />
+                </Form.Group>
+                <Button variant="primary" type="submit">Crear Cliente</Button>
+            </Form>
             {mensaje && <p style={{ color: 'green' }}>{mensaje}</p>}
             {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>

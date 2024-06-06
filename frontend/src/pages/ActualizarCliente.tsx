@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 
 const ActualizarCliente = () => {
-    const { id } = useParams<{ id: string }>();
+    const { clientId } = useParams<{ clientId: string }>();
     const [cliente, setCliente] = useState<any>();
     const [error, setError] = useState<string>('');
     const [formData, setFormData] = useState<any>({ // Inicializar con un objeto vacío
@@ -13,9 +13,9 @@ const ActualizarCliente = () => {
     });
 
     useEffect(() => {
-        const obtenerCliente = async (clienteId: string) => {
+        const obtenerCliente = async () => {
             try {
-                const response = await axios.get(`https://elsaval.com.pe/api/elsaval/clients/${clienteId}`);
+                const response = await axios.get(`https://elsaval.com.pe/api/elsaval/clients/${clientId}`);
                 setCliente(response.data.data);
                 setFormData(response.data.data.user);
             } catch (error) {
@@ -24,12 +24,12 @@ const ActualizarCliente = () => {
             }
         };
 
-        if (id) {
-            obtenerCliente(id);
+        if (clientId) {
+            obtenerCliente();
         } else {
             setError('ID de cliente no válido.');
         }
-    }, [id]);
+    }, [clientId]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -38,7 +38,7 @@ const ActualizarCliente = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await axios.put(`https://elsaval.com.pe/api/elsaval/clients/${id}`, formData);
+            await axios.put(`https://elsaval.com.pe/api/elsaval/clients/${clientId}`, formData);
             alert('Cliente actualizado correctamente');
         } catch (error) {
             console.error('Error al actualizar el cliente:', error);
@@ -56,7 +56,8 @@ const ActualizarCliente = () => {
 
     return (
         <div>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
+                <h1>Actualizar Cliente</h1>
                 <Form.Group controlId="formNombre">
                     <Form.Label>Nombre:</Form.Label>
                     <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} />

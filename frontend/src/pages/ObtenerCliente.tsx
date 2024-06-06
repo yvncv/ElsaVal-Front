@@ -13,14 +13,14 @@ interface Cliente {
 }
 
 const ObtenerCliente = () => {
-    const { id } = useParams<{ id: string }>();
+    const { clientId } = useParams<{ clientId: string }>();
     const [cliente, setCliente] = useState<Cliente>();
     const [error, setError] = useState<string>('');
 
     useEffect(() => {
-        const obtenerCliente = async (clienteId: string) => {
+        const obtenerCliente = async () => {
             try {
-                const response = await axios.get(`https://elsaval.com.pe/api/elsaval/clients/${clienteId}`);
+                const response = await axios.get(`https://elsaval.com.pe/api/elsaval/clients/${clientId}`);
                 setCliente(response.data.data);
             } catch (error) {
                 console.error('Error al obtener el cliente:', error);
@@ -28,12 +28,12 @@ const ObtenerCliente = () => {
             }
         };
 
-        if (id) {
-            obtenerCliente(id);
+        if (clientId) {
+            obtenerCliente();
         } else {
             setError('ID de cliente no válido.');
         }
-    }, [id]);
+    }, [clientId]);
 
     if (error) {
         return <p>{error}</p>;
