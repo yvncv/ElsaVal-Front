@@ -14,13 +14,13 @@ function CrearOrden() {
   const [products, setProducts] = useState<Product[]>([]);
   const [order, setOrder] = useState<Order | null>(null);
   const [error, setError] = useState('');
-  const [total, setTotal] = useState<number | null>(null);
+  const [subtotal, setSubtotal] = useState<number>(0);
 
   useEffect(() => {
     // Obtener clientes de la API al cargar el componente
     axios.get('https://elsaval.com.pe/api/elsaval/clients')
       .then(response => {
-        setClients(response.data.data);
+        setClients(response.data.data || []); // Inicializar como array vacío si no hay datos
       })
       .catch(error => {
         console.error('Error al obtener los clientes:', error);
@@ -30,7 +30,7 @@ function CrearOrden() {
     // Obtener productos de la API al cargar el componente
     axios.get('https://elsaval.com.pe/api/elsaval/products')
       .then(response => {
-        setProducts(response.data.data);
+        setProducts(response.data.data || []); // Inicializar como array vacío si no hay datos
       })
       .catch(error => {
         console.error('Error al obtener los productos:', error);
@@ -39,20 +39,15 @@ function CrearOrden() {
   }, []);
 
   useEffect(() => {
-    // Calcula el total de la orden cuando cambian los productos seleccionados
-    const calculateTotal = () => {
-      let totalAmount = 0;
-      order_products.forEach(({ product_id, quantity }) => {
-        const product = products.find(product => product.id === Number(product_id));
-        if (product) {
-          const productTotal = Number(product.price) * Number(quantity);
-          totalAmount += productTotal;
-        }
-      });
-      setTotal(totalAmount);
-    };
-
-    calculateTotal();
+    // Calcula el subtotal cuando cambian los productos seleccionados
+    let newSubtotal = 0;
+    order_products.forEach(({ product_id, quantity }) => {
+      const product = products.find(product => product.id === Number(product_id));
+      if (product) {
+        newSubtotal += parseFloat(product.price) * parseInt(quantity);
+      }
+    });
+    setSubtotal(newSubtotal);
   }, [order_products, products]);
 
   const handleOrderProductChange = (index, key, value) => {
@@ -73,18 +68,9 @@ function CrearOrden() {
       if (!client_id || !status || !street_address || order_products.some(op => !op.product_id || !op.quantity)) {
         throw new Error('Por favor, complete todos los campos.');
       }
-  
-      // Calcular subtotal y total
-      let subtotal = 0;
-      order_products.forEach(op => {
-        const product = products.find(p => p.id === parseInt(op.product_id)); // Aseguramos que el ID del producto sea numérico
-        if (product) {
-          subtotal += parseFloat(product.price) * parseInt(op.quantity);
-        }
-      });
 
-      const total = subtotal; // Aquí puedes ajustar el cálculo del total según sea necesario
-  
+      const total = subtotal; // El total es igual al subtotal en este caso
+
       const response = await axios.post('https://elsaval.com.pe/api/elsaval/orders', {
         client_id,
         status,
@@ -111,6 +97,7 @@ function CrearOrden() {
       setError(error.response?.data?.message || error.message);
     }
   };
+
   return (
     <Form onSubmit={guardarDatos} style={{ backgroundColor: '#fff', borderRadius: '15px', padding: '30px', margin: '30px', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)' }}>
       <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>Crear Orden</h1>
@@ -132,7 +119,7 @@ function CrearOrden() {
         <Form.Label>Dirección:</Form.Label>
         <Form.Control type="text" value={street_address} onChange={(e) => setStreetAddress(e.target.value)} placeholder="Dirección" />
       </Form.Group>
-  
+
       {order_products.map((order_product, index) => (
         <div key={index} style={{ marginBottom: '20px' }}>
           <Form.Group controlId={`formProductId${index}`}>
@@ -150,15 +137,16 @@ function CrearOrden() {
           </Form.Group>
         </div>
       ))}
-  
-      {/* Mostrar total calculado solo si total es diferente de null */}
-      {total !== null && (
+
+      {/* Mostrar total calculado solo si subtotal es diferente de 0 */}
+      {subtotal !== 0 && (
         <div>
           <h2 style={{ marginTop: '20px', color: '#333' }}>Total Calculado</h2>
-          <p style={{ color: '#333' }}>Total: {total}</p>
+          <p style={{ color: '#333' }}>Subtotal: {subtotal}</p>
+          {/* Aquí puedes agregar más detalles sobre el precio, como impuestos, descuentos, etc. */}
         </div>
       )}
-  
+
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
         <Button variant="primary" type="button" onClick={agregarProducto} style={{ marginRight: '10px' }}>Agregar Producto</Button>
         <Button variant="primary" type="submit">Crear Orden</Button>
