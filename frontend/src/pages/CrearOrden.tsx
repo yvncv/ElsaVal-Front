@@ -1,41 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Form, Alert } from 'react-bootstrap';
-
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  images: string[]; // Aquí se define como un array de strings
-  cost_price: string;
-  price: string;
-  discount: null | number;
-  sku: string;
-  stock: number;
-  status: string;
-  category: {
-      id: number;
-      name: string;
-  };
-  material: {
-      id: number;
-      name: string;
-      description: null | string;
-      quantity: number;
-      unit_price: string;
-  };
-  created_at: string;
-  updated_at: string;
-}
-
-interface Client {
-  id: number;
-  user: {
-      id: number;
-      name: string;
-      email: string;
-  };
-}
+import { Client } from '../types/Client';
+import { Product } from '../types/Product';
+import { Order } from '../types/Order';
 
 function CrearOrden() {
   const [client_id, setClientId] = useState('');
@@ -44,7 +12,9 @@ function CrearOrden() {
   const [order_products, setOrderProducts] = useState([{ product_id: '', quantity: '' }]);
   const [clients, setClients] = useState<Client[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
+  const [order, setOrder] = useState<Order | null>(null);
   const [error, setError] = useState('');
+  const [total, setTotal] = useState<number | null>(null);
 
   useEffect(() => {
     // Obtener clientes de la API al cargar el componente
@@ -68,6 +38,23 @@ function CrearOrden() {
       });
   }, []);
 
+  useEffect(() => {
+    // Calcula el total de la orden cuando cambian los productos seleccionados
+    const calculateTotal = () => {
+      let totalAmount = 0;
+      order_products.forEach(({ product_id, quantity }) => {
+        const product = products.find(product => product.id === Number(product_id));
+        if (product) {
+          const productTotal = Number(product.price) * Number(quantity);
+          totalAmount += productTotal;
+        }
+      });
+      setTotal(totalAmount);
+    };
+
+    calculateTotal();
+  }, [order_products, products]);
+
   const handleOrderProductChange = (index, key, value) => {
     const newOrderProducts = [...order_products];
     newOrderProducts[index][key] = value;
@@ -86,16 +73,31 @@ function CrearOrden() {
       if (!client_id || !status || !street_address || order_products.some(op => !op.product_id || !op.quantity)) {
         throw new Error('Por favor, complete todos los campos.');
       }
+  
+      // Calcular subtotal y total
+      let subtotal = 0;
+      order_products.forEach(op => {
+        const product = products.find(p => p.id === parseInt(op.product_id)); // Aseguramos que el ID del producto sea numérico
+        if (product) {
+          subtotal += parseFloat(product.price) * parseInt(op.quantity);
+        }
+      });
 
+      const total = subtotal; // Aquí puedes ajustar el cálculo del total según sea necesario
+  
       const response = await axios.post('https://elsaval.com.pe/api/elsaval/orders', {
         client_id,
         status,
         street_address,
-        order_products
+        order_products,
+        total // Enviamos el total calculado al servidor
       });
 
       if (response.status === 200 || response.status === 201) {
-        console.log('Orden creada:', response.data.data);
+        const createdOrder = response.data.data;
+        console.log('Orden creada:', createdOrder);
+        // Almacenar la orden creada en el estado
+        setOrder(createdOrder);
         // Limpiar los campos después de crear la orden
         setClientId('');
         setStatus('');
@@ -105,10 +107,11 @@ function CrearOrden() {
         throw new Error('Error al crear la orden. Por favor, inténtalo de nuevo.');
       }
     } catch (error) {
-      console.error('Error al crear la orden:', error.message);
-      setError(error.message);
+      console.error('Error al crear la orden:', error.response?.data || error.message);
+      setError(error.response?.data?.message || error.message);
     }
   };
+
 
   return (
     <Form onSubmit={guardarDatos} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
@@ -149,6 +152,15 @@ function CrearOrden() {
           </Form.Group>
         </div>
       ))}
+  
+      {/* Mostrar total calculado */}
+      {total && (
+        <div>
+          <h2 style={{marginTop: '20px'}}>Total Calculado</h2>
+          <p>Total: {total}</p>
+        </div>
+      )}
+  
       <div style={{display: 'flex', margin: '30px 0 0 0'}}>
         <Button variant="primary" type="button" onClick={agregarProducto} style={{ margin: '0 auto' }}>Agregar Producto</Button>
         <Button variant="primary" type="submit" style={{ margin: '0 auto' }}>Crear Orden</Button>
