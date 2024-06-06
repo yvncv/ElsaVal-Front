@@ -39,7 +39,7 @@ const Productos: React.FC = () => {
                     <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>Productos</h1>
             <div className="row">
                 {productos.map(product => (
-                    <div key={product.id} className="col-md-4">
+                    <div key={product.id} className="col-md-4" style={{ width: 'fit-content' }}>
                         <Card style={{ width: '18rem', marginBottom: '10px' }}>
                             <Carousel style={{ width: '290px' }} interval={1000} fade={true}>
                                 {product.images.map((image, index) => (

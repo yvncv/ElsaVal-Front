@@ -58,8 +58,8 @@ function CategoriasPage() {
             <h4 style={{ marginBottom: '50px' }}>Cantidad {categorias.filter(categoria => categoria.id === categoriaSeleccionada)?.length}</h4>
             <div className="row">
               {productos.map(producto => (
-                <div key={producto.id} className="col-md-4">
-                  <Card style={{ width: '18rem', marginBottom: '10px' }}>
+                <div key={producto.id} className="col-md-4 d-flex flex-wrap" style={{ width: 'fit-content' }}>
+                  <Card style={{ width: '18rem', margin: '10px' }}>
                     <Carousel style={{ width: '290px' }} interval={1000} fade={true}>
                       {producto.images.map((image, index) => (
                         <Carousel.Item key={index} style={{ height: '300px' }}>
