@@ -111,11 +111,9 @@ function CrearOrden() {
       setError(error.response?.data?.message || error.message);
     }
   };
-
-
   return (
-    <Form onSubmit={guardarDatos} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
-      <h1>Crear Orden</h1>
+    <Form onSubmit={guardarDatos} style={{ backgroundColor: '#fff', borderRadius: '15px', padding: '30px', margin: '30px', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)' }}>
+      <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>Crear Orden</h1>
       {error && <Alert variant="danger">{error}</Alert>}
       <Form.Group controlId="formClientId">
         <Form.Label>ID del Cliente:</Form.Label>
@@ -136,7 +134,7 @@ function CrearOrden() {
       </Form.Group>
   
       {order_products.map((order_product, index) => (
-        <div key={index}>
+        <div key={index} style={{ marginBottom: '20px' }}>
           <Form.Group controlId={`formProductId${index}`}>
             <Form.Label>ID del Producto {index + 1}:</Form.Label>
             <Form.Control as="select" value={order_product.product_id} onChange={(e) => handleOrderProductChange(index, 'product_id', e.target.value)}>
@@ -153,17 +151,17 @@ function CrearOrden() {
         </div>
       ))}
   
-      {/* Mostrar total calculado */}
-      {total && (
+      {/* Mostrar total calculado solo si total es diferente de null */}
+      {total !== null && (
         <div>
-          <h2 style={{marginTop: '20px'}}>Total Calculado</h2>
-          <p>Total: {total}</p>
+          <h2 style={{ marginTop: '20px', color: '#333' }}>Total Calculado</h2>
+          <p style={{ color: '#333' }}>Total: {total}</p>
         </div>
       )}
   
-      <div style={{display: 'flex', margin: '30px 0 0 0'}}>
-        <Button variant="primary" type="button" onClick={agregarProducto} style={{ margin: '0 auto' }}>Agregar Producto</Button>
-        <Button variant="primary" type="submit" style={{ margin: '0 auto' }}>Crear Orden</Button>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
+        <Button variant="primary" type="button" onClick={agregarProducto} style={{ marginRight: '10px' }}>Agregar Producto</Button>
+        <Button variant="primary" type="submit">Crear Orden</Button>
       </div>
     </Form>
   );

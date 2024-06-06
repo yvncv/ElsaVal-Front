@@ -1,32 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Carousel } from 'react-bootstrap';
-
-interface Product {
-    id: number;
-    name: string;
-    description: string;
-    images: string[]; // Aquí se define como un array de strings
-    cost_price: string;
-    price: string;
-    discount: null | number;
-    sku: string;
-    stock: number;
-    status: string;
-    category: {
-        id: number;
-        name: string;
-    };
-    material: {
-        id: number;
-        name: string;
-        description: null | string;
-        quantity: number;
-        unit_price: string;
-    };
-    created_at: string;
-    updated_at: string;
-}
+import { Product } from '../types/Product';
 
 const Productos: React.FC = () => {
     const [productos, setProductos] = useState<Product[]>([]);
@@ -61,7 +36,7 @@ const Productos: React.FC = () => {
 
     return (
         <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
-            <h2>Productos</h2>
+                    <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>Productos</h1>
             <div className="row">
                 {productos.map(product => (
                     <div key={product.id} className="col-md-4">
@@ -81,6 +56,10 @@ const Productos: React.FC = () => {
                             <Card.Body>
                                 <Card.Title>{product.name}</Card.Title>
                                 <Card.Subtitle>{product.description}</Card.Subtitle>
+                                <Card.Text>{product.price}</Card.Text>
+                                <Card.Text>Categoría: {product.category.name}</Card.Text>
+                                <Card.Text>Hecho de: {product.material.name}</Card.Text>
+                                <Card.Text>Stock: {product.stock}</Card.Text>
                             </Card.Body>
                         </Card>
                     </div>

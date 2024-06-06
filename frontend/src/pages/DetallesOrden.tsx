@@ -2,48 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Form, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-
-interface Order {
-  id: number;
-  client: {
-    id: number;
-    user: {
-      id: number;
-      name: string;
-      email: string;
-    };
-  };
-  identifier: string;
-  uuid: string;
-  subtotal_price: string;
-  delivery_price: string | null;
-  discount: number | null;
-  total_price: string;
-  street_address: string;
-  status: string;
-  products: {
-    id: number;
-    product: {
-      id: number;
-      name: string;
-      description: string;
-      images: string[];
-      cost_price: string;
-      price: string;
-      discount: number | null;
-      sku: string;
-      stock: number;
-      status: string;
-      created_at: string;
-      updated_at: string;
-    };
-    unit_price: string;
-    quantity: number;
-    total_price: string;
-  }[];
-  created_at: string;
-  updated_at: string;
-}
+import { Order } from '../types/Order';
 
 function DetallesOrden() {
   const { orderId } = useParams<{ orderId?: string }>();
@@ -90,12 +49,13 @@ function DetallesOrden() {
       {error ? (
         <div>
           <Form onSubmit={handleSearch} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
+          <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>Detalles de Orden</h1>
           <p className="error-message">{error}</p>
             <Form.Group controlId="formOrderId">
               <Form.Label>Introduce el ID de la Orden:</Form.Label>
-              <Form.Control type="text" value={inputOrderId} onChange={handleIdChange} />
+              <Form.Control type="text" value={inputOrderId} onChange={handleIdChange}/>
             </Form.Group>
-            <Button variant="primary" type="submit">Buscar Orden</Button>
+            <Button variant="primary" type="submit" style={{ marginTop: '30px', width: '100%' }}>Buscar Orden</Button>
           </Form>
         </div>
       ) : (

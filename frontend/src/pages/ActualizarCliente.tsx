@@ -63,12 +63,13 @@ const ActualizarCliente = () => {
         return (
             <div>
                 <Form onSubmit={handleSearch} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
+                    <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>Actualizar Cliente</h1>
                     <p>{error}</p>
                     <Form.Group controlId="formClientId">
                         <Form.Label>Introduce el ID del Cliente:</Form.Label>
                         <Form.Control type="text" value={inputClientId} onChange={handleIdChange} />
                     </Form.Group>
-                    <Button variant="primary" type="submit">Buscar Cliente</Button>
+                    <Button variant="primary" type="submit"  style={{ marginTop: '30px', width: '100%' }}>Buscar Cliente</Button>
                 </Form>
             </div>
         );
@@ -90,7 +91,7 @@ const ActualizarCliente = () => {
                     <Form.Label>Email:</Form.Label>
                     <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} />
                 </Form.Group>
-                <Button variant="primary" type="submit">Actualizar</Button>
+                <Button style={{ marginTop: '30px', width: '100%' }} variant="primary" type="submit">Actualizar</Button>
             </Form>
         </div>
     );

@@ -2,19 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-
-interface Cliente {
-    id: number;
-    user: {
-        id: number;
-        name: string;
-        email: string;
-    };
-}
+import { Client } from '../types/Client';
 
 const ObtenerCliente = () => {
     const { clientId } = useParams<{ clientId?: string }>();
-    const [cliente, setCliente] = useState<Cliente | null>(null);
+    const [cliente, setCliente] = useState<Client | null>(null);
     const [error, setError] = useState<string>('');
     const [inputClientId, setInputClientId] = useState<string>(clientId || '');
 
@@ -54,6 +46,7 @@ const ObtenerCliente = () => {
 
     return (
         <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
+            <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>Buscar Cliente</h1>
             {error && (
                 <div>
                     <p>{error}</p>
@@ -62,7 +55,7 @@ const ObtenerCliente = () => {
                             <Form.Label>Introduce el ID del Cliente:</Form.Label>
                             <Form.Control type="text" value={inputClientId} onChange={handleIdChange} />
                         </Form.Group>
-                        <Button variant="primary" type="submit">Buscar Cliente</Button>
+                        <Button style={{ marginTop: '30px', width: '100%' }} variant="primary" type="submit">Buscar Cliente</Button>
                     </Form>
                 </div>
             )}

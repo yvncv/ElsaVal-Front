@@ -2,48 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, ListGroup, Form, Button } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
-
-interface Order {
-  id: string;
-  client: {
-    id: string;
-    user: {
-      id: string;
-      name: string;
-      email: string;
-    };
-  };
-  identifier: string;
-  uuid: string;
-  subtotal_price: string;
-  delivery_price: string | null;
-  discount: number | null;
-  total_price: string;
-  street_address: string;
-  status: string;
-  products: {
-    id: number;
-    product: {
-      id: number;
-      name: string;
-      description: string;
-      images: string[];
-      cost_price: string;
-      price: string;
-      discount: number | null;
-      sku: string;
-      stock: number;
-      status: string;
-      created_at: string;
-      updated_at: string;
-    };
-    unit_price: string;
-    quantity: number;
-    total_price: string;
-  }[];
-  created_at: string;
-  updated_at: string;
-}
+import { Order } from '../types/Order';
 
 const OrdenesCliente = () => {
   const { clientId } = useParams<{ clientId?: string }>();
@@ -90,16 +49,16 @@ const OrdenesCliente = () => {
 
   return (
     <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
-      <h1>Órdenes del Cliente</h1>
+      <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>órdenes de Cliente</h1>
       {error && (
         <p className="error-message">{error}</p>
       )}
       <Form onSubmit={handleSearch}>
         <Form.Group controlId="formClientId">
           <Form.Label>Introduce el ID del Cliente:</Form.Label>
-          <Form.Control type="text" value={inputClientId} onChange={handleIdChange} />
+          <Form.Control type="text" value={inputClientId} onChange={handleIdChange} title=''/>
         </Form.Group>
-        <Button variant="primary" type="submit">Buscar Órdenes</Button>
+        <Button variant="primary" type="submit" style={{ margin: '30px 0 30px 0', width: '100%' }}>Buscar Órdenes</Button>
       </Form>
       {orders === null && !error ? (
         <p>Cargando...</p>

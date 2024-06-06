@@ -52,7 +52,7 @@ const CrearCliente: React.FC = () => {
     return (
         <div>
             <Form onSubmit={guardarDatos} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
-                <h1>Crear Cliente</h1>
+                <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>Crear Cliente</h1>
                 <Form.Group controlId="formNombre">
                     <Form.Label>Nombre:</Form.Label>
                     <Form.Control type="text" value={nombre} onChange={handleNombreChange} />
@@ -65,7 +65,7 @@ const CrearCliente: React.FC = () => {
                     <Form.Label>Password:</Form.Label>
                     <Form.Control type="password" value={password} onChange={handlePasswordChange} />
                 </Form.Group>
-                <Button variant="primary" type="submit">Crear Cliente</Button>
+                <Button variant="primary" type="submit" style={{ marginTop: '30px', width: '100%' }}>Crear Cliente</Button>
             </Form>
             {mensaje && <p style={{ color: 'green' }}>{mensaje}</p>}
             {error && <p style={{ color: 'red' }}>{error}</p>}
