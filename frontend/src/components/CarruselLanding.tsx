@@ -32,7 +32,7 @@ function CarruselLanding() {
         <Carousel.Item style={{ height: '40dvw', maxHeight: '600' }}>
           <img
             className="d-block w-100 h-100"
-            src="https://escreatextil.com/wp-content/uploads/2022/06/diferencia-crochet-y-tejido-e1654463823736.jpg"
+            src="https://okdiario.com/look/img/2022/02/14/crochet1.jpg"
             alt="Third slide"
             style={{ borderRadius: '60px', border: '6px dotted yellow', padding: '10px' }}
           />
