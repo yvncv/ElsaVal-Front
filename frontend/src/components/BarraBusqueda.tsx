@@ -24,7 +24,7 @@ function BarraBusqueda() {
           <Nav className="ml-auto" style={{ marginLeft: 'auto' }}>
             <Nav.Link as={Link} to="/Acercade" style={{ color: '#ede8da' }}>Nosotros</Nav.Link>
             <Nav.Link as={Link} to="/products" style={{ color: '#ede8da' }}>Productos</Nav.Link>
-            <Nav.Link as={Link} to="/categories" style={{ color: '#ede8da' }}>Categorias</Nav.Link>
+            <Nav.Link as={Link} to="/categories" style={{ color: '#ede8da' }}>Catalogo</Nav.Link>
             <Nav.Link as={Link} to="/create-client" style={{ color: '#ede8da' }}>Crear Cliente</Nav.Link>
             <Nav.Link as={Link} to="/update-client/:clientId" style={{ color: '#ede8da' }}>Actualizar Cliente</Nav.Link>
             <Nav.Link as={Link} to="/orders" style={{ color: '#ede8da' }}>Órdenes</Nav.Link>
