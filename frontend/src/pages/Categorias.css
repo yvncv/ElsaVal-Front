@@ -1,6 +1,4 @@
-/*contenedor principal*/
-
-
+/* contenedor principal */
 .categorias-main-container {
   display: flex;
   flex-direction: row;
@@ -9,93 +7,218 @@
   padding: 30px;
   margin: 30px;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.85);
-  font-family:"Amatic SC",sans-serif;
+  font-family: "Amatic SC", sans-serif;
+  flex-wrap: wrap;
 }
 
-
-/*categorias*/
+/* categorias */
 .categorias-column {
-  display:flex;
+  display: flex;
   background-color: #000000b3;
   border-radius: 25px;
   width: 18%;
   flex-direction: column;
   align-items: center;
   margin-right: 5%;
+  align-content: center;
 }
 
-  .categorias-title{
-    flex:1;
-    width: 100%;
-    margin-top: 30px !important;
-    margin-bottom: 30px !important;
-    margin-left: 18px;
-    color:rgb(237, 232, 218) !important;
-    text-align: start;
-  }
+.categorias-title {
+  /*flex: 1;*//*responsable del gran espaciado al seleccionar categorias*/
+  width: 100%;
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+  color: rgb(237, 232, 218) !important;
+  text-align: center;/*start*/
+  height: fit-content!important;
+}
 
-  .categorias-container {
-    display: flex;
-    flex-direction: column;/*hace que los hijos del container se apilen en columnas*/
-    align-items: flex-start;
-    width: 100%;
-  }
+.categorias-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
 
-    .categorias-card{
-      display: flex;
-      flex: 1;
-      width: 100%;
-      background-color: transparent !important;
-      color:rgb(237, 232, 218)!important;
-      border-color: transparent !important;
-      border-radius: 0!important;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    .categorias-card:hover {
-      background-color: rgba(237, 232, 218, 0.1) !important; /* Color de fondo al pasar el cursor */
-      color: rgb(237, 232, 218) !important; /* Color de texto al pasar el cursor */
-    }
+.categorias-card {/*la ventana de categorias*/
+  display: flex;
+  flex: 1;
+  width: 100%;
+  background-color: transparent !important;
+  color: rgb(237, 232, 218) !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-      .categorias-card-body{
-        padding-top: 18px !important; 
-        padding-bottom: 18px !important; 
-        display: flex;
-        flex:1;
-        align-items: center;
-      }
+.categorias-card:hover {
+  background-color: rgba(237, 232, 218, 0.1) !important;
+  color: rgb(237, 232, 218) !important;
+}
 
-        .categorias-checkbtn{
-          margin-right: 2px;
-        }
-        .categorias-card-title{
-          text-align: left;
-          flex:1;
-          margin-bottom: 0 !important;
-          width: 100%;
-        }
+.categorias-card-body {
+  padding-top: 18px !important;
+  padding-bottom: 18px !important;
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.categorias-checkbtn {
+  margin-right: 2px;
+}
+
+.categorias-card-title {
+  text-align: left;
+  flex: 1;
+  margin-bottom: 0 !important;
+  width: 100%;
+}
 
 
-/*productos, falta modificar*/
+
+
+
+
+
+
+
+
+
+
+
+/* productos */
+
+/*div que engloba el titulo y los productos(verde oscuro)*/
 .categorias-productos-column {
-  display:flex;
+  display: flex;
   background-color: #000000b3;
   border-radius: 25px;
-  width:77%;
-  flex-direction: column;/*hace que los hijos del container se apilen en columnas*/
+  width: 77%;
+  flex-direction: column;
+  align-items: center;
+}
+  /*div con el titulo de los productos*/
+  .resultados-title{
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+    color: rgb(237, 232, 218) !important;
+  }
+  /*fin div con titulo*/
+
+  /*div con productos*/
+  .categorias-productos-row{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+    /*div invisible que engloba cada card*/
+    .col-xxl-4{
+      margin-top: 10px;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-bottom: 20px;
+    }
+      /*card*/
+      .categorias-productos-card {/*el cuadro de cada producto mostrado*/
+        width:auto;
+        background-color: #0000007b!important;
+        color:#ede8da !important;
+        align-items: center;/*centro horizontal*/
+      }
+        /*carousel*/
+        .categorias-productos-carousel {
+          width: 290px;
+        }
+
+          .categorias-productos-carousel-item {
+            height: 300px;
+          }
+            /*carrousel inner*/
+            div.carousel-inner{
+              width: 90%;
+              margin-left: 5%;
+            }
+            /*fin carrousel inner*/
+              /*imagen*/
+              .categorias-productos-carousel-item img {
+                border-radius: 25px;
+                padding: 10px;
+              }
+              /*fin imagen*/
+
+        /*fin carousel*/
+        /*card-body*/
+            /*button ver detalles*/
+            button.btn_ver_Detalles{
+                border-color: #ede8da!important;
+                background-color: #353535!important;
+                color: #ede8da !important;
+                transition: background-color 0.3s ease!important;
+            }
+            button.btn_ver_Detalles:hover {
+              background-color: #000000 !important;
+            }
+            /*fin button ver detalles*/
+        /*fin card-body*/
+      /*fin card*/
+    /*fin div invisible*/
+  /*fin div con productos*/
+/*fin div verde oscuro*/
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsivo */
+@media (max-width: 1200px) {
+  .categorias-column {
+    width: 22%;
+  }
+  .categorias-productos-column {
+    width: 73%;
+  }
 }
 
-.categorias-productos-card{
-  margin-bottom: 10px;
-  width: 18rem;
+@media (max-width: 992px) {
+  .categorias-column {
+    width: 25%;
+  }
+  .categorias-productos-column {
+    width: 70%;
+  }
 }
 
-.categorias-productos-carousel{
-  width: 290px;
+@media (max-width: 768px) {
+  .categorias-main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .categorias-column {
+    width: 90%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  .categorias-productos-column {
+    width: 90%;
+  }
 }
-.categorias-productos-carousel-item{
- height: 300px;
-}
-.categorias-productos-carousel-item img{
- border-radius: 25px;
- padding: 10px;
+
+@media (max-width: 576px) {
+  .categorias-title {
+    font-size: 1.5rem;
+  }
+  .categorias-card-title {
+    font-size: 1.2rem;
+  }
+  .categorias-productos-card {
+    width: 100%;
+  }
 }
