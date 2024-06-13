@@ -33,12 +33,23 @@
             }
             
             /*ajustes para el text box*/
-            .Ingresa-correo-txtbox{
-                font-family:'Roboto', sans-serif;
+            .Ingresa-correo-txtbox,.Ingresa-contra-txtbox{
+                border-color: #ede8da;
+                color: #ede8da;
+                background-color: #171A19;
+                font-family: 'Roboto', sans-serif;
+                transition: background-color, border-color 0.3s;
+                font-size: 15px;
             }
-
-            .Ingresa-contra-txtbox{
-                font-family:'Roboto', sans-serif;
+            .Ingresa-correo-txtbox::placeholder,.Ingresa-contra-txtbox::placeholder{
+                color:#837a63;
+            }
+            .Ingresa-correo-txtbox:active,
+            .Ingresa-correo-txtbox:focus,.Ingresa-contra-txtbox:active,.Ingresa-contra-txtbox:focus{
+                border-color: #ede8da;
+                background-color: #171A19;
+                color:#ede8da;
+                box-shadow: 0 0 10px #ede8da; 
             }
 
             .mb-3.w-100{/*boton*/
