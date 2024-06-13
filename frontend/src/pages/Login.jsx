@@ -33,7 +33,8 @@ const Login = ({ setLoggedInUser }) => {
         headers: {
           'Authorization': `Bearer ${token}`
         }
-      });
+      }); 
+      //comentario
 
       // Obtener la información del usuario
       const user = userResponse.data;
