@@ -13,7 +13,7 @@ const Login = ({ setLoggedInUser }) => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     try {
       // Realizar la solicitud de login
       const response = await axios.post('https://elsaval.com.pe/api/login', {
@@ -23,7 +23,7 @@ const Login = ({ setLoggedInUser }) => {
       setLoggedInUser(email);
 
       // Obtener el token del usuario del response
-      const { token } = response.data; 
+      const { token } = response.data;
 
       // Almacenar el token en el almacenamiento local
       localStorage.setItem('token', token);

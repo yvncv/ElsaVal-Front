@@ -1,35 +1,56 @@
 /* En Login.css */
-.form-content {
-    background-color: rgba(23, 23, 23, 0.811);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 0px 10px 0px rgba(252, 252, 252, 0);
+
+
+.Contenedor-Login{
+    font-family: "Amatic SC",sans-serif;
 }
 
-body {
-    font-family: Arial, sans-serif;
-}
-
-.title {
-    font-weight: bold;
-    color: white;
-}
-.text-white {
-    color: white;
-}
-@media (max-width: 576px) {
-    .form-content {
-        padding: 10px;
+    .login-form{
+        background-color: rgba(0, 0, 0, 0.766);
+        border-radius: 10px;
+        padding: 35px;
+        box-shadow: 0px 0px 10px 0px rgba(252, 252, 252, 0);
+        color:rgb(237, 232, 218) !important;
     }
-}
 
-/* Ajustes de estilo para Form.Label */
-.form-label { 
-    font-size: 1.2em; /* Aumentar el tamaño de la fuente */
-    text-align: left; /* Alinear al extremo izquierdo */
-    width: 100%; /* Ocupar todo el ancho disponible */
-    display: block; /* Mostrar como un bloque para ocupar toda la línea */
-}
+        .title {
+            font-weight: bolder;
+            font-size: 2em;
+            letter-spacing: 1px;
+        }
+        @media (max-width: 576px) {
+            .form-content {
+                padding: 10px;
+            }
+        }
 
+            /* Ajustes de estilo para Form.Label */
+            .form-label {/*para labels de correo y contrasena*/
+                font-size: 1.5em; /* Aumentar el tamaño de la fuente */
+                text-align: left; /* Alinear al extremo izquierdo */
+                width: 100%; /* Ocupar todo el ancho disponible */
+                display: block; /* Mostrar como un bloque para ocupar toda la línea */
+            }
+            
+            /*ajustes para el text box*/
+            .Ingresa-correo-txtbox{
+                font-family:'Roboto', sans-serif;
+            }
 
-  
+            .Ingresa-contra-txtbox{
+                font-family:'Roboto', sans-serif;
+            }
+
+            .mb-3.w-100{/*boton*/
+                background-color: #A8C3BB;
+                border-color: #1B2A20;
+                font-weight: bold;
+            }
+
+        a.Olvidar-contra-link-info{
+            color:#A8C3BB;
+        }
+
+        a.registrarse-link-info{
+            color:#A8C3BB;
+        }
