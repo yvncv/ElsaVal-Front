@@ -34,12 +34,12 @@
             
             /*ajustes para el text box*/
             .Ingresa-correo-txtbox,.Ingresa-contra-txtbox{
-                /*font-family:'Roboto', sans-serif;*/
                 border-color: #ede8da;
                 color: #ede8da;
                 background-color: #171A19;
                 font-family: 'Roboto', sans-serif;
                 transition: background-color, border-color 0.3s;
+                font-size: 15px;
             }
             .Ingresa-correo-txtbox::placeholder,.Ingresa-contra-txtbox::placeholder{
                 color:#837a63;
