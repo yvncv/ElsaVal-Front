@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Form } from 'react-bootstrap';
+import './CrearCliente.css'
 
 const CrearCliente: React.FC = () => {
     const [nombre, setNombre] = useState<string>('');

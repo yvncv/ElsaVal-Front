@@ -1,31 +1,65 @@
-/* Acercade.css */
 .acercade-container {
   display: flex;
-  align-items: center;
-  margin: 20px; /* Añade margen al contenedor principal */
+  flex-direction: row; /* Alinea los elementos en fila por defecto */
+  align-items: flex-start; /* Alinea los elementos al inicio en el eje transversal */
+  margin: 20px;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en dispositivos pequeños */
 }
 
 .text-container {
-  flex: 1;
-  background-color: white;
-  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.738);
+  padding: 30px;
   border-radius: 8px;
-  font-family: Arial, sans-serif;
-  color: black;
-  margin-right: 10px; /* Ajusta el margen derecho */
+  font-family: "Amatic SC", sans-serif;
+  color: #ede8da;
+  max-width: 600px; /* Ancho máximo del contenedor de texto */
+  width: 100%; /* Ajustar el ancho al 100% del contenedor */
+  flex: 1;
 }
 
 .image-section {
-  flex: 1; 
+  flex: 1;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center; /* Centrar la imagen */
+  margin-left: 20px; /* Añadir margen izquierdo para separar la imagen del texto */
 }
 
 .image {
-  max-width: 100%;
-  margin-top: 20px; /* Añade margen superior a la imagen */
-  margin-left: 10px; /* Ajusta el margen izquierdo */
+  max-width: 100%; /* Ajustar el ancho máximo de la imagen */
+  height: auto; /* Permite que la altura se ajuste automáticamente */
 }
 
+@media (max-width: 768px) {
+  .acercade-container {
+    flex-direction: column; /* Cambiar a columna en dispositivos pequeños */
+  }
 
-  
+  .image-section {
+    justify-content: center; /* Centrar la imagen en dispositivos pequeños */
+    margin-left: 0; /* Eliminar el margen izquierdo en dispositivos pequeños */
+    margin-top: 20px; /* Añadir margen superior para separar la imagen del texto */
+  }
+
+  .image {
+    margin: 0; /* Eliminar márgenes de la imagen en dispositivos pequeños */
+  }
+}
+
+.text-container h1 {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.text-container h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.text-container p {
+  font-size: 25px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  text-align: left;
+}

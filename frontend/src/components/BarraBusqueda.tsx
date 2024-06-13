@@ -2,6 +2,23 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { AuthContext } from '../context/AuthContext.jsx';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+
+function CustomToggle({ children, onClick }) {
+  return (
+    <Nav.Link
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+      style={{ padding: '0.5rem 1rem' }}
+    >
+      {children}
+    </Nav.Link>
+  );
+}
 
 interface Props {
   loggedInUser: any; // Tipo del usuario autenticado, ajusta según tu implementación
@@ -42,13 +59,26 @@ const BarraBusqueda: React.FC<Props> = ({ loggedInUser }) => {
                 <Nav.Link as={Link} to="/orders/:orderId">Detalles de Orden</Nav.Link>
                 <Nav.Link as={Link} to="/client-orders/:clientId">Órdenes de Cliente</Nav.Link>
                 <Nav.Link as={Link} to="/Acercade">Acerca de</Nav.Link>
-                <Nav.Link as={Link} onClick={handleLogout} to="/" style={{color: "red"}}>Cerrar Sesión</Nav.Link>
+                <Nav.Link as={Link} to="/CarritodeCompras">
+                  <FontAwesomeIcon icon={faShoppingCart} />
+                </Nav.Link>
+                <Dropdown align="end">
+                  <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+                    <FontAwesomeIcon icon={faUser} />
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item as={Link} to="/Detalles">Cuenta</Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/HistorialCompras">Historial de Compras</Dropdown.Item>
+                    <Dropdown.Item onClick={handleLogout} style={{color: "red"}}>Cerrar Sesión</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </>
             ) : (
               <>
                 <Nav.Link as={Link} to="/">Inicio</Nav.Link>
-                <Nav.Link as={Link} to="/register">Registrarse</Nav.Link>
-                <Nav.Link as={Link} to="/login">Iniciar Sesión</Nav.Link>
+                <Nav.Link as={Link} to="/Login">
+                  <FontAwesomeIcon icon={faUser} />
+                </Nav.Link>
               </>
             )}
           </Nav>
