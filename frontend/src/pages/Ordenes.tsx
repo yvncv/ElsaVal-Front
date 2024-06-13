@@ -30,7 +30,7 @@ function Ordenes() {
             <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>Órdenes</h1>
             {error && (
                 <p className="error-message" style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>{error}</p>
-            )}
+            )} 
             {!error && orders.map(order => (
                 <Card key={order.id} style={{ marginBottom: '20px' }}>
                     <Card.Body>

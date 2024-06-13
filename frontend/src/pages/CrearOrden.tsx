@@ -84,7 +84,7 @@ function CrearOrden() {
         order_products: order_products.map(op => ({
           product_id: parseInt(op.product_id),
           quantity: parseInt(op.quantity, 10)
-        })),
+        })), 
         subtotal_price: subtotal.toFixed(2), // Enviamos el subtotal calculado
         delivery_price: delivery_price.toFixed(2), // Aseguramos que sea un valor decimal con dos lugares
         discount: discount.toFixed(2), // Aseguramos que sea un valor decimal con dos lugares

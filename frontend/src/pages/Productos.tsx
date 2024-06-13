@@ -68,5 +68,5 @@ const Productos: React.FC = () => {
         </div>
     );
 };
-
+ 
 export default Productos;

@@ -9,7 +9,7 @@ function Producto({ nombre, imagenSrc, precio, descripcion }) {
       <Card.Body>
         <Card.Title>{nombre}</Card.Title>
         <Card.Text>{descripcion}</Card.Text>
-      </Card.Body>
+      </Card.Body> 
       <ListGroup className="list-group-flush">
         <ListGroup.Item>Precio: {precio}</ListGroup.Item>
       </ListGroup>

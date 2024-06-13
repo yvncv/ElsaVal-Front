@@ -59,7 +59,7 @@ const ActualizarCliente = () => {
         }
     };
 
-    if (!clientId || error) {
+    if (!clientId || error) { 
         return (
             <div>
                 <Form onSubmit={handleSearch} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function Footer() {
     return (
         <footer className='text-center text-white' style={{ backgroundColor: '#343a40', padding: '1rem 0' }}>
-            <Container className='p-4'>
+            <Container className='p-4'> 
                 <section className='mb-4'>
                     <Button variant="outline-light" className='m-1' href='#!'>
                         <FaFacebookF />

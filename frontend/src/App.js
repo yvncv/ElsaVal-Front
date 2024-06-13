@@ -33,7 +33,7 @@ function App() {
           <Route path="/clients/:clientId" element={<ObtenerCliente />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/Acercade" element={<Acercade/>}/>
-          <Route path="/Login" element={<Login/>}/>
+          <Route path="/Login" element={<Login/>}/> 
         </Routes>
       </div>
     </Router>

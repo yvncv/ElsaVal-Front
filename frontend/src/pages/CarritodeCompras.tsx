@@ -12,7 +12,7 @@ function CarritodeCompras() {
       </main>
       <footer>
         <p>Hecho con amor por mí mismo.</p>
-      </footer>
+      </footer> 
     </div>
   );
 }

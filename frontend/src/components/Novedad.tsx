@@ -8,7 +8,7 @@ function Novedad({ title, text, imageSrc, items, links }) {
       <Card.Img variant="top" src={imageSrc} />
       <Card.Body>
         <Card.Title>{title}</Card.Title>
-        <Card.Text>{text}</Card.Text>
+        <Card.Text>{text}</Card.Text> 
       </Card.Body>
       <ListGroup className="list-group-flush">
         {items.map((item, index) => (

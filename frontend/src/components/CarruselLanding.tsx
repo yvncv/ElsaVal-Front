@@ -8,7 +8,7 @@ function CarruselLanding() {
         <Carousel.Item style={{ height: '40dvw', maxHeight: '600' }}>
           <img
             className="d-block w-100 h-100"
-            src="https://okdiario.com/look/img/2022/02/14/crochet1.jpg"
+            src="https://okdiario.com/look/img/2022/02/14/crochet1.jpg" 
             alt="First slide"
             style={{ borderRadius: '60px', border: '6px dotted white', padding: '10px' }}
           />

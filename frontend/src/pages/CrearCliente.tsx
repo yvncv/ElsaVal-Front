@@ -31,7 +31,7 @@ const CrearCliente: React.FC = () => {
                 password: password
             });
 
-            if (response.status === 200) {
+            if (response.status === 200) { 
                 const clienteData = response.data; // Ajuste aquí
                 const message = clienteData.message;
                 console.log('Respuesta completa de la API:', response);

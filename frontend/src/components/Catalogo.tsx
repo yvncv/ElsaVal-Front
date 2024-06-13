@@ -5,7 +5,7 @@ function CatalogoProductos() {
   const productos = [
     {
       nombre: 'Bolso Azul',
-      imagenSrc: 'https://via.placeholder.com/150',
+      imagenSrc: 'https://via.placeholder.com/150', 
       precio: '$20.00',
       descripcion: 'Un hermoso bolso tejido a crochet en color azul.'
     },

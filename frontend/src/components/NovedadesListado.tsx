@@ -27,7 +27,7 @@ function Novedades() {
   ];
 
   return (
-    <div style={{ }}>
+    <div style={{ }}> 
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
         {novedades.map((novedad, index) => (
           <Novedad

@@ -24,7 +24,7 @@ body {
 }
 
 /* Ajustes de estilo para Form.Label */
-.form-label {
+.form-label { 
     font-size: 1.2em; /* Aumentar el tamaño de la fuente */
     text-align: left; /* Alinear al extremo izquierdo */
     width: 100%; /* Ocupar todo el ancho disponible */

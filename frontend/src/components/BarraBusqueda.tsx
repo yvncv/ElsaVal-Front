@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-
+ 
 function BarraBusqueda() {
   return (
     <Navbar expand="lg" style={{ backgroundColor: '#abc7bf', fontSize: '15px', color: '#ede8da' }}>

@@ -15,7 +15,7 @@ export type Order = {
     discount: number | null;
     total_price: string;
     street_address: string;
-    status: string;
+    status: string; 
     products: {
       id: number;
       product: {

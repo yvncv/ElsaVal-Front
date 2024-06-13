@@ -56,7 +56,7 @@ function DetallesOrden() {
               <Form.Control type="text" value={inputOrderId} onChange={handleIdChange}/>
             </Form.Group>
             <Button variant="primary" type="submit" style={{ marginTop: '30px', width: '100%' }}>Buscar Orden</Button>
-          </Form>
+          </Form> 
         </div>
       ) : (
         order && (

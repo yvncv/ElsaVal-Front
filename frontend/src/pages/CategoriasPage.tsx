@@ -20,7 +20,7 @@ function CategoriasPage() {
   useEffect(() => {
     // Obtener las categorías de la API
     axios.get('https://elsaval.com.pe/api/elsaval/categories')
-      .then(response => {
+      .then(response => { 
         setCategorias(response.data.data);
       })
       .catch(error => console.error('Error al obtener categorías:', error));

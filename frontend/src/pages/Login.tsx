@@ -14,7 +14,7 @@ const Login = () => {
                   <Form.Label className='white-text'>Correo Electrónico</Form.Label>
                   <Form.Control type="email" placeholder="Ingresa tu correo" size="lg" />
                 </Form.Group>
-  
+   
                 <Form.Group controlId="formBasicPassword" className='mb-3'>
                   <Form.Label className='white-text'>Contraseña</Form.Label>
                   <Form.Control type="password" placeholder="Ingresa tu contraseña" size="lg" />

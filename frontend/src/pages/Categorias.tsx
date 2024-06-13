@@ -49,7 +49,7 @@ function Categorias() {
                   className="categorias-checkbtn"
                   type="radio"
                   name="categorias"
-                  id={`categoria-${categoria.id}`}
+                  id={`categoria-${categoria.id}`} 
                   onChange={() => handleClickVerProductos(categoria.id)}
                   checked={categoriaSeleccionada === categoria.id}
                 />

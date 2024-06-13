@@ -20,7 +20,7 @@ export default function LandingPage() {
             <CarruselLanding />
             <p
                 style={{
-                    fontSize: "50px",
+                    fontSize: "50px", 
                     padding: "50px",
                     textAlign: "center",
                     fontWeight: "bolder",

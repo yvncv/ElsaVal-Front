@@ -12,7 +12,7 @@ const Texto = () => {
       <p>
         Desde nuestra fundación en los tiempos de pandemia, hemos buscado la producción de los mejores productos con los precios más cómodos para todos los interesados en los carteras, bolsas y adornos elaborados con la técnica de crochet.
       </p>
-    </div>
+    </div> 
   );
 };
 

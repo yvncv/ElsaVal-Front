@@ -53,7 +53,7 @@ const OrdenesCliente = () => {
       {error && (
         <p className="error-message">{error}</p>
       )}
-      <Form onSubmit={handleSearch}>
+      <Form onSubmit={handleSearch}> 
         <Form.Group controlId="formClientId">
           <Form.Label>Introduce el ID del Cliente:</Form.Label>
           <Form.Control type="text" value={inputClientId} onChange={handleIdChange} title=''/>

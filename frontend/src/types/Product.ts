@@ -19,7 +19,7 @@ export type Product = {
       description: null | string;
       quantity: number;
       unit_price: string;
-    };
+    }; 
     created_at: string;
     updated_at: string;
   }
