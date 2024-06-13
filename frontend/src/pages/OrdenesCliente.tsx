@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Card, ListGroup, Form, Button } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Order } from '../types/Order';
-
+import './Gestion.css';
 const OrdenesCliente = () => {
   const { clientId } = useParams<{ clientId?: string }>();
   const navigate = useNavigate();
@@ -48,17 +48,17 @@ const OrdenesCliente = () => {
   };
 
   return (
-    <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
-      <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>órdenes de Cliente</h1>
-      {error && (
-        <p className="error-message">{error}</p>
-      )}
-      <Form onSubmit={handleSearch}> 
-        <Form.Group controlId="formClientId">
-          <Form.Label>Introduce el ID del Cliente:</Form.Label>
-          <Form.Control type="text" value={inputClientId} onChange={handleIdChange} title=''/>
+    <div>
+      <Form onSubmit={handleSearch} className="Form_Gestion">
+        <h1>Órdenes de Cliente</h1>
+        <Form.Group controlId="formClienteId">
+          <Form.Label controlId="lblClienteId">Introduce el ID del Cliente:</Form.Label>
+          <Form.Control type="text" value={inputClientId} onChange={handleIdChange} className='Control_txt'/>
         </Form.Group>
-        <Button variant="primary" type="submit" style={{ margin: '30px 0 30px 0', width: '100%' }}>Buscar Órdenes</Button>
+        {error && (
+          <p className="error-message">{error}</p>
+        )}
+        <Button variant="primary" type="submit" className="Form_btn">Buscar Órdenes</Button>
       </Form>
       {orders === null && !error ? (
         <p>Cargando...</p>

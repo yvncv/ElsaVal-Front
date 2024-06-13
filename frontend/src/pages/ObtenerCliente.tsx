@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { Client } from '../types/Client';
-
+import './Gestion.css';
 const ObtenerCliente = () => {
     const { clientId } = useParams<{ clientId?: string }>();
     const [cliente, setCliente] = useState<Client | null>(null);
@@ -45,35 +45,36 @@ const ObtenerCliente = () => {
     };
 
     return (
-        <div style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>Buscar Cliente</h1>
+        <div>
             {error && (
                 <div>
-                    <p>{error}</p>
-                    <Form onSubmit={handleSearch}> 
-                        <Form.Group controlId="formClientId">
-                            <Form.Label>Introduce el ID del Cliente:</Form.Label>
-                            <Form.Control type="text" value={inputClientId} onChange={handleIdChange} />
+                    <Form onSubmit={handleSearch} className="Form_Gestion"> 
+                        <h1>Buscar Cliente</h1>
+                        <Form.Group controlId="formClienteId">
+                            <Form.Label controlId="lblClienteId">Introduce el ID del Cliente:</Form.Label>
+                            <Form.Control type="text" value={inputClientId} onChange={handleIdChange} className='Control_txt'/>
                         </Form.Group>
-                        <Button style={{ marginTop: '30px', width: '100%' }} variant="primary" type="submit">Buscar Cliente</Button>
+                        <p>{error}</p>
+                        <Button variant="primary" type="submit" className='Form_btn'>Buscar Cliente</Button>
                     </Form>
                 </div>
             )}
             {cliente && (
-                <Form>
+                <Form className='Form_Gestion'>
                     <h1>Detalle del Cliente</h1>
-                    <Form.Group controlId="formClientId">
-                        <Form.Label>ID del Cliente:</Form.Label>
-                        <Form.Control type="text" value={cliente.id} readOnly />
+                    <Form.Group controlId="formClienteId">
+                        <Form.Label controlId="lblClienteId">ID del Cliente:</Form.Label>
+                        <Form.Control type="text" value={cliente.id} readOnly className='Control_txt'/>
                     </Form.Group>
                     <Form.Group controlId="formNombre">
-                        <Form.Label>Nombre:</Form.Label>
-                        <Form.Control type="text" value={cliente.user.name} readOnly />
+                        <Form.Label controlId="lblNombre">Nombre:</Form.Label>
+                        <Form.Control type="text" value={cliente.user.name} readOnly className='Control_txt'/>
                     </Form.Group>
-                    <Form.Group controlId="formEmail">
-                        <Form.Label>Email:</Form.Label>
-                        <Form.Control type="email" value={cliente.user.email} readOnly />
+                    <Form.Group controlId="formCorreo">
+                        <Form.Label controlId="lblEmail">Email:</Form.Label>
+                        <Form.Control type="email" value={cliente.user.email} readOnly className='Control_txt'/>
                     </Form.Group>
+                    
                 </Form>
             )}
             {!cliente && !error && (

@@ -1,3 +1,4 @@
+/*
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./Categorias.css";
@@ -98,5 +99,4 @@ function CategoriasPage() {
   );
 }
 
-export default CategoriasPage;
-
+export default CategoriasPage;*/

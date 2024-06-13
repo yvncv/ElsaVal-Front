@@ -113,86 +113,58 @@ function CrearOrden() {
   };
 
   return (
-    <Form onSubmit={guardarDatos} style={formStyle}>
+    <Form onSubmit={guardarDatos} className='Form_Gestion'>
       <h1>Crear Orden</h1>
       {error && <Alert variant="danger">{error}</Alert>}
-      <Form.Group controlId="formClientId">
-        <Form.Label>ID del Cliente:</Form.Label>
-        <Form.Control as="select" value={client_id} onChange={(e) => setClientId(e.target.value)}>
-          <option value="">Seleccione un cliente</option>
+      <Form.Group controlId="formClienteId">
+        <Form.Label controlId="formClienteId">ID del Cliente:</Form.Label>
+        <Form.Control as="select" value={client_id} onChange={(e) => setClientId(e.target.value)} className='Control_txt'>
+          <option value=""> - - Seleccione un cliente - - </option>
           {clients.map(client => (
             <option key={client.id} value={client.id}>{client.user.name}</option>
           ))}
         </Form.Control>
       </Form.Group>
-      <Form.Group controlId="formStatus">
-        <Form.Label>Estado:</Form.Label>
-        <Form.Control type="text" value={status} onChange={(e) => setStatus(e.target.value)} placeholder="Estado" />
+      <Form.Group controlId="formEstado">
+        <Form.Label controlId="lblEstado">Estado:</Form.Label>
+        <Form.Control type="text" value={status} onChange={(e) => setStatus(e.target.value)} placeholder="**Estado**" className='Control_txt'/>
       </Form.Group>
-      <Form.Group controlId="formStreetAddress">
-        <Form.Label>Dirección:</Form.Label>
-        <Form.Control type="text" value={street_address} onChange={(e) => setStreetAddress(e.target.value)} placeholder="Dirección" />
+      <Form.Group controlId="formDireccion">
+        <Form.Label controlId="lblDireccion">Dirección:</Form.Label>
+        <Form.Control type="text" value={street_address} onChange={(e) => setStreetAddress(e.target.value)} placeholder="**Dirección**" className='Control_txt'/>
       </Form.Group>
 
       {order_products.map((order_product, index) => (
-        <div key={index} style={productStyle}>
-          <Form.Group controlId={`formProductId${index}`}>
-            <Form.Label>ID del Producto {index + 1}:</Form.Label>
-            <Form.Control as="select" value={order_product.product_id} onChange={(e) => handleOrderProductChange(index, 'product_id', e.target.value)}>
-              <option value="">Seleccione un producto</option>
+        <div key={index}>
+          <Form.Group controlId={`formProductId${index}`} className='formProducto'>
+            <Form.Label controlId="lblIDProducto">ID del Producto {index + 1}:</Form.Label>
+            <Form.Control as="select" value={order_product.product_id} onChange={(e) => handleOrderProductChange(index, 'product_id', e.target.value)} className='Control_txt'>
+              <option value="">- - Seleccione un producto - -</option>
               {products.map(product => (
                 <option key={product.id} value={product.id}>{product.name}</option>
               ))}
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId={`formQuantity${index}`}>
-            <Form.Label>Cantidad del Producto {index + 1}:</Form.Label>
-            <Form.Control type="number" value={order_product.quantity} onChange={(e) => handleOrderProductChange(index, 'quantity', e.target.value)} placeholder="Cantidad" />
+          <Form.Group controlId={`formQuantity${index}`} className='formCantidad'>
+            <Form.Label controlId="lblCantidadProducto">Cantidad del Producto {index + 1}:</Form.Label>
+            <Form.Control type="number" min="0" value={order_product.quantity} onChange={(e) => handleOrderProductChange(index, 'quantity', e.target.value)} placeholder="**Cantidad**" className="Control_txt"/>
           </Form.Group>
         </div>
       ))}
 
       {subtotal !== 0 && (
         <div>
-          <h2 style={totalStyle}>Total Calculado</h2>
-          <p style={{ color: '#333' }}>Subtotal: {subtotal.toFixed(2)}</p>
+          <h2>Total Calculado</h2>
+          <p>Subtotal: {subtotal.toFixed(2)}</p>
         </div>
       )}
 
-      <div style={buttonContainerStyle}>
-        <Button variant="primary" type="button" onClick={agregarProducto} style={{ marginRight: '10px' }}>Agregar Producto</Button>
-        <Button variant="primary" type="submit">Crear Orden</Button>
+      <div className='Cinta_Form_btn'>
+        <Button variant="primary" type="button" onClick={agregarProducto} className='Form_btn'>Agregar Producto</Button>
+        <Button variant="primary" type="submit" className='Form_btn'>Crear Orden</Button>
       </div>
     </Form>
   );
 }
-
-// Estilos adicionales para el formulario
-const formStyle = {
-  margin: '20px',
-  padding: '20px',
-  borderRadius: '5px',
-  backgroundColor: '#f7f7f7',
-  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-};
-
-const productStyle = {
-  marginBottom: '15px',
-  padding: '10px',
-  border: '1px solid #ccc',
-  borderRadius: '5px',
-  backgroundColor: '#fff',
-};
-
-const buttonContainerStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  marginTop: '15px',
-};
-
-const totalStyle = {
-  marginTop: '15px',
-  color: '#007bff',
-};
 
 export default CrearOrden;
