@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Button, Form, Alert } from 'react-bootstrap';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
+import './Login.css'; // Import Login.css for shared styles
 
 const Registro: React.FC = () => {
   const [nombre, setNombre] = useState<string>('');
@@ -9,7 +11,7 @@ const Registro: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [mensaje, setMensaje] = useState<string>('');
   const [error, setError] = useState<string>('');
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleNombreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNombre(event.target.value);
@@ -27,42 +29,42 @@ const Registro: React.FC = () => {
     event.preventDefault();
 
     try {
-        const response = await axios.post('https://elsaval.com.pe/api/elsaval/clients/', {
-            name: nombre,
-            email: email,
-            password: password
-        });
+      const response = await axios.post('https://elsaval.com.pe/api/elsaval/clients/', {
+        name: nombre,
+        email: email,
+        password: password
+      });
 
-        if (response.status === 200) {
-            const clienteData = response.data; // Ajuste aquí
-            const message = clienteData.message;
-            console.log('Respuesta completa de la API:', response);
-            console.log('Datos del cliente:', response.data.data);
-            console.log('Mensaje de éxito:', message);
-            setMensaje(message);
-            alert('Cliente creado exitosamente.');
-            navigate('/login', { replace: true })
-        } else {
-            throw new Error('Error al crear el cliente. Por favor, inténtalo de nuevo.');
-        }
+      if (response.status === 200) {
+        const clienteData = response.data;
+        const message = clienteData.message;
+        console.log('Respuesta completa de la API:', response);
+        console.log('Datos del cliente:', response.data.data);
+        console.log('Mensaje de éxito:', message);
+        setMensaje(message);
+        alert('Cliente creado exitosamente.');
+        navigate('/login', { replace: true });
+      } else {
+        throw new Error('Error al crear el cliente. Por favor, inténtalo de nuevo.');
+      }
     } catch (error: any) {
-        console.error('Error al crear el cliente:', error);
-        console.log('Detalles del error:', error.response);
-        setError('Hubo un error al crear el cliente. Por favor, inténtalo de nuevo.');
+      console.error('Error al crear el cliente:', error);
+      console.log('Detalles del error:', error.response);
+      setError('Hubo un error al crear el cliente. Por favor, inténtalo de nuevo.');
     }
   };
 
   return (
-    <Container fluid className='Contenedor-Registro'>
+    <Container fluid className='Contenedor-Login'> {/* Use Contenedor-Login for consistent styling */}
       <Row className="justify-content-center align-items-center" style={{ height: "100vh" }}>
         <Col xs={12} sm={8} md={6} lg={4}>
-          <div className='registro-form'>
+          <div className='login-form'> {/* Use login-form for consistent styling */}
             <h3 className="title mb-3 ps-3 pb-3">Registro de Cliente</h3>
             <Form className='px-3' onSubmit={handleSubmit}>
               <Form.Group controlId="Nombre-Group" className='mb-3'>
-                <Form.Label className='nombre-label'>Nombre</Form.Label>
+                <Form.Label className='form-label'>Nombre</Form.Label> {/* Use form-label for consistent styling */}
                 <Form.Control
-                  className="Ingresa-nombre-txtbox"
+                  className="Ingresa-correo-txtbox"
                   type="text"
                   placeholder="Ingresa tu nombre"
                   size="lg"
@@ -72,7 +74,7 @@ const Registro: React.FC = () => {
               </Form.Group>
 
               <Form.Group controlId="Email-Group" className='mb-3'>
-                <Form.Label className='email-label'>Correo Electrónico</Form.Label>
+                <Form.Label className='form-label'>Correo Electrónico</Form.Label> {/* Use form-label for consistent styling */}
                 <Form.Control
                   className="Ingresa-correo-txtbox"
                   type="email"
@@ -84,7 +86,7 @@ const Registro: React.FC = () => {
               </Form.Group>
 
               <Form.Group controlId="Password-Group" className='mb-3'>
-                <Form.Label className='password-label'>Contraseña</Form.Label>
+                <Form.Label className='form-label'>Contraseña</Form.Label> {/* Use form-label for consistent styling */}
                 <Form.Control
                   className="Ingresa-contra-txtbox"
                   type="password"
