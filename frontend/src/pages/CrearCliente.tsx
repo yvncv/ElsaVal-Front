@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Form } from 'react-bootstrap';
-
+import "./Gestion.css";
 const CrearCliente: React.FC = () => {
     const [nombre, setNombre] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -51,24 +51,25 @@ const CrearCliente: React.FC = () => {
 
     return (
         <div>
-            <Form onSubmit={guardarDatos} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
+            <Form onSubmit={guardarDatos} className="Form_Gestion">
                 <h1>Crear Cliente</h1>
                 <Form.Group controlId="formNombre">
-                    <Form.Label>Nombre:</Form.Label>
-                    <Form.Control type="text" value={nombre} onChange={handleNombreChange} />
+                    <Form.Label controlId="lblNombre">Nombre:</Form.Label>
+                    <Form.Control type="text" value={nombre} onChange={handleNombreChange} className='Control_txt'/>
                 </Form.Group>
-                <Form.Group controlId="formEmail">
-                    <Form.Label>Email:</Form.Label>
-                    <Form.Control type="email" value={email} onChange={handleEmailChange} />
+                <Form.Group controlId="formCorreo">
+                    <Form.Label controlId="lblEmail">Correo Electrónico:</Form.Label>
+                    <Form.Control type="email" value={email} onChange={handleEmailChange} className='Control_txt'/>
                 </Form.Group>
-                <Form.Group controlId="formPassword">
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control type="password" value={password} onChange={handlePasswordChange} />
+                <Form.Group controlId="formContra">
+                    <Form.Label controlId="lblPassword">Contraseña:</Form.Label>
+                    <Form.Control type="password" value={password} onChange={handlePasswordChange} className='Control_txt'/>
                 </Form.Group>
-                <Button variant="primary" type="submit">Crear Cliente</Button>
+                {mensaje && <p>{mensaje}</p>}
+                {error && <p>{error}</p>}
+                <Button variant="primary" type="submit" className='Form_btn'>Crear Cliente</Button>
             </Form>
-            {mensaje && <p style={{ color: 'green' }}>{mensaje}</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import Novedad from './Novedad.tsx';
+import Novedad from '../pages/Novedad.tsx';
 
 function Novedades() {
   const novedades = [

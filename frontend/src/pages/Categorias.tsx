@@ -90,10 +90,10 @@ function Categorias() {
       
       {categoriaSeleccionada !== null && (
         <div className="categorias-productos-column">
-          <h1 className='categorias-title'>Resultados de: {categorias.find(categoria => categoria.id === categoriaSeleccionada)?.name}</h1>
+          <h1 className='resultados-title'>¡Nuestr@s {categorias.find(categoria => categoria.id === categoriaSeleccionada)?.name}!</h1>
           <div className="categorias-productos-row">
             {productos.map(producto => (
-              <div key={producto.id} className="col-md-4">
+              <div key={producto.id} className="col-xxl-4">
                 <Card className="categorias-productos-card">
                   <Carousel className="categorias-productos-carousel" interval={1000} fade={true}>
                     {producto.images.map((image, index) => (
@@ -110,7 +110,7 @@ function Categorias() {
                     <Card.Title>{producto.name}</Card.Title>
                     <Card.Subtitle>{producto.description}</Card.Subtitle>
                     <Card.Text>Precio: S./{producto.price}</Card.Text>
-                    <Button variant="primary">Ver detalles</Button>
+                    <Button variant="primary" className='btn_ver_Detalles'>Ver detalles</Button>
                   </Card.Body>
                 </Card>
               </div>

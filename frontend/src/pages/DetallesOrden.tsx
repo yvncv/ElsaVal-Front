@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Form, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-
+import './Gestion.css';
 interface Order {
   id: number;
   client: {
@@ -89,13 +89,13 @@ function DetallesOrden() {
     <>
       {error ? (
         <div>
-          <Form onSubmit={handleSearch} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
-          <p className="error-message">{error}</p>
-            <Form.Group controlId="formOrderId">
-              <Form.Label>Introduce el ID de la Orden:</Form.Label>
-              <Form.Control type="text" value={inputOrderId} onChange={handleIdChange} />
+          <Form onSubmit={handleSearch} className='Form_Gestion'>
+            <Form.Group controlId="formOrdenId">
+              <Form.Label controlId="lblOrdenId">Introduce el ID de la Orden:</Form.Label>
+              <Form.Control type="text" value={inputOrderId} onChange={handleIdChange} className="Control_txt"/>
             </Form.Group>
-            <Button variant="primary" type="submit">Buscar Orden</Button>
+            <p className="error-message">{error}</p>
+            <Button variant="primary" type="submit" className='Form_btn'>Buscar Orden</Button>
           </Form>
         </div>
       ) : (

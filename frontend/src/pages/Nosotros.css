@@ -2,22 +2,26 @@
     display: flex;
     flex-direction: column; /* Cambiar la dirección de los elementos en dispositivos pequeños */
     align-items: center;
+    margin: 20px;
   }
   
   .text-container {
     background-color: rgba(0, 0, 0, 0.738);
     padding: 30px;
     border-radius: 8px;
-    font-family: Arial, sans-serif;
-    color: white;
+    font-family:  "Amatic SC", sans-serif;
+    color: #ede8da;
     margin-right: 40px;
     max-width: 600px; /* Establecer un ancho máximo para evitar que el texto se vuelva demasiado ancho */
     width: 100%; /* Ajustar el ancho al 100% del contenedor */
     margin-bottom: 20px; /* Agregar margen inferior para separarlo de la imagen */
+    flex: 1;
   }
   
   .image-section {
     flex: 1;
+    display: flex;
+    justify-content: flex-end;
   }
   
   .text-container h1 {
@@ -33,12 +37,33 @@
   }
   
   .text-container p {
-    font-size: 20px;
+    font-size: 25px;
     line-height: 1.6;
     margin-bottom: 15px;
     text-align: left;
   }
+  .image {
+    max-width: 100%;
+    margin-top: 20px; /* Añade margen superior a la imagen */
+    margin-left: 10px; /* Ajusta el margen izquierdo */
+  }
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   @media screen and (min-width: 768px) {
     .acercade-container {
       flex-direction: row; /* Volver a la dirección de fila en dispositivos más grandes */

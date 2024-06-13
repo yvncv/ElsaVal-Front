@@ -1,0 +1,7 @@
+.Links_NavBar{
+    color: #ede8da !important;
+    transition: background-color 0.15s linear 0.02s!important;
+}
+.Links_NavBar:hover{
+    background-color: #222D28 !important;
+}

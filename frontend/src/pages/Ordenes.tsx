@@ -72,24 +72,28 @@ function Ordenes() {
             {error && (
                 <p className="error-message" style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>{error}</p>
             )}
-            {!error && orders.map(order => (
-                <Card key={order.id} style={{ marginBottom: '20px' }}>
-                    <Card.Body>
-                        <Card.Title>Orden ID: {order.id}</Card.Title>
-                        <Card.Text>Estado: {order.status}</Card.Text>
-                        <Card.Text>Dirección: {order.street_address}</Card.Text>
-                        <Card.Text>Cliente: {order.client.id}, {order.client.user.name}</Card.Text> {/* Mostrar el nombre del cliente */}
-                        <ListGroup variant="flush">
-                            <ListGroup.Item><h3>Productos:</h3></ListGroup.Item>
-                            {order.products.map((product, index) => (
-                                <ListGroup.Item key={index}>
-                                    <div key={index}>{index+1}. {product.product.name}, Cantidad: {product.quantity}</div>
-                                </ListGroup.Item>
-                            ))}
-                        </ListGroup>
-                    </Card.Body>
-                </Card>
-            ))}
+            {
+                !error && orders.map(order => (
+                    <div>
+                        <Card key={order.id} style={{ marginBottom: '20px' }}>
+                            <Card.Body>
+                                <Card.Title>Orden ID: {order.id}</Card.Title>
+                                <Card.Text>Estado: {order.status}</Card.Text>
+                                <Card.Text>Dirección: {order.street_address}</Card.Text>
+                                <Card.Text>Cliente: {order.client.id}, {order.client.user.name}</Card.Text> {/* Mostrar el nombre del cliente */}
+                                <ListGroup variant="flush">
+                                    <ListGroup.Item><h3>Productos:</h3></ListGroup.Item>
+                                    {order.products.map((product, index) => (
+                                        <ListGroup.Item key={index}>
+                                            <div key={index}>{index+1}. {product.product.name}, Cantidad: {product.quantity}</div>
+                                        </ListGroup.Item>
+                                    ))}
+                                </ListGroup>
+                            </Card.Body>
+                        </Card>
+                    </div>
+                )    
+            )}
         </div>
     );
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-
+import "./Gestion.css";
 const ActualizarCliente = () => {
     const { clientId } = useParams<{ clientId?: string }>();
     const [cliente, setCliente] = useState<any>();
@@ -62,13 +62,14 @@ const ActualizarCliente = () => {
     if (!clientId || error) {
         return (
             <div>
-                <Form onSubmit={handleSearch} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
-                    <p>{error}</p>
-                    <Form.Group controlId="formClientId">
-                        <Form.Label>Introduce el ID del Cliente:</Form.Label>
-                        <Form.Control type="text" value={inputClientId} onChange={handleIdChange} />
+                <Form onSubmit={handleSearch} className='Form_Gestion'>
+
+                    <Form.Group controlId="formClienteId">
+                        <Form.Label controlId="lblClienteId">Introduce el ID del Cliente:</Form.Label>
+                        <Form.Control type="text" value={inputClientId} onChange={handleIdChange} className='Control_txt'/>
                     </Form.Group>
-                    <Button variant="primary" type="submit">Buscar Cliente</Button>
+                    <p>{error}</p>
+                    <Button variant="primary" type="submit" className='Form_btn'>Buscar Cliente</Button>
                 </Form>
             </div>
         );
@@ -80,17 +81,17 @@ const ActualizarCliente = () => {
 
     return (
         <div>
-            <Form onSubmit={handleSubmit} style={{ backgroundColor: '#fff', borderRadius: '50px', padding: '30px', margin: '30px' }}>
+            <Form onSubmit={handleSubmit} className='Form_Gestion'>
                 <h1>Actualizar Cliente</h1>
                 <Form.Group controlId="formNombre">
-                    <Form.Label>Nombre:</Form.Label>
-                    <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} />
+                    <Form.Label controlId="lblNombre">Nombre:</Form.Label>
+                    <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} className='Control_txt'/>
                 </Form.Group>
-                <Form.Group controlId="formEmail">
-                    <Form.Label>Email:</Form.Label>
-                    <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} />
+                <Form.Group controlId="formCorreo">
+                    <Form.Label controlId="lblEmail">Correo Electrónico:</Form.Label>
+                    <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} className='Control_txt'/>
                 </Form.Group>
-                <Button variant="primary" type="submit">Actualizar</Button>
+                <Button variant="primary" type="submit" className='Form_btn'>Actualizar</Button>
             </Form>
         </div>
     );

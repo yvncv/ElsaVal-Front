@@ -64,7 +64,7 @@ export default function Footer() {
                                         <Link to='/' className='text-white'>Tienda</Link>
                                     </li>
                                     <li>
-                                        <Link to='/Acercade' className='text-white'>Acerca de</Link>
+                                        <Link to='/Nosotros' className='text-white'>Nosotros</Link>
                                     </li>
                                     <li>
                                         <Link to='#!' className='text-white'>Blog</Link>

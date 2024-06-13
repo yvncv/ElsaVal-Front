@@ -13,7 +13,7 @@ import Ordenes from "./pages/Ordenes.tsx";
 import Productos from "./pages/Productos.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Acercade from "./pages/Acercade.tsx";
+import Nosotros from "./pages/Nosotros.tsx";
 import Login from "./pages/Login.tsx";
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
           <Route path="/update-client/:clientId" element={<ActualizarCliente />} />
           <Route path="/clients/:clientId" element={<ObtenerCliente />} />
           <Route path="/" element={<LandingPage />} />
-          <Route path="/Acercade" element={<Acercade/>}/>
+          <Route path="/Nosotros" element={<Nosotros/>}/>
           <Route path="/Login" element={<Login/>}/>
         </Routes>
       </div>
