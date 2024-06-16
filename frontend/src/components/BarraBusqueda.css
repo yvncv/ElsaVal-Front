@@ -1,0 +1,25 @@
+.Navbar{
+    background-color: #ffffff !important;
+    border-bottom: 4px #000000 !important;
+    font-family: "Urbanist", sans-serif;
+    font-weight:400;
+    font-size: 20px!important;
+}
+.Navbar_Collapse{
+    flex-grow: 0;
+    align-content: right!important;
+}
+.LinkNav,.IconosNavbar{
+    color: #88525B !important;
+}
+.DropdownMenu{
+    padding: 0;
+}
+.DropdownItem{
+    color: #88525B!important;
+    transition: background-color 0.3s ease;
+}
+.DropdownItem:hover{
+    background-color: #88525B;
+    color: #ffffff!important;
+}

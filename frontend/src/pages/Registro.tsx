@@ -3,8 +3,6 @@ import axios from 'axios';
 import { Container, Row, Col, Button, Form, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-import './Login.css'; // Import Login.css for shared styles
-
 const Registro: React.FC = () => {
   const [nombre, setNombre] = useState<string>('');
   const [email, setEmail] = useState<string>('');
