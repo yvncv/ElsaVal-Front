@@ -2,10 +2,10 @@ import React from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { FaFacebookF, FaTwitter, FaGoogle, FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-
+import './Footer.css'
 export default function Footer() {
     return (
-        <footer className='text-center text-white' style={{ backgroundColor: '#343a40', padding: '1rem 0' }}>
+        <footer className='Footer'>
             <Container className='p-4'> 
                 <section className='mb-4'>
                     <Button variant="outline-light" className='m-1' href='#!'>

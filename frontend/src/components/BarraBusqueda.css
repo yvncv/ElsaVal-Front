@@ -1,9 +1,10 @@
 .Navbar{
     background-color: #ffffff !important;
-    border-bottom: 4px #000000 !important;
+    /*border-bottom: 4px #000000 !important;*/
     font-family: "Urbanist", sans-serif;
     font-weight:400;
     font-size: 20px!important;
+    border-bottom: 1.5px solid #E8E8E8!important;
 }
 .Navbar_Collapse{
     flex-grow: 0;

@@ -1,0 +1,12 @@
+.parrafo{
+    font-size: 100px;
+    padding: 50px;
+    text-align: center;
+    font-weight: 300;
+    color: #88525B; 
+    font-family: "Urbanist", sans-serif;
+}
+
+.subparrafo{
+    font-size: 30px;
+}

@@ -2,45 +2,18 @@ import CarruselLanding from "../components/CarruselLanding.tsx";
 import Novedades from "../components/NovedadesListado.tsx";
 import Footer from "../components/Footer.tsx";
 import React from "react";
-
+import './LandingPage.css';
 export default function LandingPage() {
     return (
         <>
-            <p
-                style={{
-                    fontSize: "50px",
-                    padding: "50px",
-                    textAlign: "center",
-                    fontWeight: "bolder",
-                    color: "#fff",
-                }}
-            >
-                ELIGE. ORDENA. DISFRUTA.
+            <p className="parrafo">
+                Costura con ternura
+                <p className="subparrafo">Y sin dejar de lado la elegancia...</p>
             </p>
-            <CarruselLanding />
-            <p
-                style={{
-                    fontSize: "50px", 
-                    padding: "50px",
-                    textAlign: "center",
-                    fontWeight: "bolder",
-                    color: "#fff",
-                }}
-            >
-                Próximas novedades
-            </p>
+            {/*<CarruselLanding />*/}
+            <p className="parrafo">Próximas novedades</p>
             <Novedades />
-            <p
-                style={{
-                    fontSize: "50px",
-                    padding: "50px",
-                    textAlign: "center",
-                    fontWeight: "bolder",
-                    color: "#fff",
-                }}
-            >
-                ¿QUÉ ESPERAS? ¡COTIZA YA!
-            </p>
+            <p className="parrafo">Te Esperamos!</p>
             <Footer />
         </>
     );
