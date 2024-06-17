@@ -4,7 +4,10 @@ import Login from './pages/Login.jsx';
 import Registro from './pages/Registro.tsx';
 import BarraNavegacion from './components/BarraBusqueda.tsx';/*la nueva barra de busqueda */
 import LandingPage from './pages/LandingPage.tsx';
-import Categorias from './pages/Categorias.tsx';
+/*import Categorias from './pages/Categorias.tsx';*///lo comento para probar la otra pagina
+
+import Categorias from './pages/NewCategorias.tsx';
+
 import Acercade from './pages/Acercade.tsx';
 import CarritoCompras from'./pages/CarritoCompras.tsx';
 import './App.css';

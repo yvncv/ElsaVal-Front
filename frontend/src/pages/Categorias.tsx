@@ -5,13 +5,11 @@ import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
 import { Product } from '../types/Product';
-import './Categorias.css'
-
+import './Categorias.css';
 interface Categoria {
   id: number;
   name: string;
 }
-
 function Categorias() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [productos, setProductos] = useState<Product[]>([]);
@@ -62,6 +60,7 @@ function Categorias() {
         </div>
       </div>
       
+      {/*sucede cuando la categoria queda seleccionada*/}
       {categoriaSeleccionada !== null && (
         <div className="categorias-productos-column">
           <h1 className='resultados-title'>¡Nuestr@s {categorias.find(categoria => categoria.id === categoriaSeleccionada)?.name}!</h1>
@@ -92,6 +91,7 @@ function Categorias() {
           </div>
         </div>
       )}
+      {/*fin de categoria seleccionada */}
     </div>
   );
 }
