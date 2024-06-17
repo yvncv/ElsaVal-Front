@@ -99,7 +99,7 @@ function Categorias() {
             </div>
         </div>
       
-        {/*sucede cuando la categoria queda seleccionada*/}
+        {/*sucede cuando la categoria queda seleccionada, fuentez de ortiz*/}
         {categoriaSeleccionada !== null && (
             <div className="categorias-productos-column">
             <h1 className='resultados-title'>¡Nuestr@s {categorias.find(categoria => categoria.id === categoriaSeleccionada)?.name}!</h1>
