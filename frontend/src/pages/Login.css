@@ -3,8 +3,16 @@
 
 .Contenedor-Login{
     font-family: "Amatic SC",sans-serif;
+    display:flex;
+    align-items: center!important;
+    justify-items: center!important;
+    width: 100%;
 }
-
+    .img{
+        
+        width: 40%;
+        height: 50%;
+    }
     .login-form{
         background-color: rgba(0, 0, 0, 0.766);
         border-radius: 10px;

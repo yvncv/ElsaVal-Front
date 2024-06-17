@@ -62,8 +62,13 @@ const Login = ({ setLoggedInUser }) => {
 
   return (
     <Container fluid className='Contenedor-Login'>
-      <Row className="justify-content-center align-items-center" style={{ height: "100vh" }}>
-        <Col xs={12} sm={8} md={6} lg={4}>
+      <img
+        className='img'
+        src="/images/ElsaVal_Logo.png"
+        alt="logo"
+      />
+      <Row controlId="Row" className="justify-content-center align-items-center" style={{ height: "100vh" }}>
+        <Col >
           <div className='login-form'>
             <h3 className="title mb-3 ps-3 pb-3">Inicio de Sesión</h3>
             <Form className='px-3' onSubmit={handleSubmit}>

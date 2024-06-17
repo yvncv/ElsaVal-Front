@@ -1,0 +1,11 @@
+.Card{
+    /*width: 18rem;*/
+    width: 100%;
+    margin: 0;/*1rem*/
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-left: 10%!important;
+    margin-right: 10%!important;
+}
+

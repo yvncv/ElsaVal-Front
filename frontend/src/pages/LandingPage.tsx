@@ -1,7 +1,8 @@
+import React from "react";
 import CarruselLanding from "../components/CarruselLanding.tsx";
 import Novedades from "../components/NovedadesListado.tsx";
 import Footer from "../components/Footer.tsx";
-import React from "react";
+import CustomSlider from '../components/Slider.jsx';
 import './LandingPage.css';
 export default function LandingPage() {
     return (
@@ -12,7 +13,8 @@ export default function LandingPage() {
             </p>
             {/*<CarruselLanding />*/}
             <p className="parrafo">Próximas novedades</p>
-            <Novedades />
+            <CustomSlider/>
+            {/*<Novedades />*/}
             <p className="parrafo">Te Esperamos!</p>
             <Footer />
         </>

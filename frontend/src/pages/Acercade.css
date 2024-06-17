@@ -1,17 +1,19 @@
 .acercade-container {
   display: flex;
   flex-direction: row; /* Alinea los elementos en fila por defecto */
-  align-items: flex-start; /* Alinea los elementos al inicio en el eje transversal */
+  align-items: center; /* Alinea los elementos al inicio en el eje transversal */
   margin: 20px;
   flex-wrap: wrap; /* Permite que los elementos se envuelvan en dispositivos pequeños */
+  justify-content: center;
+  text-align: justify;
 }
 
 .text-container {
-  background-color: rgba(0, 0, 0, 0.738);
+  background-color: #ffffff;
   padding: 30px;
   border-radius: 8px;
-  font-family: "Amatic SC", sans-serif;
-  color: #ede8da;
+  font-family:"Urbanist", sans-serif;;
+  color: #88525B;
   max-width: 600px; /* Ancho máximo del contenedor de texto */
   width: 100%; /* Ajustar el ancho al 100% del contenedor */
   flex: 1;
@@ -49,17 +51,18 @@
   font-size: 40px;
   font-weight: bold;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .text-container h2 {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 15px;
+  text-align: center;
 }
 
 .text-container p {
   font-size: 25px;
   line-height: 1.6;
   margin-bottom: 15px;
-  text-align: left;
 }
