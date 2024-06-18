@@ -107,7 +107,7 @@ const Categorias = () => {
                     <div className="contenedor-cards">
                         {productos.map(producto => (
                             <Producto
-                                key={producto.id}
+                                id={producto.id}
                                 nombre={producto.name}
                                 imagenes={producto.images}
                                 precio={producto.price}
