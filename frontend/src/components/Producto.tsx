@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Button, Carousel } from 'react-bootstrap';
 import axios from 'axios';
@@ -14,16 +14,30 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
         }
     };
 
+    const [cantidad, setCantidad] = useState(1); // Estado para la cantidad de productos en el carrito
+
     const addToCart = async () => {
         try {
+            let cartId = localStorage.getItem('cartId');
+            if (!cartId) {
+                const response = await axios.post(
+                    `${apiUrl}/carts`,
+                    { client_id: 1 }, // Ajusta según la lógica de tu aplicación para obtener el cliente actual
+                    authHeader
+                );
+                cartId = response.data.id;
+                localStorage.setItem('cartId', cartId); // Almacena el ID del carrito en el almacenamiento local
+            }
+
+            // Añadir el producto al carrito
             const response = await axios.post(
                 `${apiUrl}/cart-items`,
                 {
-                    cart_id: 1,
+                    cart_id: cartId,
                     product_id: id,
-                    quantity: 1,
+                    quantity: cantidad,
                     price: precio,
-                    total: precio
+                    total: precio * cantidad // Calcula el total según la cantidad
                 },
                 authHeader
             );
@@ -32,6 +46,16 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
         } catch (error) {
             console.error('Error al añadir producto al carrito:', error);
             alert('Error al añadir producto al carrito.');
+        }
+    };
+
+    const incrementCantidad = () => {
+        setCantidad(cantidad + 1);
+    };
+
+    const decrementCantidad = () => {
+        if (cantidad > 1) {
+            setCantidad(cantidad - 1);
         }
     };
 
@@ -55,9 +79,20 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
                     <Card.Text>{category}</Card.Text>
                     <Card.Text>{material}</Card.Text>
                     <Card.Text>Precio: S./{precio}</Card.Text>
-                    <Button variant="primary" className='btn_ver_Detalles' onClick={addToCart}>
-                        Agregar al carrito
-                    </Button>
+                    <div className="d-flex align-items-center justify-content-between">
+                        <div>
+                            <Button variant="outline-secondary" size="sm" onClick={decrementCantidad}>
+                                -
+                            </Button>
+                            <span className="mx-2">{cantidad}</span>
+                            <Button variant="outline-secondary" size="sm" onClick={incrementCantidad}>
+                                +
+                            </Button>
+                        </div>
+                        <Button variant="primary" className='btn_ver_Detalles' onClick={addToCart}>
+                            Agregar al carrito
+                        </Button>
+                    </div>
                 </Card.Body>
             </Card>
         </div>
