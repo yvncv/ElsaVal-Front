@@ -1,75 +1,130 @@
 /* En Login.css */
-
-
 .Contenedor-Login{
-    font-family: "Amatic SC",sans-serif;
+    font-family:  "Urbanist", sans-serif;
     display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center!important;
-    justify-items: center!important;
+    justify-content: space-around!important;
     width: 100%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
-    .img{
-        
-        width: 40%;
-        height: 50%;
-    }
-    .login-form{
-        background-color: rgba(0, 0, 0, 0.766);
-        border-radius: 10px;
-        padding: 35px;
-        box-shadow: 0px 0px 10px 0px rgba(252, 252, 252, 0);
-        color:rgb(237, 232, 218) !important;
-    }
+.img{
+    min-width: 30%;
+    max-width: 33%;
+    min-height: 50%;
+    max-height: 50%;
+}
+#Row{
+    min-width: 30%!important;
+    max-width: 33%!important;
+    min-height: 50%!important;
+    max-height: 50%!important;
+}
+.login-form{
+    background-color: #FFFFFF;
+    border: 1px solid #752728;
+    border-radius: 3px;
+    padding: 35px;
+    color:#88525B !important;
+}
 
-        .title {
-            font-weight: bolder;
-            font-size: 2em;
-            letter-spacing: 1px;
-        }
-        @media (max-width: 576px) {
-            .form-content {
-                padding: 10px;
-            }
-        }
+.title {
+    font-weight:400;
+    font-size: 2em;
+}
+/* Ajustes de estilo para Form.Label */
+.form-label {/*para labels de correo y contrasena*/
+    font-size: 1.5em; /* Aumentar el tamaño de la fuente */
+    text-align: left; /* Alinear al extremo izquierdo */
+    width: 100%; /* Ocupar todo el ancho disponible */
+    display: block; /* Mostrar como un bloque para ocupar toda la línea */
+}
 
-            /* Ajustes de estilo para Form.Label */
-            .form-label {/*para labels de correo y contrasena*/
-                font-size: 1.5em; /* Aumentar el tamaño de la fuente */
-                text-align: left; /* Alinear al extremo izquierdo */
-                width: 100%; /* Ocupar todo el ancho disponible */
-                display: block; /* Mostrar como un bloque para ocupar toda la línea */
-            }
-            
-            /*ajustes para el text box*/
-            .Ingresa-correo-txtbox,.Ingresa-contra-txtbox{
-                border-color: #ede8da;
-                color: #ede8da;
-                background-color: #171A19;
-                font-family: 'Roboto', sans-serif;
-                transition: background-color, border-color 0.3s;
-                font-size: 15px;
-            }
-            .Ingresa-correo-txtbox::placeholder,.Ingresa-contra-txtbox::placeholder{
-                color:#837a63;
-            }
-            .Ingresa-correo-txtbox:active,
-            .Ingresa-correo-txtbox:focus,.Ingresa-contra-txtbox:active,.Ingresa-contra-txtbox:focus{
-                border-color: #ede8da;
-                background-color: #171A19;
-                color:#ede8da;
-                box-shadow: 0 0 10px #ede8da; 
-            }
+/*ajustes para el text box*/
+.Ingresa-correo-txtbox,.Ingresa-contra-txtbox{
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-size: 15px;
+    color: #5E3F44!important;
+    transition: border 0.3s !important;
+    outline: none!important;
+}
+.Ingresa-correo-txtbox::placeholder,.Ingresa-contra-txtbox::placeholder{
+    color:#522A2C;
+    font-style: italic;
+}
+/*agregado*/
+.Ingresa-correo-txtbox:focus,
+.Ingresa-contra-txtbox:focus {
+    outline: none!important;
+    border-color: #752728;
+    -webkit-box-shadow: none !important; /* Eliminar el contorno azul en Webkit (Chrome, Safari) */
+    -moz-box-shadow: none !important; /* Eliminar el contorno azul en Firefox */
+    box-shadow: none !important; 
+}
 
-            .mb-3.w-100{/*boton*/
-                background-color: #A8C3BB;
-                border-color: #1B2A20;
-                font-weight: bold;
-            }
+.Ingresa-correo-txtbox::before,
+.Ingresa-correo-txtbox::after,
+.Ingresa-contra-txtbox::before,
+.Ingresa-contra-txtbox::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background-color: #752728;
+    transition: width 0.3s;
+}
 
-        a.Olvidar-contra-link-info{
-            color:#A8C3BB;
-        }
+.Ingresa-correo-txtbox::before,
+.Ingresa-contra-txtbox::before {
+    left: 50%;
+}
 
-        a.registrarse-link-info{
-            color:#A8C3BB;
-        }
+.Ingresa-correo-txtbox::after,
+.Ingresa-contra-txtbox::after {
+    right: 50%;
+}
+
+.Ingresa-correo-txtbox:focus::before,
+.Ingresa-correo-txtbox:focus::after,
+.Ingresa-contra-txtbox:focus::before,
+.Ingresa-contra-txtbox:focus::after {
+    width: 50%;
+}
+
+
+.mb-3.w-100{/*boton*/
+    border-radius: 3px;
+    font-weight: 400;
+    border-color: #752728;
+    color:#752728;
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
+
+.mb-3.w-100:hover{
+    background-color: #752728;
+    border-color: #752728;
+    color: white!important;
+}
+
+.mb-3.w-100:active{
+    background-color: #6F2A2D!important;
+    border-color: #6F2A2D!important;
+}
+
+a.Olvidar-contra-link-info{
+    color:#752728;
+}
+
+a.registrarse-link-info{
+    color:#752728;
+}
+a.iniciar-sesion-link-info{
+    color:#752728;
+}

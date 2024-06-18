@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Button, Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import Producto from '../components/Producto.tsx';
+import Producto from '../components/Producto.jsx';
 import { Product } from '../types/Product';
 import './Categorias.css'; 
 

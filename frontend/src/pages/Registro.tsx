@@ -71,7 +71,7 @@ const Registro: React.FC = () => {
         className='img'
         src="/images/ElsaVal_Logo.png"
         alt="logo"
-        height={'200px'}
+        
       />
       <Row controlId="Row" className="justify-content-center align-items-center" style={{ width: '450px' }}>
         <Col>

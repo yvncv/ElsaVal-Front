@@ -5,6 +5,9 @@ body {
   flex-direction: column;
   justify-content: center;
 }
+/*.App{
+  display: flex;
+}*/
 /*
 .App-logo {
   height: 40vmin;
