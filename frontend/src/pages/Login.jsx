@@ -67,7 +67,7 @@ const Login = ({ setLoggedInUser }) => {
         src="/images/ElsaVal_Logo.png"
         alt="logo"
       />
-      <Row controlId="Row" className="justify-content-center align-items-center" style={{ height: "100vh" }}>
+      <Row controlId="Row" className="justify-content-center align-items-center" style={{ width: "450px" }}>
         <Col >
           <div className='login-form'>
             <h3 className="title mb-3 ps-3 pb-3">Inicio de Sesión</h3>

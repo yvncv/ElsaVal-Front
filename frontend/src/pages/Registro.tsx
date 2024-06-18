@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Button, Form, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import "./Login.css";
 
 const Registro: React.FC = () => {
   const [nombre, setNombre] = useState<string>('');
@@ -54,8 +55,14 @@ const Registro: React.FC = () => {
 
   return (
     <Container fluid className='Contenedor-Login'> {/* Use Contenedor-Login for consistent styling */}
-      <Row className="justify-content-center align-items-center" style={{ height: "100vh" }}>
-        <Col xs={12} sm={8} md={6} lg={4}>
+      <img
+        className='img'
+        src="/images/ElsaVal_Logo.png"
+        alt="logo"
+        height={'200px'}
+      />
+      <Row controlId="Row" className="justify-content-center align-items-center" style={{ width: '450px' }}>
+        <Col>
           <div className='login-form'> {/* Use login-form for consistent styling */}
             <h3 className="title mb-3 ps-3 pb-3">Registro de Cliente</h3>
             <Form className='px-3' onSubmit={handleSubmit}>
