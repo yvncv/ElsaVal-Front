@@ -5,7 +5,7 @@ import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel } from 'react-bootstrap';
 import { Product } from '../types/Product';
-import './Categorias.css';
+import './NewCategorias.css';
 /*import OffCanvasCategoria from '../components/OffCanvasCategoria.tsx';*/
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
