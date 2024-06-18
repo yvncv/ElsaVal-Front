@@ -9,9 +9,11 @@ export default function LandingPage() {
             <p className="parrafo">
                 Costura con ternura
                 <p className="subparrafo">Y sin dejar de lado la elegancia...</p>
+                <CarruselLanding></CarruselLanding>
             </p>
             {/*<CarruselLanding />*/}
             <p className="parrafo">Próximas novedades</p>
+            <Novedades></Novedades>
             {/*<Novedades />*/}
             <p className="parrafo">Te Esperamos!</p>
             <Footer />

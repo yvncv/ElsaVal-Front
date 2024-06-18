@@ -8,6 +8,7 @@ const Registro: React.FC = () => {
   const [nombre, setNombre] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>(''); // Estado para la confirmación de contraseña
   const [mensaje, setMensaje] = useState<string>('');
   const [error, setError] = useState<string>('');
   const navigate = useNavigate();
@@ -24,14 +25,25 @@ const Registro: React.FC = () => {
     setPassword(event.target.value);
   };
 
+  const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(event.target.value);
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // Verificar si las contraseñas coinciden
+    if (password !== confirmPassword) {
+      setError('Las contraseñas no coinciden.');
+      return;
+    }
+
     try {
-      const response = await axios.post('https://elsaval.com.pe/api/elsaval/clients/', {
+      const response = await axios.post('https://elsaval.com.pe/api/register', {
         name: nombre,
         email: email,
-        password: password
+        password: password,
+        password_confirmation: confirmPassword
       });
 
       if (response.status === 200) {
@@ -99,6 +111,18 @@ const Registro: React.FC = () => {
                   size="lg"
                   value={password}
                   onChange={handlePasswordChange}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="ConfirmPassword-Group" className='mb-3'>
+                <Form.Label className='form-label'>Confirmar contraseña</Form.Label> {/* Use form-label for consistent styling */}
+                <Form.Control
+                  className="Ingresa-contra-txtbox"
+                  type="password"
+                  placeholder="Confirma tu contraseña"
+                  size="lg"
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
                 />
               </Form.Group>
 

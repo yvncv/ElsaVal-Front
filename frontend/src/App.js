@@ -6,7 +6,7 @@ import BarraNavegacion from './components/BarraBusqueda.tsx';/*la nueva barra de
 import LandingPage from './pages/LandingPage.tsx';
 /*import Categorias from './pages/Categorias.tsx';*///lo comento para probar la otra pagina
 
-import Categorias from './pages/NewCategorias.tsx';
+import Categorias from './pages/Categorias.tsx';
 
 import Acercade from './pages/Acercade.tsx';
 import CarritoCompras from'./pages/CarritoCompras.tsx';

@@ -29,7 +29,7 @@ const Login = ({ setLoggedInUser }) => {
       localStorage.setItem('token', token);
 
       // Usar el token para obtener la información del usuario autenticado
-      const userResponse = await axios.get('https://elsaval.com.pe/api/user', {
+      const userResponse = await axios.get('https://elsaval.com.pe/api/register', {
         headers: {
           'Authorization': `Bearer ${token}`
         }

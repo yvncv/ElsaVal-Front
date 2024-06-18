@@ -1,23 +1,32 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
+import { Button, Carousel } from 'react-bootstrap';
+import '../pages/Categorias.css'; // Asegúrate de que este archivo CSS tenga los estilos necesarios
 
-function Producto({ nombre, imagenSrc, precio, descripcion }) {
-  return (
-    <Card style={{ width: '18rem', margin: '1rem' }}>
-      <Card.Img variant="top" src={imagenSrc} />
-      <Card.Body>
-        <Card.Title>{nombre}</Card.Title>
-        <Card.Text>{descripcion}</Card.Text>
-      </Card.Body> 
-      <ListGroup className="list-group-flush">
-        <ListGroup.Item>Precio: {precio}</ListGroup.Item>
-      </ListGroup>
-      <Card.Body>
-        <Card.Link href="#">Ver detalles</Card.Link>
-      </Card.Body>
-    </Card>
-  );
-}
+const Producto = ({ nombre, imagenes, precio, descripcion }) => {
+    return (
+        <div className="col-xxl-4">
+            <Card className="contenedor-single-card">
+                <Carousel className="carousel-card" interval={1000} fade={true}>
+                    {imagenes.map((image, index) => (
+                        <Carousel.Item className="contenedor-img-btn-card" key={index}>
+                            <img
+                                className="d-block w-100 h-100"
+                                src={image}
+                                alt={`Slide ${index + 1}`}
+                            />
+                        </Carousel.Item>
+                    ))}
+                </Carousel>
+                <Card.Body className='body-card'>
+                    <Card.Title>{nombre}</Card.Title>
+                    <Card.Subtitle>{descripcion}</Card.Subtitle>
+                    <Card.Text>Precio: S./{precio}</Card.Text>
+                    <Button variant="primary" className='btn_ver_Detalles'>Ver detalles</Button>
+                </Card.Body>
+            </Card>
+        </div>
+    );
+};
 
 export default Producto;
