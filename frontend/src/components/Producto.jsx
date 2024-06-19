@@ -60,7 +60,7 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
     };
 
     return (
-        <div className="col-xxl-4">
+        <div className="col-xxl-3 m-3">
             <Card className="contenedor-single-card">
                 <Carousel className="carousel-card" interval={1000} fade={true}>
                     {imagenes.map((image, index) => (
