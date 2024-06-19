@@ -1,10 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Button, Carousel } from 'react-bootstrap';
 import axios from 'axios';
-import '../pages/Categorias.css'; // Asegúrate de que este archivo CSS tenga los estilos necesarios
+import '../pages/Categorias.css';
+import {jwtDecode} from 'jwt-decode'; // Importa jwt-decode correctamente
 
 const Producto = ({ id, nombre, imagenes, precio, descripcion, category, material }) => {
+    const [usuario, setUsuario] = useState(null); // Estado local para el usuario
+
+    useEffect(() => {
+        const obtenerUsuario = async () => {
+          try {
+            const token = localStorage.getItem('token');
+            if (token) {
+              const decoded = jwtDecode(token);
+              setUsuario(decoded.usuario);
+            }
+          } catch (error) {
+            console.error('Error al decodificar el token:', error);
+          }
+        };
+    
+        obtenerUsuario();
+      }, []);
+
     const apiUrl = 'http://elsaval.com.pe/api';
     const authHeader = {
         headers: {
@@ -14,7 +33,7 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
         }
     };
 
-    const [cantidad, setCantidad] = useState(1); // Estado para la cantidad de productos en el carrito
+    const [cantidad, setCantidad] = useState(1);
 
     const addToCart = async () => {
         try {
@@ -22,14 +41,13 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
             if (!cartId) {
                 const response = await axios.post(
                     `${apiUrl}/carts`,
-                    { client_id: 1 }, // Ajusta según la lógica de tu aplicación para obtener el cliente actual
+                    { client_id: usuario?.id || null },
                     authHeader
                 );
                 cartId = response.data.id;
-                localStorage.setItem('cartId', cartId); // Almacena el ID del carrito en el almacenamiento local
+                localStorage.setItem('cartId', cartId);
             }
 
-            // Añadir el producto al carrito
             const response = await axios.post(
                 `${apiUrl}/cart-items`,
                 {
@@ -37,7 +55,7 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
                     product_id: id,
                     quantity: cantidad,
                     price: precio,
-                    total: precio * cantidad // Calcula el total según la cantidad
+                    total: precio * cantidad
                 },
                 authHeader
             );

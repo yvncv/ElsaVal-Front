@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import { AuthContext } from '../context/AuthContext'; // Asegúrate de que la ruta sea correcta.
-import "./Login.css";
+import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode'; // Importa jwt-decode aquí también si planeas verificar el token.
 
 const Login = ({ setLoggedInUser }) => {
-  const { login } = useContext(AuthContext); // Uso del contexto de autenticación.
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -15,45 +15,20 @@ const Login = ({ setLoggedInUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Realizar la solicitud de login
       const response = await axios.post('https://elsaval.com.pe/api/login', {
         email,
         password
       });
-      setLoggedInUser(email);
 
-      // Obtener el token del usuario del response
       const { token } = response.data;
 
-      // Almacenar el token en el almacenamiento local
-      localStorage.setItem('token', token);
+        localStorage.setItem('token', token);
+        setLoggedInUser(email);
+        login();
+        setError('');
+        alert('Inicio de sesión exitoso.');
+        navigate('/');
 
-      // Usar el token para obtener la información del usuario autenticado
-      const userResponse = await axios.get('https://elsaval.com.pe/api/register', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      }); 
-      //comentario
-
-      // Obtener la información del usuario
-      const user = userResponse.data;
-
-      // Mostrar la información del usuario en la consola
-      console.log('Usuario logueado:', user);
-
-      // Iniciar sesión utilizando el contexto
-      login(user);
-
-      navigate('/products')
-
-      // Limpiar cualquier error previo
-      setError('');
-
-      // Aquí podrías redirigir al usuario a otra página o mostrar un mensaje de éxito
-      alert('Inicio de sesión exitoso.');
-      navigate('/login', { replace: true })
-      
     } catch (err) {
       console.error('Error during login:', err);
       setError('Hubo un error al iniciar sesión. Por favor, verifica tus credenciales e inténtalo de nuevo.');
@@ -67,8 +42,8 @@ const Login = ({ setLoggedInUser }) => {
         src="/images/ElsaVal_Logo.png"
         alt="logo"
       />
-      <Row controlId="Row" className="justify-content-center align-items-center">
-        <Col >
+      <Row className="justify-content-center align-items-center">
+        <Col>
           <div className='login-form'>
             <h3 className="title mb-3 ps-3 pb-3">Inicio de Sesión</h3>
             <Form className='px-3' onSubmit={handleSubmit}>
@@ -80,7 +55,7 @@ const Login = ({ setLoggedInUser }) => {
                   placeholder="Ingresa tu correo"
                   size="lg"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)} // Actualizar el estado del email.
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Group>
 
@@ -92,7 +67,7 @@ const Login = ({ setLoggedInUser }) => {
                   placeholder="Ingresa tu contraseña"
                   size="lg"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)} // Actualizar el estado del password.
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
 
@@ -103,13 +78,11 @@ const Login = ({ setLoggedInUser }) => {
               </Button>
             </Form>
             <p className="small mb-4 pb-lg-2 ms-3">
-              {/* Asegurarse de que <a> no esté anidado dentro de otro <a> */}
               <span>
                 <a className="Olvidar-contra-link-info" href="#!">¿Olvidaste tu Contraseña?</a>
               </span>
             </p>
             <p className='ms-3'>
-              {/* Asegurarse de que <a> no esté anidado dentro de otro <a> */}
               <span>
                 ¿No tienes una cuenta? <a href="/register" className="registrarse-link-info">Regístrate Aquí</a>
               </span>

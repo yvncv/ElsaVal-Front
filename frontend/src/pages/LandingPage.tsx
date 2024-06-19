@@ -6,11 +6,11 @@ import './LandingPage.css';
 export default function LandingPage() {
     return (
         <>
-            <p className="parrafo">
+            <div className="parrafo">
                 Costura con ternura
                 <p className="subparrafo">Y sin dejar de lado la elegancia...</p>
                 <CarruselLanding></CarruselLanding>
-            </p>
+            </div>
             {/*<CarruselLanding />*/}
             <p className="parrafo">Próximas novedades</p>
             <Novedades></Novedades>
