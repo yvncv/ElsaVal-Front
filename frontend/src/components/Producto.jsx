@@ -2,65 +2,94 @@ import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Button, Carousel } from 'react-bootstrap';
 import axios from 'axios';
-import '../pages/Categorias.css';
-import {jwtDecode} from 'jwt-decode'; // Importa jwt-decode correctamente
+import { jwtDecode } from 'jwt-decode';
 
 const Producto = ({ id, nombre, imagenes, precio, descripcion, category, material }) => {
+    const apiUrl = 'http://elsaval.com.pe/api';
+
     const [usuario, setUsuario] = useState(null); // Estado local para el usuario
 
-    useEffect(() => {
-        const obtenerUsuario = async () => {
-          try {
-            const token = localStorage.getItem('token');
-            if (token) {
-              const decoded = jwtDecode(token);
-              setUsuario(decoded.usuario);
-            }
-          } catch (error) {
-            console.error('Error al decodificar el token:', error);
-          }
-        };
-    
-        obtenerUsuario();
-      }, []);
+    // useEffect(() => {
+    //     const obtenerUsuario = async () => {
+    //         try {
+    //             const token = localStorage.getItem('token');
+    //             if (token) {
+    //                 const decoded = jwtDecode(token);
+    //                 setUsuario(decoded.usuario);
+    //             }
+    //         } catch (error) {
+    //             console.error('Error al decodificar el token:', error);
+    //         }
+    //     };
 
-    const apiUrl = 'http://elsaval.com.pe/api';
-    const authHeader = {
-        headers: {
-            Authorization: 'Bearer 5|wO4gsgtQ0frg5LjxTGXOABkZ7IPyF4GebtyjgbnOf679a2eb',
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-        }
-    };
+    //     obtenerUsuario();
+    // }, []);
 
     const [cantidad, setCantidad] = useState(1);
 
-    const addToCart = async () => {
+    // const addToCart = async () => {
+    //     try {
+    //         let cartId = localStorage.getItem('cartId');
+    //         if (!cartId) {
+    //             const response = await axios.post(
+    //                 `${apiUrl}/carts`,
+    //                 authHeader
+    //             );
+    //             cartId = response.data.id;
+    //             localStorage.setItem('cartId', cartId);
+    //         }
+
+    //         const response = await axios.post(
+    //             `${apiUrl}/cart-items`,
+    //             {
+    //                 cart_id: cartId,
+    //                 product_id: id,
+    //                 quantity: cantidad,
+    //                 price: precio,
+    //                 total: precio * cantidad
+    //             },
+    //             authHeader
+    //         );
+    //         console.log('Producto añadido al carrito:', response.data);
+    //         alert('Producto añadido al carrito.');
+    //     } catch (error) {
+    //         console.error('Error al añadir producto al carrito:', error);
+    //         alert('Error al añadir producto al carrito.');
+    //     }
+    // };
+
+
+    const addToCart = async (productId, quantity, precio) => {
+        
         try {
+            const token = localStorage.getItem('token') ?? '';
+            if (!token) {
+                throw new Error('No se encontró un token de autenticación.');
+            }
+    
+            const headers = { Authorization: `Bearer ${token}` };
+    
             let cartId = localStorage.getItem('cartId');
             if (!cartId) {
-                const response = await axios.post(
-                    `${apiUrl}/carts`,
-                    { client_id: usuario?.id || null },
-                    authHeader
-                );
-                cartId = response.data.id;
+                console.log(token);
+                const response = await axios.post('https://elsaval.com.pe/api/carts', {}, { headers });
+                console.log(response)
+                cartId = response.data.data.id;
                 localStorage.setItem('cartId', cartId);
             }
-
-            const response = await axios.post(
-                `${apiUrl}/cart-items`,
-                {
-                    cart_id: cartId,
-                    product_id: id,
-                    quantity: cantidad,
-                    price: precio,
-                    total: precio * cantidad
-                },
-                authHeader
-            );
-            console.log('Producto añadido al carrito:', response.data);
+    
+            //si el producto ya está en el carrito, actualizar la cantidad, si no :
+            
+            await axios.post('https://elsaval.com.pe/api/cart-items', {
+                cart_id: cartId,
+                product_id: productId,
+                quantity: quantity,
+                price: precio,
+                total: quantity*precio,
+            }, { headers });
+    
             alert('Producto añadido al carrito.');
+
         } catch (error) {
             console.error('Error al añadir producto al carrito:', error);
             alert('Error al añadir producto al carrito.');
@@ -107,7 +136,7 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
                                 +
                             </Button>
                         </div>
-                        <Button variant="primary" className='btn_ver_Detalles' onClick={addToCart}>
+                        <Button variant="primary" className='btn_ver_Detalles' onClick={() => addToCart(id, cantidad, precio)}>
                             Agregar al carrito
                         </Button>
                     </div>

@@ -29,41 +29,35 @@ const Registro: React.FC = () => {
     setConfirmPassword(event.target.value);
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Verificar si las contraseñas coinciden
+    
     if (password !== confirmPassword) {
-      setError('Las contraseñas no coinciden.');
-      return;
+        setError('Las contraseñas no coinciden.');
+        return;
     }
 
     try {
-      const response = await axios.post('https://elsaval.com.pe/api/register', {
-        name: nombre,
-        email: email,
-        password: password,
-        password_confirmation: confirmPassword
-      });
+        const response = await axios.post('https://elsaval.com.pe/api/register', {
+            name: nombre,
+            email: email,
+            password: password,
+            password_confirmation: confirmPassword
+        });
 
-      if (response.status === 200) {
-        const clienteData = response.data;
-        const message = clienteData.message;
-        console.log('Respuesta completa de la API:', response);
-        console.log('Datos del cliente:', response.data.data);
-        console.log('Mensaje de éxito:', message);
-        setMensaje(message);
-        alert('Cliente creado exitosamente.');
-        navigate('/login', { replace: true });
-      } else {
-        throw new Error('Error al crear el cliente. Por favor, inténtalo de nuevo.');
-      }
-    } catch (error: any) {
-      console.error('Error al crear el cliente:', error);
-      console.log('Detalles del error:', error.response);
-      setError('Hubo un error al crear el cliente. Por favor, inténtalo de nuevo.');
+        if (response.status === 200) {
+            const message = response.data.message;
+            setMensaje(message);
+            alert('Cliente creado exitosamente.');
+            navigate('/login', { replace: true });
+        } else {
+            throw new Error('Error al crear el cliente. Por favor, inténtalo de nuevo.');
+        }
+    } catch (error) {
+        console.error('Error al crear el cliente:', error);
+        setError('Hubo un error al crear el cliente. Por favor, inténtalo de nuevo.');
     }
-  };
+};
 
   return (
     <Container fluid className='Contenedor-Login'> {/* Use Contenedor-Login for consistent styling */}

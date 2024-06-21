@@ -15,25 +15,23 @@ const Login = ({ setLoggedInUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://elsaval.com.pe/api/login', {
-        email,
-        password
-      });
+        const response = await axios.post('https://elsaval.com.pe/api/login', {
+            email,
+            password
+        });
 
-      const { token } = response.data;
-
+        const { token } = response.data;
         localStorage.setItem('token', token);
         setLoggedInUser(email);
-        login();
+        login(email);  // Usar el valor actual del usuario
         setError('');
         alert('Inicio de sesión exitoso.');
         navigate('/');
-
     } catch (err) {
-      console.error('Error during login:', err);
-      setError('Hubo un error al iniciar sesión. Por favor, verifica tus credenciales e inténtalo de nuevo.');
+        console.error('Error during login:', err);
+        setError('Hubo un error al iniciar sesión. Por favor, verifica tus credenciales e inténtalo de nuevo.');
     }
-  };
+};
 
   return (
     <Container fluid className='Contenedor-Login'>
