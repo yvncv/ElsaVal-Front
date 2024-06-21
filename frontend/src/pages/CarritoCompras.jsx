@@ -37,37 +37,37 @@ const CarritoCompras = () => {
     const headers = { Authorization: `Bearer ${token}` };
 
     // Añadir producto al carrito
-    const addToCart = async (productId, quantity, precio) => {
+    // const addToCart = async (productId, quantity, precio) => {
 
-        try {
-            if (!token) {
-                throw new Error('No se encontró un token de autenticación.');
-            }
+    //     try {
+    //         if (!token) {
+    //             throw new Error('No se encontró un token de autenticación.');
+    //         }
 
 
-            let cartId = localStorage.getItem('cartId');
-            if (!cartId) {
-                console.log(token);
-                const response = await axios.post('https://elsaval.com.pe/api/carts', {}, { headers });
-                console.log(response)
-                cartId = response.data.data.id;
-                localStorage.setItem('cartId', cartId);
-            }
+    //         let cartId = localStorage.getItem('cartId');
+    //         if (!cartId) {
+    //             console.log(token);
+    //             const response = await axios.post('https://elsaval.com.pe/api/carts', {}, { headers });
+    //             console.log(response)
+    //             cartId = response.data.data.id;
+    //             localStorage.setItem('cartId', cartId);
+    //         }
 
-            await axios.post('https://elsaval.com.pe/api/cart-items', {
-                cart_id: cartId,
-                product_id: productId,
-                quantity: quantity,
-                price: precio,
-                total: quantity * precio,
-            }, { headers });
+    //         await axios.post('https://elsaval.com.pe/api/cart-items', {
+    //             cart_id: cartId,
+    //             product_id: productId,
+    //             quantity: quantity,
+    //             price: precio,
+    //             total: quantity * precio,
+    //         }, { headers });
 
-            alert('Producto añadido al carrito.');
-        } catch (error) {
-            console.error('Error al añadir producto al carrito:', error);
-            alert('Error al añadir producto al carrito.');
-        }
-    };
+    //         alert('Producto añadido al carrito.');
+    //     } catch (error) {
+    //         console.error('Error al añadir producto al carrito:', error);
+    //         alert('Error al añadir producto al carrito.');
+    //     }
+    // };
 
     // Actualizar la cantidad de un producto en el carrito
     const updateItemInCart = async (itemId, quantity, price) => {

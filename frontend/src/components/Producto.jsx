@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Button, Carousel } from 'react-bootstrap';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
 
 const Producto = ({ id, nombre, imagenes, precio, descripcion, category, material }) => {
-    const apiUrl = 'http://elsaval.com.pe/api';
-
-    const [usuario, setUsuario] = useState(null); // Estado local para el usuario
 
     // useEffect(() => {
     //     const obtenerUsuario = async () => {
@@ -79,7 +75,7 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
             }
     
             //si el producto ya está en el carrito, actualizar la cantidad, si no :
-            
+
             await axios.post('https://elsaval.com.pe/api/cart-items', {
                 cart_id: cartId,
                 product_id: productId,
