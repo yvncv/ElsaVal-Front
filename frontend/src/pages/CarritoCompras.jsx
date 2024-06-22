@@ -126,7 +126,7 @@ const CarritoCompras = () => {
                 status: "new",
                 delivery_price: null,
                 discount: null,
-                street_address: "PRUEBA TEST", // Debes reemplazar esto con la dirección real del cliente
+                street_address: "PRUEBA TEST",
                 order_products: items.map(item => ({
                     product_id: item.product_id,
                     quantity: item.quantity,

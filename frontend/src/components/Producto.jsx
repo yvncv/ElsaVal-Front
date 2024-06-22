@@ -9,54 +9,7 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
 
     const [usuario, setUsuario] = useState(null); // Estado local para el usuario
 
-    // useEffect(() => {
-    //     const obtenerUsuario = async () => {
-    //         try {
-    //             const token = localStorage.getItem('token');
-    //             if (token) {
-    //                 const decoded = jwtDecode(token);
-    //                 setUsuario(decoded.usuario);
-    //             }
-    //         } catch (error) {
-    //             console.error('Error al decodificar el token:', error);
-    //         }
-    //     };
-
-    //     obtenerUsuario();
-    // }, []);
-
     const [cantidad, setCantidad] = useState(1);
-
-    // const addToCart = async () => {
-    //     try {
-    //         let cartId = localStorage.getItem('cartId');
-    //         if (!cartId) {
-    //             const response = await axios.post(
-    //                 `${apiUrl}/carts`,
-    //                 authHeader
-    //             );
-    //             cartId = response.data.id;
-    //             localStorage.setItem('cartId', cartId);
-    //         }
-
-    //         const response = await axios.post(
-    //             `${apiUrl}/cart-items`,
-    //             {
-    //                 cart_id: cartId,
-    //                 product_id: id,
-    //                 quantity: cantidad,
-    //                 price: precio,
-    //                 total: precio * cantidad
-    //             },
-    //             authHeader
-    //         );
-    //         console.log('Producto añadido al carrito:', response.data);
-    //         alert('Producto añadido al carrito.');
-    //     } catch (error) {
-    //         console.error('Error al añadir producto al carrito:', error);
-    //         alert('Error al añadir producto al carrito.');
-    //     }
-    // };
 
 
     const addToCart = async (productId, quantity, precio) => {
