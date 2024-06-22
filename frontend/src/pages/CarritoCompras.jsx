@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Row, Col, Button, Table, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Button, Table, Alert, Form } from 'react-bootstrap';
 
 const CarritoCompras = () => {
-    const [cart, setCart] = useState();
+    const [cart, setCart] = useState(null);
     const [items, setItems] = useState([]);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const [deliveryAddress, setDeliveryAddress] = useState('');
 
     const apiUrl = 'https://elsaval.com.pe/api';
+    const token = localStorage.getItem('token') ?? '';
+    const headers = { Authorization: `Bearer ${token}` };
 
     // Obtener el carrito actual
     useEffect(() => {
         const fetchCart = async () => {
             try {
-                const token = localStorage.getItem('token') ?? '';
                 if (!token) {
                     throw new Error('No se encontró un token de autenticación.');
                 }
 
-                const headers = { Authorization: `Bearer ${token}` };
                 const response = await axios.get(`${apiUrl}/carts/${localStorage.getItem('cartId')}`, { headers });
-                console.log(response);
                 setCart(response.data.data);
-                setItems(response.data.data.cart_items); // Asumiendo que la estructura de datos de respuesta tiene un campo 'items'
+                setItems(response.data.data.cart_items); // Asumiendo que la estructura de datos de respuesta tiene un campo 'cart_items'
             } catch (error) {
                 setError('Error al obtener el carrito.');
                 console.error('Error al obtener el carrito:', error);
@@ -33,33 +33,26 @@ const CarritoCompras = () => {
         fetchCart();
     }, []);
 
-    const token = localStorage.getItem('token') ?? '';
-    const headers = { Authorization: `Bearer ${token}` };
-
     // Añadir producto al carrito
-    const addToCart = async (productId, quantity, precio) => {
-
+    const addToCart = async (productId, quantity, price) => {
         try {
             if (!token) {
                 throw new Error('No se encontró un token de autenticación.');
             }
 
-
             let cartId = localStorage.getItem('cartId');
             if (!cartId) {
-                console.log(token);
-                const response = await axios.post('https://elsaval.com.pe/api/carts', {}, { headers });
-                console.log(response)
+                const response = await axios.post(`${apiUrl}/carts`, {}, { headers });
                 cartId = response.data.data.id;
                 localStorage.setItem('cartId', cartId);
             }
 
-            await axios.post('https://elsaval.com.pe/api/cart-items', {
+            await axios.post(`${apiUrl}/cart-items`, {
                 cart_id: cartId,
                 product_id: productId,
                 quantity: quantity,
-                price: precio,
-                total: quantity * precio,
+                price: price,
+                total: quantity * price,
             }, { headers });
 
             alert('Producto añadido al carrito.');
@@ -94,7 +87,7 @@ const CarritoCompras = () => {
     // Eliminar producto del carrito
     const removeItemFromCart = async (itemId) => {
         try {
-            await axios.delete(`${apiUrl}/cart-items/${itemId}`, {headers});
+            await axios.delete(`${apiUrl}/cart-items/${itemId}`, { headers });
             setItems(items.filter(item => item.id !== itemId));
             setSuccess('Producto eliminado del carrito.');
         } catch (error) {
@@ -106,13 +99,40 @@ const CarritoCompras = () => {
     // Eliminar el carrito
     const deleteCart = async () => {
         try {
-            await axios.delete(`${apiUrl}/carts/${cart.id}`, {headers});
+            await axios.delete(`${apiUrl}/carts/${cart.id}`, { headers });
             setCart(null);
             setItems([]);
             setSuccess('Carrito eliminado.');
         } catch (error) {
             setError('Error al eliminar el carrito.');
             console.error('Error al eliminar el carrito:', error);
+        }
+    };
+
+    // Generar orden
+    const generateOrder = async () => {
+        try {
+            if (!cart) {
+                throw new Error('No hay carrito para generar la orden.');
+            }
+    
+            const response = await axios.post(`${apiUrl}/elsaval/orders`, {
+                client_id: "1", // Debe ser dinámico si tienes el id del cliente almacenado en algún lugar
+                status: "new",
+                delivery_price: null,
+                discount: null,
+                street_address: deliveryAddress, // Usar la dirección ingresada por el usuario
+                order_products: items.map(item => ({
+                    product_id: item.product_id,
+                    quantity: item.quantity,
+                })),
+            }, { headers });
+    
+            setSuccess('Orden generada correctamente.');
+            console.log('Orden generada:', response.data);
+        } catch (error) {
+            setError('Error al generar la orden.');
+            console.error('Error al generar la orden:', error);
         }
     };
 
@@ -125,6 +145,9 @@ const CarritoCompras = () => {
                 <Col>
                     <Button variant="danger" onClick={deleteCart}>
                         Eliminar Carrito
+                    </Button>
+                    <Button variant="primary" onClick={generateOrder} className="ml-2">
+                        Generar Orden
                     </Button>
                 </Col>
             </Row>
@@ -172,13 +195,22 @@ const CarritoCompras = () => {
                                             </Button>
                                         </td>
                                     </tr>
-
                                 ))}
                             </tbody>
                         </Table>
                     ) : (
                         <p>No hay productos en el carrito.</p>
                     )}
+
+                    <Form.Group className="mt-3">
+                        <Form.Label>Dirección de entrega</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Ingresa la dirección de entrega"
+                            value={deliveryAddress}
+                            onChange={(e) => setDeliveryAddress(e.target.value)}
+                        />
+                    </Form.Group>
                 </Col>
             </Row>
         </Container>
