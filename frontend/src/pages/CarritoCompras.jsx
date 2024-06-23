@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Button, Table, Alert, Form } from 'react-bootstrap';
-
+import './CarritoCompras.css'
 const CarritoCompras = () => {
     const [cart, setCart] = useState(null);
     const [items, setItems] = useState([]);
@@ -137,24 +137,34 @@ const CarritoCompras = () => {
     };
 
     return (
-        <Container>
-            <h1 className="mt-5">Carrito de Compras</h1>
+        <Container className='CartContainer'>
+            <h1 className="mt-5">Mi Carrito</h1>
             {success && <Alert variant="success">{success}</Alert>}
             {error && <Alert variant="danger">{error}</Alert>}
-            <Row className="mt-3">
-                <Col>
+            <Form.Group className="mt-3">
+                <Form.Label>Dirección de entrega</Form.Label>
+                    <Form.Control
+                        className='Ingresa-direccion-txtbox'
+                        type="text"
+                        placeholder="Ingresa la dirección de entrega"
+                        value={deliveryAddress}
+                        onChange={(e) => setDeliveryAddress(e.target.value)}
+                    />
+            </Form.Group>
+            <Row className="row-button">
+                <div>
                     <Button variant="danger" onClick={deleteCart}>
                         Eliminar Carrito
                     </Button>
                     <Button variant="primary" onClick={generateOrder} className="ml-2">
                         Generar Orden
                     </Button>
-                </Col>
+                </div>
             </Row>
-            <Row className="mt-3">
+            <Row className="row-sheet">
                 <Col>
                     {items.length > 0 ? (
-                        <Table striped bordered hover style={{ marginTop: '20px' }}>
+                        <Table className="table-sheet" striped bordered hover>
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -201,16 +211,6 @@ const CarritoCompras = () => {
                     ) : (
                         <p>No hay productos en el carrito.</p>
                     )}
-
-                    <Form.Group className="mt-3">
-                        <Form.Label>Dirección de entrega</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Ingresa la dirección de entrega"
-                            value={deliveryAddress}
-                            onChange={(e) => setDeliveryAddress(e.target.value)}
-                        />
-                    </Form.Group>
                 </Col>
             </Row>
         </Container>
