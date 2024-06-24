@@ -88,7 +88,8 @@ const CarritoCompras = () => {
     const removeItemFromCart = async (itemId) => {
         try {
             await axios.delete(`${apiUrl}/cart-items/${itemId}`, { headers });
-            setItems(items.filter(item => item.id !== itemId));
+            const updatedItems = items.filter(item => item.id !== itemId);
+            setItems(updatedItems);
             setSuccess('Producto eliminado del carrito.');
         } catch (error) {
             setError('Error al eliminar producto del carrito.');
@@ -99,13 +100,22 @@ const CarritoCompras = () => {
     // Eliminar el carrito
     const deleteCart = async () => {
         try {
-            await axios.delete(`${apiUrl}/carts/${cart.id}`, { headers });
-            setCart(null);
+            if (!cart) {
+                throw new Error('No hay carrito para eliminar.');
+            }
+    
+            // Eliminar todos los cart_items del carrito actual
+            await Promise.all(items.map(async (item) => {
+                await axios.delete(`${apiUrl}/cart-items/${item.id}`, { headers });
+            }));
+    
+            // Limpiar la lista de items en el estado local
             setItems([]);
-            setSuccess('Carrito eliminado.');
+    
+            setSuccess('Productos eliminados del carrito.');
         } catch (error) {
-            setError('Error al eliminar el carrito.');
-            console.error('Error al eliminar el carrito:', error);
+            setError('Error al eliminar productos del carrito.');
+            console.error('Error al eliminar productos del carrito:', error);
         }
     };
 
