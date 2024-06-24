@@ -6,10 +6,10 @@
     font-family: "Urbanist", sans-serif;;
 }
 
-.mb-2{
+.txtEmail,.btnEmail{
     transition: border-color 0.3s;
 }
-.mb-2:focus,.mb-2:active{
+.txtEmail:focus,.btnEmail:active,.txtEmail:active,.btnEmail:focus{
     border-color: #5E3F44;
     box-shadow: 0 0 10px #5E3F44; 
 }

@@ -48,10 +48,10 @@ export default function Footer() {
                                 <p className='pt-2'>
                                     <strong>Entérese de nuestras novedades</strong>
                                 </p>
-                                <Form.Group controlId="formEmail" className="d-flex">
+                                <Form.Group  className="formEmail d-flex">
                                     <Row>
-                                        <Form.Control type='email' placeholder='Dirección de correo electrónico' className='mb-2' />
-                                        <Button variant='outline-light' type='submit' className='mb-2'>
+                                        <Form.Control type='email' placeholder='Dirección de correo electrónico' className='txtEmail mb-2' />
+                                        <Button variant='outline-light' type='submit' className='btnEmail mb-2'>
                                             Enviar
                                         </Button>
                                     </Row>

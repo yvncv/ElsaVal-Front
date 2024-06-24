@@ -156,7 +156,7 @@ const CarritoCompras = () => {
                     <Button variant="danger" onClick={deleteCart}>
                         Eliminar Carrito
                     </Button>
-                    <Button variant="primary" onClick={generateOrder} className="ml-2">
+                    <Button onClick={generateOrder} className="btn-GenerarOrden ml-2">
                         Generar Orden
                     </Button>
                 </div>

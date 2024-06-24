@@ -66,7 +66,7 @@ const BarraBusqueda: React.FC<Props> = ({ loggedInUser }) => {
                   <FontAwesomeIcon icon={faShoppingCart} className='IconosNavbar'/>
                 </Nav.Link>
 
-                <Dropdown align="end">
+                <Dropdown className="Navbar-dropdown" align="end">
                   <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
                     <FontAwesomeIcon title="Mi Cuenta" icon={faUser} className='IconosNavbar'/>
                   </Dropdown.Toggle>

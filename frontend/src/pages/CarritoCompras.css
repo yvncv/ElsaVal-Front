@@ -32,6 +32,15 @@
     gap:10px
 }
 
+.btn-GenerarOrden{
+    background-color: #09e814;
+    border-color: #09e814;
+}
+.btn-GenerarOrden:hover{
+    background-color: #0ad114;
+    border-color: #0ad114;
+}
+
 .table-sheet{
     margin-top: 5px;
 }

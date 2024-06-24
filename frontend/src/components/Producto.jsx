@@ -3,6 +3,9 @@ import Card from 'react-bootstrap/Card';
 import { Button, Carousel } from 'react-bootstrap';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faCartPlus} from '@fortawesome/free-solid-svg-icons';
+import './Producto.css';
 
 const Producto = ({ id, nombre, imagenes, precio, descripcion, category, material }) => {
     const apiUrl = 'http://elsaval.com.pe/api';
@@ -136,8 +139,8 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
                                 +
                             </Button>
                         </div>
-                        <Button variant="primary" className='btn_ver_Detalles' onClick={() => addToCart(id, cantidad, precio)}>
-                            Agregar al carrito
+                        <Button title="Añadir al Carrito" variant="primary" className='btn_ver_Detalles' onClick={() => addToCart(id, cantidad, precio)}>
+                            <FontAwesomeIcon icon={faCartPlus}/>
                         </Button>
                     </div>
                 </Card.Body>

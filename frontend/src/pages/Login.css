@@ -30,9 +30,12 @@
     color:#88525B !important;
 }
 
+
+
 .title {
     font-weight:400;
     font-size: 2em;
+    text-align: center;
 }
 /* Ajustes de estilo para Form.Label */
 .form-label {/*para labels de correo y contrasena*/

@@ -1,0 +1,58 @@
+/*div invisible que engloba cada card*/
+.col-xxl-4{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
+  /*card*/
+  .contenedor-single-card {/*el cuadro de cada producto mostrado*/
+    /*width:auto*/
+    align-items: center;/*centro horizontal*/
+    width:fit-content;
+    background-color: #FFFFFF!important;
+    border: 2px solid #5E3F44;
+    color:#000000 !important;
+    text-align: center;
+  }      
+    /*carousel*/
+  .carousel-card,.body-card{
+    width: 300px;
+  }
+  
+  .contenedor-img-btn-card {
+    /*esta etiqueta es de la parte de la imagen de cada card, entro esta la imagen y los botones del card*/
+    height: 290px;
+  }
+  /*carrousel inner*/
+  div.carousel-inner{
+    width: 90%;
+    margin-left: 5%;
+  }
+  /*fin carrousel inner*/
+  /*imagen*/
+  .contenedor-img-btn-card img {
+    border-radius: 25px;
+    padding: 10px;
+  }
+  /*fin imagen*/
+  
+  /*fin carousel*/
+          
+  /*card-body*/
+  /*button ver detalles*/
+  button.btn_ver_Detalles{
+    border-color: #88525B;
+    color:#88525B;
+    background-color: white;
+    transition: background-color 0.4s ease!important;
+  }
+  button.btn_ver_Detalles:hover {
+    background-color: #752728;
+    border-color: #752728;
+    color: white!important;
+  }
+  button.btn_ver_Detalles:active{
+    background-color: #6F2A2D!important;
+    border-color: #6F2A2D!important;
+  }

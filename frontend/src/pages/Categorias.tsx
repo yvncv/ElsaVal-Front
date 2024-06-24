@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, Offcanvas } from 'react-bootstrap';
+import { Button, Offcanvas,Form} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import Producto from '../components/Producto.jsx';
@@ -78,7 +78,7 @@ const Categorias = () => {
                         </Offcanvas.Header>
                         <Offcanvas.Body className="canvas-body">
                             Seleccione una categoria
-                            <select
+                            {/*<select
                                 className="categorias-select"
                                 value={categoriaSeleccionada || ''}
                                 onChange={handleSelectChange}
@@ -90,7 +90,21 @@ const Categorias = () => {
                                         {categoria.name}
                                     </option>
                                 ))}
-                            </select>
+                            </select>*/}
+                            <Form.Select 
+                                className="categorias-select"
+                                value={categoriaSeleccionada || ''}
+                                onChange={handleSelectChange}
+                                //aria-label="Default select example"
+                            >
+                                <option value="" disabled>Selecciona una categoría</option>
+                                <option className="categorias-option" key={0} value={0}>Todo</option>
+                                {categorias.map((categoria) => (
+                                    <option className="categorias-option" key={categoria.id} value={categoria.id}>
+                                        {categoria.name}
+                                    </option>
+                                ))}
+                            </Form.Select>
                         </Offcanvas.Body>
                     </Offcanvas>
                 </div>
