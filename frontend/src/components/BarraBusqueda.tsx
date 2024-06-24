@@ -72,7 +72,7 @@ const BarraBusqueda: React.FC<Props> = ({ loggedInUser }) => {
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="DropdownMenu">
                     <Dropdown.Item as={Link} to="/Detalles" className="DropdownItem">Información de la Cuenta</Dropdown.Item>
-                    <Dropdown.Item as={Link} to="/HistorialCompras" className="DropdownItem">Historial de Compras</Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/HistorialOrdenes" className="DropdownItem">Historial de Compras</Dropdown.Item>
                     <Dropdown.Item onClick={handleLogout} className="DropdownItem">Cerrar Sesión</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

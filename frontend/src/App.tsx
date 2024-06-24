@@ -10,6 +10,8 @@ import Acercade from './pages/Acercade.tsx';
 import CarritoCompras from './pages/CarritoCompras';
 import './App.css';
 import { DecodedToken } from './types/DecodedToken.ts';
+import Detalles from './pages/Detalles.tsx';
+import HistorialOrdenes from './pages/HistorialOrdenes.tsx';
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState<DecodedToken['user'] | null>(null);
@@ -44,6 +46,8 @@ function App() {
             element={loggedInUser ? <Navigate to="/" replace /> : <Login setLoggedInUser={setLoggedInUser} />}
           />
           <Route path="/register" element={<Registro />} />
+          <Route path="/Detalles" element={<Detalles />} />
+          <Route path="/HistorialOrdenes" element={<HistorialOrdenes />} />
         </Routes>
       </div>
     </Router>

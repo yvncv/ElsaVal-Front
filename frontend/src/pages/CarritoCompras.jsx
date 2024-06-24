@@ -117,7 +117,7 @@ const CarritoCompras = () => {
             }
     
             const response = await axios.post(`${apiUrl}/elsaval/orders`, {
-                client_id: "1", // Debe ser dinámico si tienes el id del cliente almacenado en algún lugar
+                client_id: "21", // Debe ser dinámico si tienes el id del cliente almacenado en algún lugar
                 status: "new",
                 delivery_price: null,
                 discount: null,
