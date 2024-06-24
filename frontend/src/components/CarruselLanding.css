@@ -1,0 +1,23 @@
+.Container-Carousel{
+    display: flex;
+    justify-content: center;
+}
+.Carousel{
+    width: 90dvw;
+    border-radius: 30px;
+    margin: 0px; 
+    max-width: 1200px;
+}
+.Carousel-item{
+    height: 40dvw; 
+    max-height: 600;
+}
+.img-container{
+    border-radius: 15px!important;
+    padding: 10px;
+}
+.Carousel-Caption{
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    font-size:  20px;
+}
