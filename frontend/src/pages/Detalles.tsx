@@ -1,38 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import { Client } from '../types/Client';
 
 const Detalles: React.FC = () => {
-    const [clientData, setClientData] = useState<Client | null>(null);
+  const { loggedInUser } = useContext(AuthContext);
+  const [clientData, setClientData] = useState<Client | null>(null);
 
-    useEffect(() => {
-        const clientId = 21;  // ID del cliente deseado
-        const apiUrl = `https://elsaval.com.pe/api/elsaval/clients/${clientId}`;
+  useEffect(() => {
+    if (loggedInUser) {
+      const clientId = loggedInUser.id;
+      const apiUrl = `https://elsaval.com.pe/api/elsaval/clients/${clientId}`;
 
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                setClientData(data.data);
-            })
-            .catch(error => console.error('Error al obtener los datos del cliente', error));
-    }, []);
-
-    if (!clientData) {
-        return <p>Cargando...</p>;
+      fetch(apiUrl, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+        .then(response => response.json())
+        .then(data => {
+          setClientData(data.data);
+        })
+        .catch(error => console.error('Error al obtener los datos del cliente', error));
     }
+  }, [loggedInUser]);
 
-    const { user } = clientData;
-    const userName = user.name;
-    const userEmail = user.email;
+  if (!clientData) {
+    return <p>Cargando...</p>;
+  }
 
-    return (
-        <div>
-            <h1>Detalles de la Cuenta</h1>
-            <div>
-                <p><strong>Nombre:</strong> {userName}</p>
-                <p><strong>Email:</strong> {userEmail}</p>
-            </div>
-        </div>
-    );
+  const { user } = clientData;
+  const userName = user.name;
+  const userEmail = user.email;
+
+  return (
+    <div>
+      <h1>Detalles de la Cuenta</h1>
+      <div>
+        <p><strong>Nombre:</strong> {userName}</p>
+        <p><strong>Email:</strong> {userEmail}</p>
+      </div>
+    </div>
+  );
 };
 
 export default Detalles;
