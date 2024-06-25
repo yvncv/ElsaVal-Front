@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { Container, Row, Col, Button, Table, Alert, Form } from 'react-bootstrap';
-import './CarritoCompras.css'
+import './CarritoCompras.css';
+
 const CarritoCompras = () => {
     const [cart, setCart] = useState(null);
     const [items, setItems] = useState([]);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [deliveryAddress, setDeliveryAddress] = useState('');
+    const { loggedInUser } = useContext(AuthContext);
 
     const apiUrl = 'https://elsaval.com.pe/api';
     const token = localStorage.getItem('token') ?? '';
@@ -23,7 +26,7 @@ const CarritoCompras = () => {
 
                 const response = await axios.get(`${apiUrl}/carts/${localStorage.getItem('cartId')}`, { headers });
                 setCart(response.data.data);
-                setItems(response.data.data.cart_items); // Asumiendo que la estructura de datos de respuesta tiene un campo 'cart_items'
+                setItems(response.data.data.cart_items);
             } catch (error) {
                 setError('Error al obtener el carrito.');
                 console.error('Error al obtener el carrito:', error);
@@ -103,15 +106,15 @@ const CarritoCompras = () => {
             if (!cart) {
                 throw new Error('No hay carrito para eliminar.');
             }
-    
+
             // Eliminar todos los cart_items del carrito actual
             await Promise.all(items.map(async (item) => {
                 await axios.delete(`${apiUrl}/cart-items/${item.id}`, { headers });
             }));
-    
+
             // Limpiar la lista de items en el estado local
             setItems([]);
-    
+
             setSuccess('Productos eliminados del carrito.');
         } catch (error) {
             setError('Error al eliminar productos del carrito.');
@@ -125,19 +128,23 @@ const CarritoCompras = () => {
             if (!cart) {
                 throw new Error('No hay carrito para generar la orden.');
             }
-    
+
+            if (!loggedInUser || !loggedInUser.id) {
+                throw new Error('Usuario no autenticado.');
+            }
+
             const response = await axios.post(`${apiUrl}/elsaval/orders`, {
-                client_id: "21", // Debe ser dinámico si tienes el id del cliente almacenado en algún lugar
+                client_id: loggedInUser.id,
                 status: "new",
                 delivery_price: null,
                 discount: null,
-                street_address: deliveryAddress, // Usar la dirección ingresada por el usuario
+                street_address: deliveryAddress,
                 order_products: items.map(item => ({
                     product_id: item.product_id,
                     quantity: item.quantity,
                 })),
             }, { headers });
-    
+
             setSuccess('Orden generada correctamente.');
             console.log('Orden generada:', response.data);
         } catch (error) {
@@ -153,13 +160,13 @@ const CarritoCompras = () => {
             {error && <Alert variant="danger">{error}</Alert>}
             <Form.Group className="mt-3">
                 <Form.Label>Dirección de entrega</Form.Label>
-                    <Form.Control
-                        className='Ingresa-direccion-txtbox'
-                        type="text"
-                        placeholder="Ingresa la dirección de entrega"
-                        value={deliveryAddress}
-                        onChange={(e) => setDeliveryAddress(e.target.value)}
-                    />
+                <Form.Control
+                    className='Ingresa-direccion-txtbox'
+                    type="text"
+                    placeholder="Ingresa la dirección de entrega"
+                    value={deliveryAddress}
+                    onChange={(e) => setDeliveryAddress(e.target.value)}
+                />
             </Form.Group>
             <Row className="row-button">
                 <div>

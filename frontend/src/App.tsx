@@ -23,7 +23,7 @@ function App() {
         const decoded: DecodedToken = jwtDecode(token);
         setLoggedInUser(decoded.user);
       } catch (error) {
-        console.error('Error al decodificar el token:', error);
+        console.error('Error al decodificar el token del usuario:', error);
         setLoggedInUser(null);
       }
     }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode'; // Importa jwt-decode aquí también si planeas verificar el token.
+import { jwtDecode } from 'jwt-decode'; // Importa jwt-decode aquí también si planeas verificar el token.
 
 const Login = ({ setLoggedInUser }) => {
   const { login } = useContext(AuthContext);
@@ -15,23 +15,26 @@ const Login = ({ setLoggedInUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.post('https://elsaval.com.pe/api/login', {
-            email,
-            password
-        });
+      const response = await axios.post('https://elsaval.com.pe/api/login', { email, password });
+      const token = response.data.token;
+      localStorage.setItem('token', token);
 
-        const { token } = response.data;
-        localStorage.setItem('token', token);
-        setLoggedInUser(email);
-        login(email);  // Usar el valor actual del usuario
-        setError('');
-        alert('Inicio de sesión exitoso.');
-        navigate('/');
-    } catch (err) {
-        console.error('Error during login:', err);
-        setError('Hubo un error al iniciar sesión. Por favor, verifica tus credenciales e inténtalo de nuevo.');
+      const userResponse = await axios.get('https://elsaval.com.pe/api/elsaval/clients', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      const user = userResponse.data.data.find(user => user.user.email === email);
+      if (user) {
+        setLoggedInUser(user);
+        login(user);
+        navigate('/'); // Redirige al usuario a la página principal o a la que desees
+      } else {
+        console.error('Usuario no encontrado en la respuesta de la API.');
+      }
+    } catch (error) {
+      console.error('Error durante el login:', error);
     }
-};
+  };
 
   return (
     <Container fluid className='Contenedor-Login'>
