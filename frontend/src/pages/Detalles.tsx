@@ -26,7 +26,7 @@ const Detalles: React.FC = () => {
     return <p>Cargando...</p>;
   }
 
-  const { user } = clientData;
+  const { user,contact_number,street_address } = clientData;
   const userName = user.name;
   const userEmail = user.email;
 
@@ -36,6 +36,8 @@ const Detalles: React.FC = () => {
       <div>
         <p><strong>Nombre:</strong> {userName}</p>
         <p><strong>Email:</strong> {userEmail}</p>
+        <p><strong>Número de Contacto:</strong> {contact_number}</p>
+        <p><strong>Dirección de Entrega:</strong> {street_address}</p>
       </div>
     </div>
   );
