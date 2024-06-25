@@ -23,7 +23,9 @@ const Login = ({ setLoggedInUser }) => {
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      const user = userResponse.data.data.find(user => user.user.email === email);
+      const user = userResponse.data.data.find(
+        user => user.user.email.toLowerCase() === email.toLowerCase()
+    );
       if (user) {
         setLoggedInUser(user);
         login(user);
