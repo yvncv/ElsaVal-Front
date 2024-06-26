@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Client } from '../types/Client';
-
+import {Form,Button} from 'react-bootstrap';
+import './InfoCuenta.css';
 const Detalles: React.FC = () => {
   const { loggedInUser } = useContext(AuthContext);
   const [clientData, setClientData] = useState<Client | null>(null);
@@ -31,15 +32,27 @@ const Detalles: React.FC = () => {
   const userEmail = user.email;
 
   return (
-    <div>
-      <h1>Detalles de la Cuenta</h1>
-      <div>
-        <p><strong>Nombre:</strong> {userName}</p>
-        <p><strong>Email:</strong> {userEmail}</p>
-        <p><strong>Número de Contacto:</strong> {contact_number}</p>
-        <p><strong>Dirección de Entrega:</strong> {street_address}</p>
-      </div>
-    </div>
+    <>
+      <Form className='FormInfo'>
+        <h1>Información de la Cuenta</h1>
+        <Form.Group className='GroupForm'>
+          <Form.Label>Nombre del Usuario: {userName}</Form.Label>
+        </Form.Group>
+        <Form.Group className='GroupForm'>
+          <Form.Label>Correo Electrónico: {userEmail}</Form.Label>
+        </Form.Group>
+        <Form.Group className='GroupForm'>
+          <Form.Group className='SubGroup'>
+            <Form.Label>Número de teléfono:</Form.Label>
+            <Button className="btnEditar" variant="primary">Editar</Button>
+          </Form.Group>
+          {/*configuracion de telefono internacional*/}
+          <Form.Control type="text">{contact_number}</Form.Control>
+          <Form.Label>Dirección de envío:</Form.Label>
+          <Form.Control className="txtDireccion" type="text" as="textarea">{street_address}</Form.Control>
+        </Form.Group>
+      </Form>
+    </>
   );
 };
 

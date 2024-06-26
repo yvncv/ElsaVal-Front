@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import { FaFacebookF, FaTwitter, FaGoogle, FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa';
+import { FaFacebookF, FaTwitter, FaGoogle, FaInstagram, FaLinkedinIn, FaGithub, FaTiktok } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './Footer.css'
 export default function Footer() {
@@ -12,19 +12,10 @@ export default function Footer() {
                         <FaFacebookF />
                     </Button>
                     <Button variant="outline-light" className='m-1' href='#!'>
-                        <FaTwitter />
-                    </Button>
-                    <Button variant="outline-light" className='m-1' href='#!'>
-                        <FaGoogle />
-                    </Button>
-                    <Button variant="outline-light" className='m-1' href='#!'>
                         <FaInstagram />
                     </Button>
                     <Button variant="outline-light" className='m-1' href='#!'>
-                        <FaLinkedinIn />
-                    </Button>
-                    <Button variant="outline-light" className='m-1' href='#!'>
-                        <FaGithub />
+                        <FaTiktok/>
                     </Button>
                 </section>
 

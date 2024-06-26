@@ -41,7 +41,7 @@ const HistorialOrdenes: React.FC = () => {
 
     return (
         <div>
-            <h1>Órdenes del Cliente</h1>
+            <h1>Historial de Órdenes</h1>
             <div>
                 {orders.length === 0 ? (
                     <p>No cuenta con ninguna orden registrada</p>
