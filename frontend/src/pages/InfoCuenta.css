@@ -11,8 +11,12 @@
     margin-right: 8%;
     border: solid 1px #E8E8E8;
     padding:20px;
-    gap: 5px;
+    gap: 10px;
     color:#88525B;
+}
+.SeccionDatosPersonales,.SeccionContra{
+    border:solid 1px #E8E8E8;
+    padding: 15px;
 }
 .GroupForm{
     display: flex;
@@ -21,6 +25,10 @@
 }
 .lblForm{
     font-size: 21px;
+}
+.lblSubtitleForm{
+    font-size: 26px!important;
+    font-weight: 500;
 }
 .SubGroup{
     display: flex;
@@ -52,7 +60,7 @@
     border-color: #6F2A2D!important;
 }
 
-.txtDireccion,.txtTelefono{
+.txtDireccion,.txtTelefono,.txtOldContra{
     border-radius: 0;
     font-size: 15px;
     color: #5E3F44!important;

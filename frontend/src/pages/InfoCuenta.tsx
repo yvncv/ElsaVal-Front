@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Client } from '../types/Client';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, FormLabel } from 'react-bootstrap';
 import './InfoCuenta.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faPenToSquare,faCheck,faXmark} from '@fortawesome/free-solid-svg-icons';
+import {faPenToSquare,faCheck,faXmark,faEye} from '@fortawesome/free-solid-svg-icons';
 
 const Detalles: React.FC = () => {
     // estados
@@ -15,6 +15,7 @@ const Detalles: React.FC = () => {
     const [title,setTitle]=useState("Editar");
     const [cancelarEdicion, setCancelarEdicion]=useState(true);
     const [cambiarContra,setCambiarContra]=useState(false);
+    const [verContra,setVerContra]=useState("password");
     useEffect(() => {
       if (loggedInUser) {
         const clientId = loggedInUser.id;
@@ -62,6 +63,14 @@ const Detalles: React.FC = () => {
           case "btnCambiarContraseña":
             setCambiarContra(!cambiarContra);
             break;
+          case"btnVerContra":
+            if(verContra=="password"){
+              setVerContra("text")
+            }
+            else{
+              setVerContra("password")
+            }
+            break;
           default:
             break;
       }
@@ -71,45 +80,68 @@ const Detalles: React.FC = () => {
       <>
         <Form className='FormInfo'>
           <h1>Información de la Cuenta</h1>
-          <Form.Group className='GroupForm'>
-            <Form.Label className='lblForm'>Nombre del Usuario: {userName}</Form.Label>
-          </Form.Group>
-          <Form.Group className='GroupForm'>
-            <Form.Label className='lblForm'>Correo Electrónico: {userEmail}</Form.Label>
-          </Form.Group>
-          <Form.Group className='GroupForm'>
-            <Form.Group className='SubGroup'>
-              <Form.Label className='lblForm'>Número de teléfono:</Form.Label>
-              {
-                cancelarEdicion===false &&(
-                  <Button className="btnCancelar" title='Cancelar edición' onClick={()=>{handleClick("btnCancelar")}}>
-                    <FontAwesomeIcon icon={faXmark}/>
-                  </Button>
-                )
-              }
-              <Button className="btnEditar" title={title} onClick={()=>{handleClick("btnEditar")}}>
-                <FontAwesomeIcon icon={icon} />
-              </Button>
+          <Form.Group className='SeccionDatosPersonales'>
+            <Form.Group className='GroupForm'>
+              <Form.Label className='lblForm'>Nombre del Usuario: {userName}</Form.Label>
             </Form.Group>
-            {/* configuración de teléfono internacional */}
-            <Form.Control
+            <Form.Group className='GroupForm'>
+              <Form.Label className='lblForm'>Correo Electrónico: {userEmail}</Form.Label>
+            </Form.Group>
+            <Form.Group className='GroupForm'>
+              <Form.Group className='SubGroup'>
+                <Form.Label className='lblForm'>Número de teléfono:</Form.Label>
+                {
+                  cancelarEdicion===false &&(
+                    <Button className="btnCancelar" title='Cancelar edición' onClick={()=>{handleClick("btnCancelar")}}>
+                      <FontAwesomeIcon icon={faXmark}/>
+                    </Button>
+                  )
+                }
+                <Button className="btnEditar" title={title} onClick={()=>{handleClick("btnEditar")}}>
+                  <FontAwesomeIcon icon={icon} />
+                </Button>
+              </Form.Group>
+              {/* configuración de teléfono internacional */}
+              <Form.Control
               className="txtTelefono"
               type="text"
               placeholder='Ejm: 994256741'
               disabled={disabled}
               defaultValue={contact_number}
-            />
-            <Form.Label className='lblForm'>Dirección de envío:</Form.Label>
-            <Form.Control
+              />
+              <Form.Label className='lblForm'>Dirección de envío:</Form.Label>
+              <Form.Control
               className="txtDireccion"
               type="text"
               as="textarea"
               placeholder='Ejm: 123 Avenida Primavera, Ciudad Jardín, Estado del Sol, País Imaginario'
               disabled={disabled}
               defaultValue={street_address}
-            />
+              />
+            </Form.Group>
           </Form.Group>
           <Button className="btnCambiarContraseña" onClick={()=>{handleClick("btnCambiarContraseña")}}>Cambiar contraseña</Button>
+          {
+            //empieza la seccion de la contraseña
+            cambiarContra===true&&(
+              <Form.Group className='SeccionContra'>
+                <Form.Label className='lblSubtitleForm'>Cambiar Contraseña</Form.Label>
+                <FormLabel className="lblForm">Contraseña actual</FormLabel>
+                <Form.Group className='SubGroup'>
+                  <Form.Control
+                    className="txtOldContra"
+                    type={verContra}
+                    disabled={true}
+                    defaultValue={"micontraseña"}
+                  />
+                  <Button title='Ver' className="btnVerContra" onClick={()=>{handleClick("btnVerContra")}}>
+                    <FontAwesomeIcon icon={faEye}/>
+                  </Button>
+                </Form.Group>
+
+              </Form.Group>
+            )
+          }
         </Form>
       </>
     );
