@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import { FaFacebookF, FaTwitter, FaGoogle, FaInstagram, FaLinkedinIn, FaGithub, FaTiktok } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaTiktok,FaWhatsapp} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './Footer.css'
 export default function Footer() {
@@ -8,14 +8,17 @@ export default function Footer() {
         <footer className='Footer'>
             <Container className='p-4'> 
                 <section className='mb-4'>
-                    <Button variant="outline-light" className='m-1' href='#!'>
+                    <Button variant="outline-light" className='m-1' href='https://www.facebook.com/ElsaValCrochet' target='_blank'>
                         <FaFacebookF />
                     </Button>
-                    <Button variant="outline-light" className='m-1' href='#!'>
+                    <Button variant="outline-light" className='m-1' href='https://www.instagram.com/elsavalcrochet' target='_blank'>
                         <FaInstagram />
                     </Button>
-                    <Button variant="outline-light" className='m-1' href='#!'>
+                    <Button variant="outline-light" className='m-1' href='https://www.tiktok.com/@elsavalcrochet' target='_blank'>
                         <FaTiktok/>
+                    </Button>
+                    <Button variant="outline-light" className='m-1' href='https://www.whatsapp.com/catalog/51983652040' target='_blank'>
+                        <FaWhatsapp/>
                     </Button>
                 </section>
 

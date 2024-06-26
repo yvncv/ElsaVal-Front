@@ -4,15 +4,17 @@ import { Client } from '../types/Client';
 import {Form,Button} from 'react-bootstrap';
 import './InfoCuenta.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
+import {faPenToSquare,faCheck} from '@fortawesome/free-solid-svg-icons';
 
 
 
 const Detalles: React.FC = () => {
+  //estados
   const { loggedInUser } = useContext(AuthContext);
   const [clientData, setClientData] = useState<Client | null>(null);
   const [disabled,setDisabled]=useState(true);
-
+  const [icon, setIcon]=useState(faPenToSquare);
+  const [title,setTitle]=useState("Editar");
   useEffect(() => {
     if (loggedInUser) {
       const clientId = loggedInUser.id;
@@ -36,6 +38,19 @@ const Detalles: React.FC = () => {
   const { user,contact_number,street_address } = clientData;
   const userName = user.name;
   const userEmail = user.email;
+
+  const handleClick=()=>{
+    setDisabled(!disabled);
+    if(disabled){//esta para editar
+      setIcon(faCheck);
+      setTitle("Guardar cambios");
+    }
+    else{//se cerro
+      setIcon(faPenToSquare);
+      setTitle("Editar");
+      alert("se guardaron los cambios");//simula ser la logica de guardado de cambios
+    }
+  }
   return (
     <>
       <Form className='FormInfo'>
@@ -49,8 +64,8 @@ const Detalles: React.FC = () => {
         <Form.Group className='GroupForm'>
           <Form.Group className='SubGroup'>
             <Form.Label className='lblForm'>Número de teléfono:</Form.Label>
-            <Button className="btnEditar" variant="primary" title="Editar" onClick={()=>{setDisabled(!disabled)}}>
-              <FontAwesomeIcon icon={faPenToSquare}/>
+            <Button className="btnEditar" title={title} onClick={handleClick}>
+              <FontAwesomeIcon icon={icon}/>
             </Button>
           </Form.Group>
           {/*configuracion de telefono internacional*/}
