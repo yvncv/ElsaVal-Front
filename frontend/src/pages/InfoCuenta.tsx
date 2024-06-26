@@ -1,20 +1,19 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Client } from '../types/Client';
-import {Form,Button} from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import './InfoCuenta.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faPenToSquare,faCheck} from '@fortawesome/free-solid-svg-icons';
-
-
+import { faPenToSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const Detalles: React.FC = () => {
-  //estados
+  // estados
   const { loggedInUser } = useContext(AuthContext);
   const [clientData, setClientData] = useState<Client | null>(null);
-  const [disabled,setDisabled]=useState(true);
-  const [icon, setIcon]=useState(faPenToSquare);
-  const [title,setTitle]=useState("Editar");
+  const [disabled, setDisabled] = useState(true);
+  const [icon, setIcon] = useState(faPenToSquare);
+  const [title, setTitle] = useState("Editar");
+
   useEffect(() => {
     if (loggedInUser) {
       const clientId = loggedInUser.id;
@@ -34,23 +33,23 @@ const Detalles: React.FC = () => {
   if (!clientData) {
     return <p>Cargando...</p>;
   }
-  //variables
-  const { user,contact_number,street_address } = clientData;
+  // variables
+  const { user, contact_number, street_address } = clientData;
   const userName = user.name;
   const userEmail = user.email;
 
-  const handleClick=()=>{
+  const handleClick = () => {
     setDisabled(!disabled);
-    if(disabled){//esta para editar
+    if (disabled) { // está para editar
       setIcon(faCheck);
       setTitle("Guardar cambios");
-    }
-    else{//se cerro
+    } else { // se cerró
       setIcon(faPenToSquare);
       setTitle("Editar");
-      alert("se guardaron los cambios");//simula ser la logica de guardado de cambios
+      alert("se guardaron los cambios"); // simula ser la lógica de guardado de cambios
     }
   }
+
   return (
     <>
       <Form className='FormInfo'>
@@ -65,28 +64,26 @@ const Detalles: React.FC = () => {
           <Form.Group className='SubGroup'>
             <Form.Label className='lblForm'>Número de teléfono:</Form.Label>
             <Button className="btnEditar" title={title} onClick={handleClick}>
-              <FontAwesomeIcon icon={icon}/>
+              <FontAwesomeIcon icon={icon} />
             </Button>
           </Form.Group>
-          {/*configuracion de telefono internacional*/}
-          <Form.Control 
-          className="txtTelefono"
-          type="text"
-          placeholder='Ejm: 994256741'
-          disabled={disabled}
-          
-          >
-            {contact_number}
-          </Form.Control>
+          {/* configuración de teléfono internacional */}
+          <Form.Control
+            className="txtTelefono"
+            type="text"
+            placeholder='Ejm: 994256741'
+            disabled={disabled}
+            defaultValue={contact_number}
+          />
           <Form.Label className='lblForm'>Dirección de envío:</Form.Label>
-          <Form.Control 
-          className="txtDireccion" 
-          type="text" 
-          as="textarea" 
-          placeholder='Ejm: 123 Avenida Primavera, Ciudad Jardín, Estado del Sol, País Imaginario'
-          disabled={disabled}>
-            {street_address}
-          </Form.Control>
+          <Form.Control
+            className="txtDireccion"
+            type="text"
+            as="textarea"
+            placeholder='Ejm: 123 Avenida Primavera, Ciudad Jardín, Estado del Sol, País Imaginario'
+            disabled={disabled}
+            defaultValue={street_address}
+          />
         </Form.Group>
       </Form>
     </>
@@ -94,3 +91,4 @@ const Detalles: React.FC = () => {
 };
 
 export default Detalles;
+

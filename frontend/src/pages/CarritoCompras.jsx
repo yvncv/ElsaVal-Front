@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useMemo } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { Container, Row, Col, Button, Table, Alert, Form } from 'react-bootstrap';
@@ -14,9 +14,11 @@ const CarritoCompras = () => {
 
     const apiUrl = 'https://elsaval.com.pe/api';
     const token = localStorage.getItem('token') ?? '';
-    const headers = { Authorization: `Bearer ${token}` };
 
-    // Obtener el carrito actual
+    const headers = useMemo(() => {
+        return { Authorization: `Bearer ${token}` };
+    }, [token]);
+
     useEffect(() => {
         const fetchCart = async () => {
             try {
@@ -34,9 +36,25 @@ const CarritoCompras = () => {
         };
 
         fetchCart();
-    }, []);
+    }, [token,headers]);
 
-    // Añadir producto al carrito
+    useEffect(() => {
+        const fetchClientAddress = async () => {
+            if (loggedInUser) {
+                try {
+                    const clientId = loggedInUser.id;
+                    const response = await axios.get(`${apiUrl}/elsaval/clients/${clientId}`, { headers });
+                    const clientData = response.data.data;
+                    setDeliveryAddress(clientData.street_address);
+                } catch (error) {
+                    console.error('Error al obtener la dirección del cliente:', error);
+                }
+            }
+        };
+
+        fetchClientAddress();
+    }, [loggedInUser, headers, apiUrl]);
+
     const addToCart = async (productId, quantity, price) => {
         try {
             if (!token) {
@@ -65,7 +83,6 @@ const CarritoCompras = () => {
         }
     };
 
-    // Actualizar la cantidad de un producto en el carrito
     const updateItemInCart = async (itemId, quantity, price) => {
         try {
             await axios.put(
@@ -87,7 +104,6 @@ const CarritoCompras = () => {
         }
     };
 
-    // Eliminar producto del carrito
     const removeItemFromCart = async (itemId) => {
         try {
             await axios.delete(`${apiUrl}/cart-items/${itemId}`, { headers });
@@ -100,21 +116,17 @@ const CarritoCompras = () => {
         }
     };
 
-    // Eliminar el carrito
     const deleteCart = async () => {
         try {
             if (!cart) {
                 throw new Error('No hay carrito para eliminar.');
             }
 
-            // Eliminar todos los cart_items del carrito actual
             await Promise.all(items.map(async (item) => {
                 await axios.delete(`${apiUrl}/cart-items/${item.id}`, { headers });
             }));
 
-            // Limpiar la lista de items en el estado local
             setItems([]);
-
             setSuccess('Productos eliminados del carrito.');
         } catch (error) {
             setError('Error al eliminar productos del carrito.');
@@ -122,7 +134,6 @@ const CarritoCompras = () => {
         }
     };
 
-    // Generar orden
     const generateOrder = async () => {
         try {
             if (!cart) {
@@ -235,3 +246,4 @@ const CarritoCompras = () => {
 };
 
 export default CarritoCompras;
+

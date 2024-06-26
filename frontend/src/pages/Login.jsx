@@ -3,13 +3,12 @@ import axios from 'axios';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode'; // Importa jwt-decode aquí también si planeas verificar el token.
 
 const Login = ({ setLoggedInUser }) => {
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {

@@ -7,15 +7,15 @@ const HistorialOrdenes: React.FC = () => {
     const { loggedInUser } = useContext(AuthContext);
 
     // Mapeo de estados
-    const stateMappings = {
-        'new': 'Orden Generada',
-        'processing': 'Orden Generada',
-        'shipped': 'En Transporte',
-        'delivered': 'Finalizada',
-        'canceled': 'Orden Cancelada'
-    };
-
     useEffect(() => {
+        const stateMappings = {
+            'new': 'Orden Generada',
+            'processing': 'Orden Generada',
+            'shipped': 'En Transporte',
+            'delivered': 'Finalizada',
+            'canceled': 'Orden Cancelada'
+        };
+
         const fetchOrders = async () => {
             try {
                 if (loggedInUser) {
