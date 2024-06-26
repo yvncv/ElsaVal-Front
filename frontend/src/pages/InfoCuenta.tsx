@@ -80,7 +80,14 @@ const Detalles: React.FC = () => {
           <Form.Group className='GroupForm'>
             <Form.Group className='SubGroup'>
               <Form.Label className='lblForm'>Número de teléfono:</Form.Label>
-              <Button className="btnEditar" title={title} onClick={handleClick}>
+              {
+                cancelarEdicion===false &&(
+                  <Button className="btnCancelar" title='Cancelar edición' onClick={()=>{handleClick("btnCancelar")}}>
+                    <FontAwesomeIcon icon={faXmark}/>
+                  </Button>
+                )
+              }
+              <Button className="btnEditar" title={title} onClick={()=>{handleClick("btnEditar")}}>
                 <FontAwesomeIcon icon={icon} />
               </Button>
             </Form.Group>

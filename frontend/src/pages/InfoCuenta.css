@@ -25,9 +25,10 @@
 .SubGroup{
     display: flex;
     flex-direction: row;
+    gap:10px;
 }
 
-.btnEditar,.btnCambiarContraseña{/*boton*/
+.btnEditar,.btnCambiarContraseña,.btnCancelar{/*boton*/
     border-radius: 3px;
     font-weight: 400;
     border-color: #752728;
@@ -40,13 +41,13 @@
     align-self: flex-end!important;
 }
 
-.btnEditar:hover,.btnCambiarContraseña:hover{
+.btnEditar:hover,.btnCambiarContraseña:hover, .btnCancelar:hover{
     background-color: #752728;
     border-color: #752728;
     color: white!important;
 }
 
-.btnEditar:active,.btnCambiarContraseña:active{
+.btnEditar:active,.btnCambiarContraseña:active, .btnCancelar:active{
     background-color: #6F2A2D!important;
     border-color: #6F2A2D!important;
 }
