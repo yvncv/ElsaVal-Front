@@ -17,6 +17,9 @@
 .SeccionDatosPersonales,.SeccionContra{
     border:solid 1px #E8E8E8;
     padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 .GroupForm{
     display: flex;
@@ -36,7 +39,7 @@
     gap:10px;
 }
 
-.btnEditar,.btnCambiarContraseña,.btnCancelar{/*boton*/
+.btnEditar,.btnCambiarContraseña,.btnCancelar,.btnVerContra,.btnConfirmar{/*boton*/
     border-radius: 3px;
     font-weight: 400;
     border-color: #752728;
@@ -48,19 +51,22 @@
 .btnCambiarContraseña{
     align-self: flex-end!important;
 }
+.btnConfirmar{
+    align-self: flex-end!important;
+}
 
-.btnEditar:hover,.btnCambiarContraseña:hover, .btnCancelar:hover{
+.btnEditar:hover,.btnCambiarContraseña:hover, .btnCancelar:hover,.btnVerContra:hover,.btnConfirmar:hover{
     background-color: #752728;
     border-color: #752728;
     color: white!important;
 }
 
-.btnEditar:active,.btnCambiarContraseña:active, .btnCancelar:active{
+.btnEditar:active,.btnCambiarContraseña:active, .btnCancelar:active,.btnVerContra:active,.btnConfirmar:active{
     background-color: #6F2A2D!important;
     border-color: #6F2A2D!important;
 }
 
-.txtDireccion,.txtTelefono,.txtOldContra{
+.txtDireccion,.txtTelefono,.txtContra{
     border-radius: 0;
     font-size: 15px;
     color: #5E3F44!important;
@@ -73,7 +79,7 @@
     font-style: italic;
 }
 
-.txtDireccion:focus,.txtTelefono:focus{
+.txtDireccion:focus,.txtTelefono:focus,.txtContra:focus{
     outline: none!important;
     border-color: #752728;
     -webkit-box-shadow: none !important; /* Eliminar el contorno azul en Webkit (Chrome, Safari) */

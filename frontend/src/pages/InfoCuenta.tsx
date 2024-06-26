@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext,useRef } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Client } from '../types/Client';
 import { Form, Button, FormLabel } from 'react-bootstrap';
@@ -16,6 +16,8 @@ const Detalles: React.FC = () => {
     const [cancelarEdicion, setCancelarEdicion]=useState(true);
     const [cambiarContra,setCambiarContra]=useState(false);
     const [verContra,setVerContra]=useState("password");
+    const [verNewContra,setVerNewContra]=useState("password");
+
     useEffect(() => {
       if (loggedInUser) {
         const clientId = loggedInUser.id;
@@ -75,7 +77,19 @@ const Detalles: React.FC = () => {
             break;
       }
     }
-
+    const handleMouse=(estado)=>{
+      switch(estado){
+        case "presionado"://mouseDown
+          setVerNewContra("text")
+        break;
+        case "suelto"://mouseUp
+          setVerNewContra("password")
+        break; 
+        case "dejado"://mouseLeave
+          setVerNewContra("password")
+        break;
+      }
+    }
     return (
       <>
         <Form className='FormInfo'>
@@ -127,9 +141,9 @@ const Detalles: React.FC = () => {
               <Form.Group className='SeccionContra'>
                 <Form.Label className='lblSubtitleForm'>Cambiar Contraseña</Form.Label>
                 <FormLabel className="lblForm">Contraseña actual</FormLabel>
-                <Form.Group className='SubGroup'>
+                <Form.Group className='SubGroup'>{/*contrasena actual*/}
                   <Form.Control
-                    className="txtOldContra"
+                    className="txtContra"
                     type={verContra}
                     disabled={true}
                     defaultValue={"micontraseña"}
@@ -138,7 +152,31 @@ const Detalles: React.FC = () => {
                     <FontAwesomeIcon icon={faEye}/>
                   </Button>
                 </Form.Group>
-
+                
+                <FormLabel className="lblForm">Nueva contraseña</FormLabel>
+                <Form.Group className='SubGroup'>{/*nueva contrasena*/}
+                  <Form.Control
+                    className="txtContra"
+                    type={verNewContra}
+                    disabled={false}
+                    placeholder='Escribe la nueva contraseña'
+                  />
+                   <Form.Control
+                    className="txtContra"
+                    type={verNewContra}
+                    disabled={false}
+                    placeholder='Vuelva a escribir la contraseña'
+                  />
+                  <Button 
+                  title='Ver' 
+                  className="btnVerContra" 
+                  onMouseDown={()=>{handleMouse("presionado")}}
+                  onMouseUp={()=>{handleMouse("suelto")}}
+                  onMouseLeave={()=>{handleMouse("dejado")}}>
+                    <FontAwesomeIcon icon={faEye}/>
+                  </Button>
+                </Form.Group>
+                <Button className="btnConfirmar">Confirmar</Button>
               </Form.Group>
             )
           }
