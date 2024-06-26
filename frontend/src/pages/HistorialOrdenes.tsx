@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Order } from '../types/Order';
 import { AuthContext } from '../context/AuthContext';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import OrderDetailsPDF from '../components/OrderDetailsPDF.tsx';
 
 const HistorialOrdenes: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
@@ -39,6 +41,25 @@ const HistorialOrdenes: React.FC = () => {
         fetchOrders();
     }, [loggedInUser]);
 
+    // Función para formatear el costo de envío
+    const formatDeliveryPrice = (deliveryPrice: string | null): string => {
+        if (!deliveryPrice || isNaN(parseFloat(deliveryPrice))) {
+            return 'S/. 00.00';
+        } else {
+            return `S/. ${parseFloat(deliveryPrice).toFixed(2)}`;
+        }
+    };
+
+    // Función para formatear el subtotal y el costo total
+    const formatCurrency = (amount: string): string => {
+        const numericAmount = parseFloat(amount);
+        if (isNaN(numericAmount)) {
+            return 'S/. 00.00';
+        } else {
+            return `S/. ${numericAmount.toFixed(2)}`;
+        }
+    };
+
     return (
         <div>
             <h1>Historial de Órdenes</h1>
@@ -58,9 +79,12 @@ const HistorialOrdenes: React.FC = () => {
                                     </li>
                                 ))}
                             </ul>
-                            <p><strong>Subtotal:</strong> {order.subtotal_price}</p>
-                            <p><strong>Costo del Envío:</strong> {order.delivery_price}</p>
-                            <p><strong>Costo Total del Pedido:</strong> {order.total_price}</p>
+                            <p><strong>Subtotal: </strong>{formatCurrency(order.subtotal_price)}</p>
+                            <p><strong>Costo del Envío: </strong>{formatDeliveryPrice(order.delivery_price)}</p>
+                            <p><strong>Costo Total del Pedido: </strong>{formatCurrency(order.total_price)}</p>
+                            <PDFDownloadLink document={<OrderDetailsPDF order={order} />} fileName={`orden_${order.id}.pdf`}>
+                              {({ blob, url, loading, error }) => (loading ? 'Generando PDF...' : 'Descargar PDF')}
+                            </PDFDownloadLink>
                             <hr />
                         </div>
                     ))
@@ -71,3 +95,6 @@ const HistorialOrdenes: React.FC = () => {
 };
 
 export default HistorialOrdenes;
+
+
+
