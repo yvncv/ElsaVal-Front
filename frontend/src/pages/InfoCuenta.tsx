@@ -4,7 +4,7 @@ import { Client } from '../types/Client';
 import {Form,Button} from 'react-bootstrap';
 import './InfoCuenta.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faPenToSquare,faCheck} from '@fortawesome/free-solid-svg-icons';
+import {faPenToSquare,faCheck,faXmark} from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -15,6 +15,8 @@ const Detalles: React.FC = () => {
   const [disabled,setDisabled]=useState(true);
   const [icon, setIcon]=useState(faPenToSquare);
   const [title,setTitle]=useState("Editar");
+  const [cancelarEdicion, setCancelarEdicion]=useState(true);
+  const [cambiarContra,setCambiarContra]=useState(false);
   useEffect(() => {
     if (loggedInUser) {
       const clientId = loggedInUser.id;
@@ -38,17 +40,32 @@ const Detalles: React.FC = () => {
   const { user,contact_number,street_address } = clientData;
   const userName = user.name;
   const userEmail = user.email;
-
-  const handleClick=()=>{
-    setDisabled(!disabled);
-    if(disabled){//esta para editar
-      setIcon(faCheck);
-      setTitle("Guardar cambios");
-    }
-    else{//se cerro
-      setIcon(faPenToSquare);
-      setTitle("Editar");
-      alert("se guardaron los cambios");//simula ser la logica de guardado de cambios
+  const handleClick=(nombreBoton)=>{
+    switch (nombreBoton){
+        case "btnEditar":
+          setDisabled(!disabled);
+          setCancelarEdicion(!cancelarEdicion)
+          if(disabled){//esta para editar
+            setIcon(faCheck);
+            setTitle("Guardar cambios");
+          }
+          else{//se cerro
+            setIcon(faPenToSquare);
+            setTitle("Editar");
+            alert("se guardaron los cambios");//simula ser la logica de guardado de cambios
+          }
+          break;
+        case "btnCancelar":
+          setCancelarEdicion(!cancelarEdicion);
+          setDisabled(!disabled);
+          setIcon(faPenToSquare);
+          setTitle("Editar");
+          break;
+        case "btnCambiarContraseña":
+          setCambiarContra(!cambiarContra);
+          break;
+        default:
+          break;
     }
   }
   return (
@@ -64,7 +81,14 @@ const Detalles: React.FC = () => {
         <Form.Group className='GroupForm'>
           <Form.Group className='SubGroup'>
             <Form.Label className='lblForm'>Número de teléfono:</Form.Label>
-            <Button className="btnEditar" title={title} onClick={handleClick}>
+            {
+              cancelarEdicion===false &&(
+                <Button className="btnCancelar" title="Cancelar edición" onClick={()=>{handleClick("btnCancelar")}}>
+                  <FontAwesomeIcon icon={faXmark}/>
+                </Button>
+              )
+            }
+            <Button className="btnEditar" title={title} onClick={()=>{handleClick("btnEditar")}}>
               <FontAwesomeIcon icon={icon}/>
             </Button>
           </Form.Group>
@@ -74,7 +98,6 @@ const Detalles: React.FC = () => {
           type="text"
           placeholder='Ejm: 994256741'
           disabled={disabled}
-          
           >
             {contact_number}
           </Form.Control>
@@ -88,6 +111,7 @@ const Detalles: React.FC = () => {
             {street_address}
           </Form.Control>
         </Form.Group>
+        <Button className="btnCambiarContraseña" onClick={()=>{handleClick("btnCambiarContraseña")}}>Cambiar contraseña</Button>
       </Form>
     </>
   );
