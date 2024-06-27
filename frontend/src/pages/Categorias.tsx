@@ -78,19 +78,6 @@ const Categorias = () => {
                         </Offcanvas.Header>
                         <Offcanvas.Body className="canvas-body">
                             Seleccione una categoria
-                            {/*<select
-                                className="categorias-select"
-                                value={categoriaSeleccionada || ''}
-                                onChange={handleSelectChange}
-                            >
-                                <option value="" disabled>Selecciona una categoría</option>
-                                <option className="categorias-option" key={0} value={0}>Todo</option>
-                                {categorias.map((categoria) => (
-                                    <option className="categorias-option" key={categoria.id} value={categoria.id}>
-                                        {categoria.name}
-                                    </option>
-                                ))}
-                            </select>*/}
                             <Form.Select 
                                 className="categorias-select"
                                 value={categoriaSeleccionada || ''}
@@ -128,6 +115,7 @@ const Categorias = () => {
                                 descripcion={producto.description}
                                 category={producto.category.name}
                                 material={producto.material.name}
+                                stock={producto.stock}
                             />
                         ))}
                     </div>

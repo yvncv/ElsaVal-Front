@@ -36,7 +36,7 @@ const CarritoCompras = () => {
         };
 
         fetchCart();
-    }, [token,headers]);
+    }, [token, headers]);
 
     useEffect(() => {
         const fetchClientAddress = async () => {
@@ -128,9 +128,21 @@ const CarritoCompras = () => {
 
             setItems([]);
             setSuccess('Productos eliminados del carrito.');
+            setError('');
         } catch (error) {
             setError('Error al eliminar productos del carrito.');
             console.error('Error al eliminar productos del carrito:', error);
+        }
+    };
+
+    const checkStock = async (productId, quantity) => {
+        try {
+            const response = await axios.get(`https://elsaval.com.pe/api/elsaval/products/${productId}`, { headers });
+            const productData = response.data.data;
+            return quantity <= productData.stock;
+        } catch (error) {
+            console.error('Error al verificar el stock del producto:', error);
+            return false;
         }
     };
 
@@ -144,9 +156,19 @@ const CarritoCompras = () => {
                 throw new Error('Usuario no autenticado.');
             }
 
+            let orderStatus = 'processing';
+
+            for (const item of items) {
+                const isStockAvailable = await checkStock(item.product_id, item.quantity);
+                if (!isStockAvailable) {
+                    orderStatus = 'new';
+                    break;
+                }
+            }
+
             const response = await axios.post(`${apiUrl}/elsaval/orders`, {
                 client_id: loggedInUser.id,
-                status: "new",
+                status: orderStatus,
                 delivery_price: null,
                 discount: null,
                 street_address: deliveryAddress,
@@ -156,8 +178,18 @@ const CarritoCompras = () => {
                 })),
             }, { headers });
 
-            setSuccess('Orden generada correctamente.');
             console.log('Orden generada:', response.data);
+
+            // Mostrar mensaje de éxito dependiendo del estado de la orden
+            if (orderStatus === 'new') {
+                setSuccess('Orden de Reserva generada correctamente.');
+            } else {
+                setSuccess('Orden generada correctamente.');
+            }
+
+            // Eliminar los productos del carrito después de generar la orden
+            deleteCart();
+
         } catch (error) {
             setError('Error al generar la orden.');
             console.error('Error al generar la orden:', error);
@@ -246,4 +278,6 @@ const CarritoCompras = () => {
 };
 
 export default CarritoCompras;
+
+
 

@@ -6,10 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import './Producto.css';
 
-const Producto = ({ id, nombre, imagenes, precio, descripcion, category, material }) => {
+const Producto = ({ id, nombre, imagenes, precio, descripcion, category, material, stock }) => {
     const apiUrl = 'https://elsaval.com.pe/api';
 
     const [cantidad, setCantidad] = useState(1);
+    const [reservaActiva, setReservaActiva] = useState(false);
 
     const addToCart = async (productId, quantity, price) => {
         try {
@@ -43,12 +44,35 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
     };
 
     const incrementCantidad = () => {
-        setCantidad(cantidad + 1);
+        if (reservaActiva) {
+            if (cantidad < 99) {
+                setCantidad(cantidad + 1);
+            }
+        } else {
+            if (cantidad < stock) {
+                setCantidad(cantidad + 1);
+            } else {
+                setReservaActiva(true);
+                setCantidad(cantidad + 1);
+            }
+        }
     };
 
     const decrementCantidad = () => {
         if (cantidad > 1) {
             setCantidad(cantidad - 1);
+            if (reservaActiva && cantidad - 1 <= stock) {
+                setReservaActiva(false);
+            }
+        }
+    };
+
+    const handleReserva = async () => {
+        try {
+            await addToCart(id, cantidad, precio);
+        } catch (error) {
+            console.error('Error al reservar producto:', error);
+            alert('Error al reservar producto.');
         }
     };
 
@@ -72,6 +96,7 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
                     <Card.Text>{category}</Card.Text>
                     <Card.Text>{material}</Card.Text>
                     <Card.Text>Precio: S./{precio}</Card.Text>
+                    <Card.Text>Stock Disponible: {stock}</Card.Text>
                     <div className="d-flex align-items-center justify-content-between">
                         <div>
                             <Button variant="outline-secondary" size="sm" onClick={decrementCantidad}>
@@ -82,9 +107,28 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
                                 +
                             </Button>
                         </div>
-                        <Button title="Añadir al Carrito" variant="primary" className='btn_ver_Detalles' onClick={() => addToCart(id, cantidad, precio)}>
-                            <FontAwesomeIcon icon={faCartPlus}/>
-                        </Button>
+                        <div className="d-flex align-items-center">
+                            <Button 
+                                title="Añadir al Carrito" 
+                                variant="primary" 
+                                className='btn_ver_Detalles' 
+                                onClick={() => addToCart(id, cantidad, precio)}
+                                disabled={reservaActiva}
+                            >
+                                <FontAwesomeIcon icon={faCartPlus}/>
+                            </Button>
+                            {reservaActiva && (
+                                <Button 
+                                    title="Reservar" 
+                                    variant="warning" 
+                                    className='btn_reservar' 
+                                    onClick={handleReserva}
+                                    style={{ marginLeft: '10px' }}
+                                >
+                                    Reservar
+                                </Button>
+                            )}
+                        </div>
                     </div>
                 </Card.Body>
             </Card>
@@ -93,3 +137,6 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
 };
 
 export default Producto;
+
+
+
