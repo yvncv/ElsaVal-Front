@@ -5,7 +5,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import OrderDetailsPDF from '../components/OrderDetailsPDF.tsx';
 import OrdenesCard from '../components/OrdenesCard.tsx';
 import './HistorialOrdenes.css';
-const HistorialOrdenes: React.FC = () => {
+const HistorialOrdenes = () => {
     const [orders, setOrders] = useState<Order[]>([]);
     const { loggedInUser } = useContext(AuthContext);
 

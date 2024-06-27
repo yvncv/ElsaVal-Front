@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import {Button,Card } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import './OrdenesCard.css';
 function OrdenesCard(props){
+    const navigate = useNavigate();
     //estados
     const [estadoClassName,setEstadoClassName]=useState("");
     //useeffect
@@ -27,6 +29,9 @@ function OrdenesCard(props){
         setEstadoClassName(className);
     }, [props.orderStatus]); // El efecto se ejecutará cuando `props.orderStatus` cambie
 
+    const handleClick= ()=>{
+        navigate(`/orden/${props.id}`, { state: { order: props } });
+    };
     return(
         <Card key={props.id} className='CardContainer'>
             <Card.Header className={"Orden"+estadoClassName+"Header"}>Estado de Orden: {props.orderStatus}</Card.Header>
@@ -35,7 +40,7 @@ function OrdenesCard(props){
                 <Card.Text>
                     Precio total: {props.orderTotal}
                 </Card.Text>
-                <Button className='btnDetalles'>Detalles</Button>
+                <Button className='btnDetalles' onClick={handleClick}>Detalles</Button>
             </Card.Body>
         </Card>
     );

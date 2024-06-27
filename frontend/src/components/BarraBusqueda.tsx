@@ -71,7 +71,7 @@ const BarraBusqueda: React.FC<Props> = ({ loggedInUser }) => {
                     <FontAwesomeIcon title="Mi Cuenta" icon={faUser} className='IconosNavbar'/>
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="DropdownMenu">
-                    <Dropdown.Item as={Link} to="/Detalles" className="DropdownItem">Información de la Cuenta</Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/Info-Cuenta" className="DropdownItem">Información de la Cuenta</Dropdown.Item>
                     <Dropdown.Item as={Link} to="/HistorialOrdenes" className="DropdownItem">Historial de Órdenes</Dropdown.Item>
                     <Dropdown.Item onClick={handleLogout} className="DropdownItem">Cerrar Sesión</Dropdown.Item>
                   </Dropdown.Menu>

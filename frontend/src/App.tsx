@@ -8,10 +8,12 @@ import LandingPage from './pages/LandingPage.tsx';
 import Categorias from './pages/Categorias.tsx';
 import Acercade from './pages/Acercade.tsx';
 import CarritoCompras from './pages/CarritoCompras';
-import './App.css';
-import { DecodedToken } from './types/DecodedToken.ts';
 import InfoCuenta from './pages/InfoCuenta.tsx';
 import HistorialOrdenes from './pages/HistorialOrdenes.tsx';
+import DetallesOrden from './pages/DetallesOrden.tsx';
+import './App.css';
+import { DecodedToken } from './types/DecodedToken.ts';
+
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState<DecodedToken['user'] | null>(null);
@@ -46,8 +48,11 @@ function App() {
             element={loggedInUser ? <Navigate to="/" replace /> : <Login setLoggedInUser={setLoggedInUser} />}
           />
           <Route path="/register" element={<Registro />} />
-          <Route path="/Detalles" element={<InfoCuenta />} />
+          <Route path="/Info-Cuenta" element={<InfoCuenta />} />
           <Route path="/HistorialOrdenes" element={<HistorialOrdenes />} />
+          <Route 
+            path="/orden/:id" 
+            element={loggedInUser?<DetallesOrden /> : <Navigate to="/login" replace />} />
         </Routes>
       </div>
     </Router>
