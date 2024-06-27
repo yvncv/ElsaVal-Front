@@ -1,14 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Order } from '../types/Order';
 import { AuthContext } from '../context/AuthContext';
-
 import OrdenesCard from '../components/OrdenesCard.tsx';
 import './HistorialOrdenes.css';
+
 const HistorialOrdenes = () => {
     const [orders, setOrders] = useState<Order[]>([]);
     const { loggedInUser } = useContext(AuthContext);
 
-    // Mapeo de estados
     useEffect(() => {
         const stateMappings = {
             'new': 'Generada',
@@ -27,11 +26,21 @@ const HistorialOrdenes = () => {
                         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
                     });
                     const data = await response.json();
-                    const transformedOrders = data.data.map((order: Order) => ({
-                        ...order,
+
+                    const transformedOrders = data.data.map((order) => ({
+                        id: order.id,
                         status: stateMappings[order.status.toLowerCase()] || order.status,
+                        products: order.products.map(product => ({
+                            name: product.product.name,
+                            quantity: product.quantity,
+                            unitPrice: product.unit_price,
+                            totalPrice: product.total_price
+                        })),
+                        subtotal_price: order.subtotal_price,
+                        delivery_price: order.delivery_price,
+                        total_price: order.total_price
                     }));
-                    setOrders(transformedOrders);//las ordenes ya estan en la variable orders
+                    setOrders(transformedOrders);
                 }
             } catch (error) {
                 console.error('Error al obtener las órdenes del cliente', error);
@@ -39,7 +48,7 @@ const HistorialOrdenes = () => {
         };
 
         fetchOrders();
-    }, [loggedInUser]);//este metodo se debe quedar aqui entonces
+    }, [loggedInUser]);
 
     return (
         <div className='OrderContainer'>
@@ -49,45 +58,22 @@ const HistorialOrdenes = () => {
                     orders.length === 0 ? (
                         <p>No cuenta con ninguna orden registrada</p>
                     ) : (
-                        orders.map(
-                            order => (
-                                <OrdenesCard 
+                        orders.map(order => (
+                            <OrdenesCard 
+                                key={order.id}
                                 id={order.id}
                                 orderStatus={order.status}
-                                products={order.products}//name,quantity, unitprice,totalprice para cada uno
+                                products={order.products}
                                 orderSubtotal={order.subtotal_price}
                                 deliveryPrice={order.delivery_price}
                                 orderTotal={order.total_price}
-                                />
-                            )
-                        )
+                            />
+                        ))
                     )
                 }
             </div>
         </div>
-                                                   /*<div key={order.id}>
-                            <p><strong>Usuario:</strong> {order.client.user.name}</p>
-                            <p><strong>Estado:</strong> {order.status}</p>
-                            <p><strong>Productos:</strong></p>
-                            <ul>
-                                {order.products.map(product => (
-                                    <li key={product.id}>
-                                        {product.product.name} - Cantidad: {product.quantity} - Precio Unitario: {product.unit_price} - Precio Total: {product.total_price}
-                                    </li>
-                                ))}
-                            </ul>
-                            <p><strong>Subtotal: </strong>{formatCurrency(order.subtotal_price)}</p>
-                            <p><strong>Costo del Envío: </strong>{formatDeliveryPrice(order.delivery_price)}</p>
-                            <p><strong>Costo Total del Pedido: </strong>{formatCurrency(order.total_price)}</p>
-                            <PDFDownloadLink document={<OrderDetailsPDF order={order} />} fileName={`orden_${order.id}.pdf`}>
-                              {({ blob, url, loading, error }) => (loading ? 'Generando PDF...' : 'Descargar PDF')}
-                            </PDFDownloadLink>
-                            <hr />
-                        </div>*/
     );
 };
 
 export default HistorialOrdenes;
-
-
-

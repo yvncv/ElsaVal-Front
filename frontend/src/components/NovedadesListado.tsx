@@ -8,7 +8,7 @@ function Novedades() {
       text: 'Calma y paz, 2 palabras que resumen perfectamente este bolso. Disponible en Verano 2024!',
       imageSrc: 'https://i.ytimg.com/vi/UIH2oYw4m7Q/maxresdefault.jpg',
       items: ['S/. 25.50'],
-      links: [{ href: '#', text: 'Notifícame' }]
+      links: [{ href: '#', text: 'Notifícame!' }]
     },
     {
       title: 'Bolso amarillo patito',

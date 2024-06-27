@@ -1,14 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react';
-import {Button,Card } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './OrdenesCard.css';
-function OrdenesCard(props){
+
+function OrdenesCard({ id, orderStatus, products, orderSubtotal, deliveryPrice, orderTotal }) {
     const navigate = useNavigate();
-    //estados
-    const [estadoClassName,setEstadoClassName]=useState("");
-    //useeffect
+    const [estadoClassName, setEstadoClassName] = useState("");
+
     useEffect(() => {
-        // Define la función para determinar el className según el estado de la orden
         const determinarEstadoClassName = (orderStatus) => {
             switch (orderStatus) {
                 case "Generada":
@@ -24,21 +23,21 @@ function OrdenesCard(props){
             }
         };
 
-        // Llama a la función y actualiza el estado
-        const className = determinarEstadoClassName(props.orderStatus);
+        const className = determinarEstadoClassName(orderStatus);
         setEstadoClassName(className);
-    }, [props.orderStatus]); // El efecto se ejecutará cuando `props.orderStatus` cambie
+    }, [orderStatus]);
 
-    const handleClick= ()=>{
-        navigate(`/orden/${props.id}`, { state: { order: props } });
+    const handleClick = () => {
+        navigate(`/orden/${id}`, { state: { order: { id, orderStatus, products, orderSubtotal, deliveryPrice, orderTotal } } });
     };
-    return(
-        <Card key={props.id} className='CardContainer'>
-            <Card.Header className={"Orden"+estadoClassName+"Header"}>Estado de Orden: {props.orderStatus}</Card.Header>
+
+    return (
+        <Card key={id} className='CardContainer'>
+            <Card.Header className={"Orden" + estadoClassName + "Header"}>Estado de Orden: {orderStatus}</Card.Header>
             <Card.Body>
-                <Card.Title>Orden N°:{props.id}</Card.Title>
+                <Card.Title>Orden N°: {id}</Card.Title>
                 <Card.Text>
-                    Precio total: {props.orderTotal}
+                    Precio total: {orderTotal}
                 </Card.Text>
                 <Button className='btnDetalles' onClick={handleClick}>Detalles</Button>
             </Card.Body>
