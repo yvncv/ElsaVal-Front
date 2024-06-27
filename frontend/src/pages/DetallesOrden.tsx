@@ -1,8 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import OrderDetailsPDF from '../components/OrderDetailsPDF';
 
 const DetallesOrden = () => {
     const location = useLocation();

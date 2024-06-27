@@ -82,7 +82,6 @@ const Categorias = () => {
                                 className="categorias-select"
                                 value={categoriaSeleccionada || ''}
                                 onChange={handleSelectChange}
-                                //aria-label="Default select example"
                             >
                                 <option value="" disabled>Selecciona una categoría</option>
                                 <option className="categorias-option" key={0} value={0}>Todo</option>

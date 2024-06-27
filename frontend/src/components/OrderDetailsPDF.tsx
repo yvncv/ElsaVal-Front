@@ -1,7 +1,6 @@
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 import { Order } from '../types/Order';
-import './OrderDetailsPDF.css';
 
 const styles = StyleSheet.create({
   page: {

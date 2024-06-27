@@ -3,6 +3,8 @@ import { Order } from '../types/Order';
 import { AuthContext } from '../context/AuthContext';
 import OrdenesCard from '../components/OrdenesCard.tsx';
 import './HistorialOrdenes.css';
+import { PDFDownloadLink } from '@react-pdf/renderer'; // Añade la importación de PDFDownloadLink
+import OrderDetailsPDF from '../components/OrderDetailsPDF.tsx'; // Asegúrate de que la ruta esté correctamente ajustada
 
 const HistorialOrdenes = () => {
     const [orders, setOrders] = useState<Order[]>([]);
@@ -26,19 +28,9 @@ const HistorialOrdenes = () => {
                         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
                     });
                     const data = await response.json();
-
-                    const transformedOrders = data.data.map((order) => ({
-                        id: order.id,
+                    const transformedOrders = data.data.map((order: Order) => ({
+                        ...order,
                         status: stateMappings[order.status.toLowerCase()] || order.status,
-                        products: order.products.map(product => ({
-                            name: product.product.name,
-                            quantity: product.quantity,
-                            unitPrice: product.unit_price,
-                            totalPrice: product.total_price
-                        })),
-                        subtotal_price: order.subtotal_price,
-                        delivery_price: order.delivery_price,
-                        total_price: order.total_price
                     }));
                     setOrders(transformedOrders);
                 }
@@ -59,15 +51,20 @@ const HistorialOrdenes = () => {
                         <p>No cuenta con ninguna orden registrada</p>
                     ) : (
                         orders.map(order => (
-                            <OrdenesCard 
-                                key={order.id}
-                                id={order.id}
-                                orderStatus={order.status}
-                                products={order.products}
-                                orderSubtotal={order.subtotal_price}
-                                deliveryPrice={order.delivery_price}
-                                orderTotal={order.total_price}
-                            />
+                            <div key={order.id}>
+                                <OrdenesCard 
+                                    id={order.id}
+                                    orderStatus={order.status}
+                                    products={order.products}
+                                    orderSubtotal={order.subtotal_price}
+                                    deliveryPrice={order.delivery_price}
+                                    orderTotal={order.total_price}
+                                />
+                                <PDFDownloadLink document={<OrderDetailsPDF order={order} />} fileName={`orden_${order.id}.pdf`}>
+                                    {({ blob, url, loading, error }) => (loading ? 'Generando PDF...' : 'Descargar PDF')}
+                                </PDFDownloadLink>
+                                <hr />
+                            </div>
                         ))
                     )
                 }
@@ -77,3 +74,4 @@ const HistorialOrdenes = () => {
 };
 
 export default HistorialOrdenes;
+
