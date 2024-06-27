@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center', // Alinea verticalmente al centro
+    alignItems: 'center',
     marginBottom: 10,
   },
   title: {
@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   logoImage: {
-    width: 100, // Ajusta el ancho de tu imagen según sea necesario
-    height: 'auto', // Altura automática para mantener la proporción
+    width: 100,
+    height: 'auto',
   },
 });
 
@@ -74,17 +74,16 @@ const OrderDetailsPDF = ({ order }: { order: Order }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
-        {/* Encabezado con nombre y RUC */}
         <View style={styles.titleContainer}>
           <Image src={"/images/ElsaVal_Logo.png"} style={styles.logoImage} />
           <Text style={styles.title}>RUC: 12345678901</Text>
         </View>
-
-        {/* Detalles del cliente */}
-        <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Nombres y Apellidos:</Text> {order.client.user.name}</Text>
-        <Text style={styles.text}><Text style={{ fontWeight: 'bold' }}>Correo Electronico:</Text> {order.client.user.email}</Text>
-
-        {/* Productos */}
+        <Text style={styles.text}>
+          <Text style={{ fontWeight: 'bold' }}>Nombres y Apellidos:</Text> {order.client.user.name}
+        </Text>
+        <Text style={styles.text}>
+          <Text style={{ fontWeight: 'bold' }}>Correo Electrónico:</Text> {order.client.user.email}
+        </Text>
         <Text style={styles.subtitle}>Productos:</Text>
         <View style={styles.tableHeader}>
           <Text style={[styles.tableCell, { fontWeight: 'bold' }]}>Nombre Producto</Text>
@@ -100,15 +99,13 @@ const OrderDetailsPDF = ({ order }: { order: Order }) => (
             <Text style={[styles.tableCell, styles.alignRight]}>S/ {product.total_price}</Text>
           </View>
         ))}
-
-        {/* Subtotal, Costo de Envío y Costo Total dentro de la tabla */}
         <View style={styles.tableRow}>
           <Text style={[styles.tableCell, { fontWeight: 'bold' }]}>Subtotal:</Text>
           <Text style={[styles.tableCell, styles.alignRight]}>S/ {order.subtotal_price}</Text>
         </View>
         <View style={styles.tableRow}>
           <Text style={[styles.tableCell, { borderLeftWidth: 0, fontWeight: 'bold' }]}>Costo del Envío:</Text>
-          <Text style={[styles.tableCell, styles.alignRight]}>S/ {order.delivery_price}</Text>
+          <Text style={[styles.tableCell, styles.alignRight]}>S/ {order.delivery_price || 0}</Text>
         </View>
         <View style={styles.tableRow}>
           <Text style={[styles.tableCell, { fontWeight: 'bold' }]}>Costo Total del Pedido:</Text>
@@ -120,16 +117,3 @@ const OrderDetailsPDF = ({ order }: { order: Order }) => (
 );
 
 export default OrderDetailsPDF;
-
-
-
-
-
-
-
-
-
-
-
-
-

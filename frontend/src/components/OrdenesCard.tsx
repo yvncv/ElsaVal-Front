@@ -3,7 +3,7 @@ import { Button, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './OrdenesCard.css';
 
-function OrdenesCard({ id, orderStatus, products, orderSubtotal, deliveryPrice, orderTotal }) {
+function OrdenesCard({order}) {
     const navigate = useNavigate();
     const [estadoClassName, setEstadoClassName] = useState("");
 
@@ -23,21 +23,21 @@ function OrdenesCard({ id, orderStatus, products, orderSubtotal, deliveryPrice, 
             }
         };
 
-        const className = determinarEstadoClassName(orderStatus);
+        const className = determinarEstadoClassName(order.status);
         setEstadoClassName(className);
-    }, [orderStatus]);
+    }, [order.status]);
 
     const handleClick = () => {
-        navigate(`/orden/${id}`, { state: { order: { id, orderStatus, products, orderSubtotal, deliveryPrice, orderTotal } } });
+        navigate(`/orden/${order.id}`, {state:{order}});
     };
 
     return (
-        <Card key={id} className='CardContainer'>
-            <Card.Header className={"Orden" + estadoClassName + "Header"}>Estado de Orden: {orderStatus}</Card.Header>
+        <Card key={order.id} className='CardContainer'>
+            <Card.Header className={"Orden" + estadoClassName + "Header"}>Estado de Orden: {order.status}</Card.Header>
             <Card.Body>
-                <Card.Title>Orden N°: {id}</Card.Title>
+                <Card.Title>Orden N°: {order.id}</Card.Title>
                 <Card.Text>
-                    Precio total: {orderTotal}
+                    Precio total: {order.total_price}
                 </Card.Text>
                 <Button className='btnDetalles' onClick={handleClick}>Detalles</Button>
             </Card.Body>
