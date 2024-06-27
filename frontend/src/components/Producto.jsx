@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Button, Carousel } from 'react-bootstrap';
 import axios from 'axios';
@@ -11,6 +11,14 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
 
     const [cantidad, setCantidad] = useState(1);
     const [reservaActiva, setReservaActiva] = useState(false);
+    const [stockInicial, setStockInicial] = useState(stock);
+
+    useEffect(() => {
+        setStockInicial(stock);
+        if (stock === 0) {
+            setReservaActiva(true);
+        }
+    }, [stock]);
 
     const addToCart = async (productId, quantity, price) => {
         try {
@@ -49,7 +57,7 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
                 setCantidad(cantidad + 1);
             }
         } else {
-            if (cantidad < stock) {
+            if (cantidad < stockInicial) {
                 setCantidad(cantidad + 1);
             } else {
                 setReservaActiva(true);
@@ -61,7 +69,7 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
     const decrementCantidad = () => {
         if (cantidad > 1) {
             setCantidad(cantidad - 1);
-            if (reservaActiva && cantidad - 1 <= stock) {
+            if (reservaActiva && cantidad - 1 <= stockInicial) {
                 setReservaActiva(false);
             }
         }
@@ -108,16 +116,18 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
                             </Button>
                         </div>
                         <div className="d-flex align-items-center">
-                            <Button 
-                                title="Añadir al Carrito" 
-                                variant="primary" 
-                                className='btn_ver_Detalles' 
-                                onClick={() => addToCart(id, cantidad, precio)}
-                                disabled={reservaActiva}
-                            >
-                                <FontAwesomeIcon icon={faCartPlus}/>
-                            </Button>
-                            {reservaActiva && (
+                            {!reservaActiva && stockInicial > 0 && (
+                                <Button 
+                                    title="Añadir al Carrito" 
+                                    variant="primary" 
+                                    className='btn_ver_Detalles' 
+                                    onClick={() => addToCart(id, cantidad, precio)}
+                                    disabled={reservaActiva || stockInicial === 0}
+                                >
+                                    <FontAwesomeIcon icon={faCartPlus}/>
+                                </Button>
+                            )}
+                            {(reservaActiva || stockInicial === 0) && (
                                 <Button 
                                     title="Reservar" 
                                     variant="warning" 
@@ -137,6 +147,7 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
 };
 
 export default Producto;
+
 
 
 
