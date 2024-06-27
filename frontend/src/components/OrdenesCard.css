@@ -1,0 +1,21 @@
+.CardContainer{
+    border-radius: 0px;
+    border-color: #752728;
+}
+.btnDetalles{
+    border-radius: 3px;
+    font-weight: 400;
+    border-color: #752728;
+    color:#752728;
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
+.btnDetalles:hover{
+    background-color: #752728;
+    border-color: #752728;
+    color: white!important;
+}
+.btnDetalles:active{
+    background-color: #6F2A2D!important;
+    border-color: #6F2A2D!important;
+}

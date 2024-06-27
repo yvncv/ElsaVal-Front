@@ -3,7 +3,8 @@ import { Order } from '../types/Order';
 import { AuthContext } from '../context/AuthContext';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import OrderDetailsPDF from '../components/OrderDetailsPDF.tsx';
-
+import OrdenesCard from '../components/OrdenesCard.tsx';
+import './HistorialOrdenes.css';
 const HistorialOrdenes: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
     const { loggedInUser } = useContext(AuthContext);
@@ -11,11 +12,11 @@ const HistorialOrdenes: React.FC = () => {
     // Mapeo de estados
     useEffect(() => {
         const stateMappings = {
-            'new': 'Orden Generada',
-            'processing': 'Orden Generada',
+            'new': 'Generada',
+            'processing': 'Generada',
             'shipped': 'En Transporte',
             'delivered': 'Finalizada',
-            'canceled': 'Orden Cancelada'
+            'canceled': 'Cancelada'
         };
 
         const fetchOrders = async () => {
@@ -31,7 +32,7 @@ const HistorialOrdenes: React.FC = () => {
                         ...order,
                         status: stateMappings[order.status.toLowerCase()] || order.status,
                     }));
-                    setOrders(transformedOrders);
+                    setOrders(transformedOrders);//las ordenes ya estan en la variable orders
                 }
             } catch (error) {
                 console.error('Error al obtener las órdenes del cliente', error);
@@ -39,7 +40,7 @@ const HistorialOrdenes: React.FC = () => {
         };
 
         fetchOrders();
-    }, [loggedInUser]);
+    }, [loggedInUser]);//este metodo se debe quedar aqui entonces
 
     // Función para formatear el costo de envío
     const formatDeliveryPrice = (deliveryPrice: string | null): string => {
@@ -60,15 +61,33 @@ const HistorialOrdenes: React.FC = () => {
         }
     };
 
+
+
     return (
-        <div>
+        <div className='OrderContainer'>
             <h1>Historial de Órdenes</h1>
-            <div>
-                {orders.length === 0 ? (
-                    <p>No cuenta con ninguna orden registrada</p>
-                ) : (
-                    orders.map(order => (
-                        <div key={order.id}>
+            <div className='CardsOrdersContainer'>
+                {
+                    orders.length === 0 ? (
+                        <p>No cuenta con ninguna orden registrada</p>
+                    ) : (
+                        orders.map(
+                            order => (
+                                <OrdenesCard 
+                                id={order.id}
+                                orderStatus={order.status}
+                                products={order.products}//name,quantity, unitprice,totalprice para cada uno
+                                orderSubtotal={order.subtotal_price}
+                                deliveryPrice={order.delivery_price}
+                                orderTotal={order.total_price}
+                                />
+                            )
+                        )
+                    )
+                }
+            </div>
+        </div>
+                                                   /*<div key={order.id}>
                             <p><strong>Usuario:</strong> {order.client.user.name}</p>
                             <p><strong>Estado:</strong> {order.status}</p>
                             <p><strong>Productos:</strong></p>
@@ -86,11 +105,7 @@ const HistorialOrdenes: React.FC = () => {
                               {({ blob, url, loading, error }) => (loading ? 'Generando PDF...' : 'Descargar PDF')}
                             </PDFDownloadLink>
                             <hr />
-                        </div>
-                    ))
-                )}
-            </div>
-        </div>
+                        </div>*/
     );
 };
 
