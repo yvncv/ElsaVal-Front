@@ -20,26 +20,29 @@ const HistorialOrdenes = () => {
         const fetchOrders = async () => {
             try {
                 if (loggedInUser) {
-                    const clientId = loggedInUser.id;
-                    const apiUrl = `https://elsaval.com.pe/api/elsaval/orders/?client_id=${clientId}`;
+                    const clientId = loggedInUser.id;//bien
+                    const apiUrl = `https://elsaval.com.pe/api/elsaval/orders/?client_id=${clientId}`;//bien
                     const response = await fetch(apiUrl, {
-                        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-                    });
+                        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },//bien
+                    });//bien
                     const data = await response.json();
-
-                    const transformedOrders = data.data.map((order) => ({
-                        id: order.id,
-                        status: stateMappings[order.status.toLowerCase()] || order.status,
-                        products: order.products.map(product => ({
-                            name: product.product.name,
-                            quantity: product.quantity,
-                            unitPrice: product.unit_price,
-                            totalPrice: product.total_price
-                        })),
-                        subtotal_price: order.subtotal_price,
-                        delivery_price: order.delivery_price,
-                        total_price: order.total_price
-                    }));
+                    
+                    //aca se hace otro rollo
+                    const transformedOrders = data.data.map(
+                        (order:Order) => ({
+                            ...order,
+                            status: stateMappings[order.status.toLowerCase()] || order.status//transforma el campo status
+                            /*products: order.products.map(product => ({
+                                name: product.product.name,
+                                quantity: product.quantity,
+                                unitPrice: product.unit_price,
+                                totalPrice: product.total_price
+                            })),
+                            subtotal_price: order.subtotal_price,
+                            delivery_price: order.delivery_price,
+                            total_price: order.total_price*/
+                        })
+                    );
                     setOrders(transformedOrders);
                 }
             } catch (error) {
