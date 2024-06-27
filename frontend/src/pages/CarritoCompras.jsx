@@ -10,7 +10,9 @@ const CarritoCompras = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [deliveryAddress, setDeliveryAddress] = useState('');
+    const [contactNumber, setContactNumber] = useState('');
     const { loggedInUser } = useContext(AuthContext);
+    const [details, setDetails] = useState('');
 
     const apiUrl = 'https://elsaval.com.pe/api';
     const token = localStorage.getItem('token') ?? '';
@@ -46,15 +48,16 @@ const CarritoCompras = () => {
                     const response = await axios.get(`${apiUrl}/elsaval/clients/${clientId}`, { headers });
                     const clientData = response.data.data;
                     setDeliveryAddress(clientData.street_address);
+                    setContactNumber(clientData.contact_number); // Asumiendo que el campo de contacto es contact_number
                 } catch (error) {
                     console.error('Error al obtener la dirección del cliente:', error);
                 }
             }
         };
-
+    
         fetchClientAddress();
     }, [loggedInUser, headers, apiUrl]);
-
+    
     const addToCart = async (productId, quantity, price) => {
         try {
             if (!token) {
@@ -151,13 +154,13 @@ const CarritoCompras = () => {
             if (!cart) {
                 throw new Error('No hay carrito para generar la orden.');
             }
-
+    
             if (!loggedInUser || !loggedInUser.id) {
                 throw new Error('Usuario no autenticado.');
             }
-
+    
             let orderStatus = 'processing';
-
+    
             for (const item of items) {
                 const isStockAvailable = await checkStock(item.product_id, item.quantity);
                 if (!isStockAvailable) {
@@ -165,34 +168,42 @@ const CarritoCompras = () => {
                     break;
                 }
             }
-
+    
             const response = await axios.post(`${apiUrl}/elsaval/orders`, {
                 client_id: loggedInUser.id,
                 status: orderStatus,
                 delivery_price: null,
                 discount: null,
                 street_address: deliveryAddress,
+                details: details, // Añadido el campo details
+                contact_number: contactNumber,
                 order_products: items.map(item => ({
                     product_id: item.product_id,
                     quantity: item.quantity,
                 })),
             }, { headers });
-
+    
             console.log('Orden generada:', response.data);
-
-            // Mostrar mensaje de éxito dependiendo del estado de la orden
+    
             if (orderStatus === 'new') {
                 setSuccess('Orden de Reserva generada correctamente.');
             } else {
                 setSuccess('Orden generada correctamente.');
             }
-
-            // Eliminar los productos del carrito después de generar la orden
+    
             deleteCart();
-
+    
         } catch (error) {
             setError('Error al generar la orden.');
             console.error('Error al generar la orden:', error);
+        }
+    };
+    
+    const handleContactNumberChange = (e) => {
+        const value = e.target.value;
+        const regex = /^[0-9\b]{0,9}$/;
+        if (regex.test(value)) {
+            setContactNumber(value);
         }
     };
 
@@ -209,6 +220,26 @@ const CarritoCompras = () => {
                     placeholder="Ingresa la dirección de entrega"
                     value={deliveryAddress}
                     onChange={(e) => setDeliveryAddress(e.target.value)}
+                />
+            </Form.Group>
+            <Form.Group className="mt-3">
+                <Form.Label>Número de contacto</Form.Label>
+                <Form.Control
+                    className='Ingresa-numero-txtbox'
+                    type="text"
+                    placeholder="Ingresa el número de contacto"
+                    value={contactNumber}
+                    onChange={handleContactNumberChange}
+                />
+            </Form.Group>
+            <Form.Group className="mt-3">
+                <Form.Label>Detalles</Form.Label>
+                <Form.Control
+                    className='Ingresa-detalles-txtbox'
+                    type="text"
+                    placeholder="Ingresa detalles adicionales"
+                    value={details}
+                    onChange={(e) => setDetails(e.target.value)}
                 />
             </Form.Group>
             <Row className="row-button">
