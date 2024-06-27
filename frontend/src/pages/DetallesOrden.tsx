@@ -20,6 +20,7 @@ const DetallesOrden = () => {
                         <p>RUC: 12345678901</p>
                         <p>Nombres y Apellidos: {order.client.user.name}</p>
                         <p>Correo Electrónico: {order.client.user.email}</p>
+                        <p>N° Celular: {order.contact_number}</p>
                     </div>
                 </div>
                 <Table striped bordered hover className="order-details-table">
@@ -46,6 +47,7 @@ const DetallesOrden = () => {
                     <p>Subtotal: S/ {order.subtotal_price}</p>
                     <p>Precio de Envío: S/ {order.delivery_price ? order.delivery_price : '0.00'}</p>
                     <p>Total: S/ {order.total_price}</p>
+                    <p>Detalles adicionales: {order.details}</p>
                 </div>
                 <PDFDownloadLink style={{backgroundColor: '#87515a', color: 'white', padding: '10px', borderRadius: '15px', textDecoration: 'none'}}
                     document={<OrderDetailsPDF order={order} />}

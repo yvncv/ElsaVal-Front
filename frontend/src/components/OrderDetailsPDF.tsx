@@ -101,6 +101,9 @@ const OrderDetailsPDF = ({ order }: { order: Order }) => {
           <Text style={styles.text}>
             <Text style={{ fontWeight: 'bold' }}>Correo Electrónico:</Text> {order.client.user.email}
           </Text>
+          <Text style={styles.text}>
+            <Text style={{ fontWeight: 'bold' }}>N° Celular:</Text> {order.contact_number}
+          </Text>
           <Text style={styles.subtitle}>Productos:</Text>
           <View style={styles.tableHeader}>
             <Text style={styles.tableCell}>Nombre Producto</Text>
@@ -127,6 +130,10 @@ const OrderDetailsPDF = ({ order }: { order: Order }) => {
           <View style={styles.tableRow}>
             <Text style={styles.tableCell}>Costo Total del Pedido:</Text>
             <Text style={styles.tableCellRight}>S/ {order.total_price}</Text>
+          </View>
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCell}>Detalles adicionales:</Text>
+            <Text style={styles.tableCellRight}>S/ {order.details}</Text>
           </View>
         </View>
       </Page>
