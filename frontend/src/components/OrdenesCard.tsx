@@ -35,7 +35,7 @@ function OrdenesCard(props){
                 <Card.Text>
                     Precio total: {props.orderTotal}
                 </Card.Text>
-                <Button variant="primary" className='btnDetalles'>Detalles</Button>
+                <Button className='btnDetalles'>Detalles</Button>
             </Card.Body>
         </Card>
     );
