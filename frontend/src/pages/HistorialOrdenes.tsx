@@ -30,8 +30,10 @@ const HistorialOrdenes = () => {
                     //aca se hace otro rollo
                     const transformedOrders = data.data.map(
                         (order:Order) => ({
+                            //nuevo
                             ...order,
                             status: stateMappings[order.status.toLowerCase()] || order.status//transforma el campo status
+                            //fin nuevo
                             /*products: order.products.map(product => ({
                                 name: product.product.name,
                                 quantity: product.quantity,
