@@ -1,6 +1,5 @@
 .Navbar{
     background-color: #ffffff !important;
-    /*border-bottom: 4px #000000 !important;*/
     font-family: "Urbanist", sans-serif;
     font-weight:400;
     font-size: 20px!important;
@@ -10,15 +9,25 @@
     flex-grow: 0;
     align-content: right!important;
 }
+.navbar-nav {
+    align-items: center;
+}
 .LinkNav,.IconosNavbar{
     color: #88525B !important;
 }
+.Navbar-dropdown{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
 .DropdownMenu{
     padding: 0;
+    border-radius: 0px;
 }
 .DropdownItem{
     color: #88525B!important;
     transition: background-color 0.3s ease;
+    border-radius: 0px!important;
 }
 .DropdownItem:hover{
     background-color: #88525B;

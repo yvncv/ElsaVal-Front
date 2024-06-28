@@ -1,0 +1,46 @@
+.CartContainer{
+    font-family: "Urbanist", sans-serif!important;
+    margin-bottom: 30px;
+    color: #88525B
+}
+.Ingresa-direccion-txtbox,.Ingresa-numero-txtbox,.Ingresa-detalles-txtbox{
+    border-radius: 0;
+    font-size: 16px;
+    color: #5E3F44!important;
+    transition: border 0.3s !important;
+    outline: none!important;
+}
+.Ingresa-direccion-txtbox::placeholder,.Ingresa-numero-txtbox::placeholder,.Ingresa-detalles-txtbox::placeholder{
+    color:#522A2C;
+    font-style: italic;
+}
+.Ingresa-direccion-txtbox:focus,.Ingresa-numero-txtbox:focus,.Ingresa-detalles-txtbox:focus {
+    border-color: #752728;
+    -webkit-box-shadow: none !important; /* Eliminar el contorno azul en Webkit (Chrome, Safari) */
+    -moz-box-shadow: none !important; /* Eliminar el contorno azul en Firefox */
+    box-shadow: none !important; 
+}
+
+.row-button{
+    margin-top: 12px;
+}
+
+.row-button div{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap:10px
+}
+
+.btn-GenerarOrden{
+    background-color: #09e814;
+    border-color: #09e814;
+}
+.btn-GenerarOrden:hover{
+    background-color: #0ad114;
+    border-color: #0ad114;
+}
+
+.table-sheet{
+    margin-top: 5px;
+}

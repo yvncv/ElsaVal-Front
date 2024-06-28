@@ -1,0 +1,38 @@
+.Card{
+    font-family: "Urbanist", sans-serif;
+    text-align: center;
+    width: 18rem;
+    margin: 1rem;
+    border-color: #5E3F44;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.Card-body{
+    display: flex;
+    flex:none;
+    align-content: center;
+    justify-content: center;
+    padding: 0px;
+}
+
+.pseudobtnVerDetalles{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center; 
+    margin: 10px;
+    height: 40px;
+    width: 90%;
+    border-radius: 3px;
+    font-weight: 400;
+    border-color: #752728;
+    color:#FFFFFF;
+    background-color: #752728;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.pseudobtnVerDetalles:hover{
+    background-color: #6F2A2D;
+}

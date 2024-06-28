@@ -1,0 +1,15 @@
+.OrderContainer{
+    padding:15px;
+    font-family: "Urbanist", sans-serif!important;
+    display: flex!important;
+    flex-direction: column;
+    justify-content: center;
+    color:#88525B;
+}
+
+.CardsOrdersContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}

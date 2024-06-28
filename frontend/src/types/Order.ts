@@ -7,6 +7,8 @@ export type Order = {
         name: string;
         email: string;
       };
+      contact_number: string;
+      street_address: string;
     };
     identifier: string;
     uuid: string;
@@ -15,7 +17,9 @@ export type Order = {
     discount: number | null;
     total_price: string;
     street_address: string;
-    status: string; 
+    status: string;
+    contact_number: string;
+    details: string;
     products: {
       id: number;
       product: {

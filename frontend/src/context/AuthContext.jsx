@@ -9,13 +9,13 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storedUser = localStorage.getItem('loggedInUser');
     if (storedUser) {
-      setLoggedInUser(storedUser);
+      setLoggedInUser(JSON.parse(storedUser));
     }
   }, []);
 
-  const login = (usuario) => {
-    localStorage.setItem('loggedInUser', usuario);
-    setLoggedInUser(usuario);
+  const login = (user) => {
+    localStorage.setItem('loggedInUser', JSON.stringify(user));
+    setLoggedInUser(user);
   };
 
   const logout = () => {
@@ -26,8 +26,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={{ loggedInUser, login, logout }}>
       {children}
+      {console.log(loggedInUser)}
     </AuthContext.Provider>
   );
 };
-
-//carrito

@@ -66,13 +66,13 @@ const BarraBusqueda: React.FC<Props> = ({ loggedInUser }) => {
                   <FontAwesomeIcon icon={faShoppingCart} className='IconosNavbar'/>
                 </Nav.Link>
 
-                <Dropdown align="end">
+                <Dropdown className="Navbar-dropdown" align="end">
                   <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
                     <FontAwesomeIcon title="Mi Cuenta" icon={faUser} className='IconosNavbar'/>
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="DropdownMenu">
-                    <Dropdown.Item as={Link} to="/Detalles" className="DropdownItem">Información de la Cuenta</Dropdown.Item>
-                    <Dropdown.Item as={Link} to="/HistorialCompras" className="DropdownItem">Historial de Compras</Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/Info-Cuenta" className="DropdownItem">Información de la Cuenta</Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/HistorialOrdenes" className="DropdownItem">Historial de Órdenes</Dropdown.Item>
                     <Dropdown.Item onClick={handleLogout} className="DropdownItem">Cerrar Sesión</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

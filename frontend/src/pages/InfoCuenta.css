@@ -1,0 +1,88 @@
+.FormInfo{
+    font-family: "Urbanist", sans-serif!important;
+    display: flex;
+    flex-direction: column;
+    margin-top:20px;
+    margin-bottom: 20px;
+    width: 90%!important;
+    min-height: 600px;
+    height:auto;
+    margin-left: 2%;
+    margin-right: 8%;
+    border: solid 1px #E8E8E8;
+    padding:20px;
+    gap: 10px;
+    color:#88525B;
+}
+.SeccionDatosPersonales,.SeccionContra{
+    border:solid 1px #E8E8E8;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.GroupForm{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+.lblForm{
+    font-size: 21px;
+}
+.lblSubtitleForm{
+    font-size: 26px!important;
+    font-weight: 500;
+}
+.SubGroup{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+}
+
+.btnEditar,.btnCambiarContraseña,.btnCancelar,.btnVerContra,.btnConfirmar{/*boton*/
+    border-radius: 3px;
+    font-weight: 400;
+    border-color: #752728;
+    color:#752728;
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btnCambiarContraseña{
+    align-self: flex-end!important;
+}
+.btnConfirmar{
+    align-self: flex-end!important;
+}
+
+.btnEditar:hover,.btnCambiarContraseña:hover, .btnCancelar:hover,.btnVerContra:hover,.btnConfirmar:hover{
+    background-color: #752728;
+    border-color: #752728;
+    color: white!important;
+}
+
+.btnEditar:active,.btnCambiarContraseña:active, .btnCancelar:active,.btnVerContra:active,.btnConfirmar:active{
+    background-color: #6F2A2D!important;
+    border-color: #6F2A2D!important;
+}
+
+.txtDireccion,.txtTelefono,.txtContra{
+    border-radius: 0;
+    font-size: 15px;
+    color: #5E3F44!important;
+    transition: border 0.3s !important;
+    outline: none!important;
+}
+
+.txtDireccion::placeholder,.txtTelefono::placeholder{
+    color:#522A2C;
+    font-style: italic;
+}
+
+.txtDireccion:focus,.txtTelefono:focus,.txtContra:focus{
+    outline: none!important;
+    border-color: #752728;
+    -webkit-box-shadow: none !important; /* Eliminar el contorno azul en Webkit (Chrome, Safari) */
+    -moz-box-shadow: none !important; /* Eliminar el contorno azul en Firefox */
+    box-shadow: none !important; 
+}

@@ -8,8 +8,12 @@ import LandingPage from './pages/LandingPage.tsx';
 import Categorias from './pages/Categorias.tsx';
 import Acercade from './pages/Acercade.tsx';
 import CarritoCompras from './pages/CarritoCompras';
+import InfoCuenta from './pages/InfoCuenta.tsx';
+import HistorialOrdenes from './pages/HistorialOrdenes.tsx';
+import DetallesOrden from './pages/DetallesOrden.tsx';
 import './App.css';
 import { DecodedToken } from './types/DecodedToken.ts';
+
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState<DecodedToken['user'] | null>(null);
@@ -21,7 +25,7 @@ function App() {
         const decoded: DecodedToken = jwtDecode(token);
         setLoggedInUser(decoded.user);
       } catch (error) {
-        console.error('Error al decodificar el token:', error);
+        console.error('Error al decodificar el token del usuario:', error);
         setLoggedInUser(null);
       }
     }
@@ -44,6 +48,11 @@ function App() {
             element={loggedInUser ? <Navigate to="/" replace /> : <Login setLoggedInUser={setLoggedInUser} />}
           />
           <Route path="/register" element={<Registro />} />
+          <Route path="/Info-Cuenta" element={<InfoCuenta />} />
+          <Route path="/HistorialOrdenes" element={<HistorialOrdenes />} />
+          <Route 
+            path="/orden/:id" 
+            element={loggedInUser?<DetallesOrden /> : <Navigate to="/login" replace />} />
         </Routes>
       </div>
     </Router>
