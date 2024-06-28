@@ -21,7 +21,7 @@ const Acercade= () => {
   );
 };
 
-
+// es un comentario
 export default Acercade;
 
 
