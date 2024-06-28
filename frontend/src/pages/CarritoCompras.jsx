@@ -29,8 +29,11 @@ const CarritoCompras = () => {
                 }
 
                 const response = await axios.get(`${apiUrl}/carts/${localStorage.getItem('cartId')}`, { headers });
-                setCart(response.data.data);
-                setItems(response.data.data.cart_items);
+                const cartData = response.data.data;
+                setCart(cartData);
+                // Fusionar productos con el mismo id
+                const groupedItems = groupItemsByProductId(cartData.cart_items);
+                setItems(groupedItems);
             } catch (error) {
                 setError('Error al obtener el carrito.');
                 console.error('Error al obtener el carrito:', error);
@@ -48,7 +51,7 @@ const CarritoCompras = () => {
                     const response = await axios.get(`${apiUrl}/elsaval/clients/${clientId}`, { headers });
                     const clientData = response.data.data;
                     setDeliveryAddress(clientData.street_address);
-                    setContactNumber(clientData.contact_number); // Asumiendo que el campo de contacto es contact_number
+                    setContactNumber(clientData.contact_number);
                 } catch (error) {
                     console.error('Error al obtener la dirección del cliente:', error);
                 }
@@ -58,6 +61,19 @@ const CarritoCompras = () => {
         fetchClientAddress();
     }, [loggedInUser, headers, apiUrl]);
     
+    const groupItemsByProductId = (items) => {
+        return items.reduce((acc, item) => {
+            const existingItem = acc.find(i => i.product_id === item.product_id);
+            if (existingItem) {
+                existingItem.quantity += item.quantity;
+                existingItem.total = existingItem.quantity * existingItem.price;
+            } else {
+                acc.push({ ...item, total: item.quantity * item.price });
+            }
+            return acc;
+        }, []);
+    };
+
     const addToCart = async (productId, quantity, price) => {
         try {
             if (!token) {
@@ -71,13 +87,25 @@ const CarritoCompras = () => {
                 localStorage.setItem('cartId', cartId);
             }
 
-            await axios.post(`${apiUrl}/cart-items`, {
+            const response = await axios.post(`${apiUrl}/cart-items`, {
                 cart_id: cartId,
                 product_id: productId,
                 quantity: quantity,
                 price: price,
                 total: quantity * price,
             }, { headers });
+
+            const newItem = response.data.data;
+            setItems((prevItems) => {
+                const existingItem = prevItems.find(item => item.product_id === productId);
+                if (existingItem) {
+                    return prevItems.map(item => 
+                        item.product_id === productId ? { ...item, quantity: item.quantity + quantity, total: (item.quantity + quantity) * price } : item
+                    );
+                } else {
+                    return [...prevItems, { ...newItem, total: newItem.quantity * price }];
+                }
+            });
 
             alert('Producto añadido al carrito.');
         } catch (error) {
@@ -88,6 +116,9 @@ const CarritoCompras = () => {
 
     const updateItemInCart = async (itemId, quantity, price) => {
         try {
+            const item = items.find(item => item.id === itemId);
+            if (!item) throw new Error('Producto no encontrado en el carrito.');
+
             await axios.put(
                 `${apiUrl}/cart-items/${itemId}`,
                 {
@@ -97,8 +128,9 @@ const CarritoCompras = () => {
                 },
                 { headers }
             );
+
             setItems(
-                items.map(item => (item.id === itemId ? { ...item, quantity, total: quantity * price } : item))
+                items.map(i => (i.id === itemId ? { ...i, quantity, total: quantity * price } : i))
             );
             setSuccess('Producto actualizado en el carrito.');
         } catch (error) {
@@ -175,7 +207,7 @@ const CarritoCompras = () => {
                 delivery_price: null,
                 discount: null,
                 street_address: deliveryAddress,
-                details: details, // Añadido el campo details
+                details: details,
                 contact_number: contactNumber,
                 order_products: items.map(item => ({
                     product_id: item.product_id,
@@ -309,6 +341,3 @@ const CarritoCompras = () => {
 };
 
 export default CarritoCompras;
-
-
-
