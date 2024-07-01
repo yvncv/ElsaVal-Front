@@ -35,7 +35,7 @@ function OrdenesCard({order}) {
         <Card key={order.id} className='CardContainer'>
             <Card.Header className={"Orden" + estadoClassName + "Header"}>Estado de Orden: {order.status}</Card.Header>
             <Card.Body>
-                <Card.Title>Orden N°: {order.id}</Card.Title>
+                <Card.Title>Orden N° {order.id}</Card.Title>
                 <Card.Text>
                     Precio total: {order.total_price}
                 </Card.Text>

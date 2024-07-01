@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import './Producto.css';
 
-const Producto = ({ id, nombre, imagenes, precio, descripcion, category, material, stock }) => {
+const Producto = ({ id, nombre, imagenes, precio, descripcion, category, material, stock, onError, onSuccess}) => {
     const apiUrl = 'https://elsaval.com.pe/api';
 
     const [cantidad, setCantidad] = useState(1);
@@ -44,10 +44,12 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
                 total: quantity * price,
             }, { headers });
 
-            alert('Producto añadido al carrito.');
+            /*alert('Producto añadido al carrito.');*/
+            onSuccess("Producto añadido al carrito!");
         } catch (error) {
             console.error('Error al añadir producto al carrito:', error);
-            alert('Error al añadir producto al carrito.');
+            /*alert('Error al añadir producto al carrito.');*/
+            onError("Error al añadir producto al carrito");
         }
     };
 
@@ -78,9 +80,11 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
     const handleReserva = async () => {
         try {
             await addToCart(id, cantidad, precio);
+            /*Confirmar la reserva del producto*/
         } catch (error) {
             console.error('Error al reservar producto:', error);
-            alert('Error al reservar producto.');
+            /*alert('Error al reservar producto.');*/
+            onError("Error al reservar producto");
         }
     };
 

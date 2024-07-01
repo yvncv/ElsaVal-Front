@@ -9,14 +9,20 @@
     }
 }
 
-.alert{
-    position: absolute;
+.alert,.fixedAlert{
     top: 10px;
     right: 10px;
     animation: slideInRight 0.5s ease-out;
+    z-index: 999; /* Z-index alto para que esté por encima de otros elementos */
+}
+.alert{
+    position: absolute;
+}
+.fixedAlert{
+    position: fixed;
 }
 
-.alert .btn-close{
+.alert .btn-close, .fixedAlert .btn-close{
     box-shadow: none !important; 
     -webkit-box-shadow: none !important; /* Eliminar el contorno azul en Webkit (Chrome, Safari) */
     -moz-box-shadow: none !important;

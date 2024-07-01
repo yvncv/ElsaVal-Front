@@ -65,13 +65,6 @@ const HistorialOrdenes = () => {
                     ) : (
                         orders.map(order => (
                             <OrdenesCard 
-                                /*key={order.id}
-                                id={order.id}
-                                orderStatus={order.status}
-                                products={order.products}
-                                orderSubtotal={order.subtotal_price}
-                                deliveryPrice={order.delivery_price}
-                                orderTotal={order.total_price}*/
                                 order={order}
                             />
                         ))

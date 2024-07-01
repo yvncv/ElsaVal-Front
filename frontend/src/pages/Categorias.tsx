@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import Producto from '../components/Producto.jsx';
 import { Product } from '../types/Product';
+import Alerta from '../components/Alerta.tsx';
 import './Categorias.css'; 
 
 interface Categoria {
@@ -19,6 +20,8 @@ const Categorias = () => {
     const [categorias, setCategorias] = useState<Categoria[]>([]);
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<number | null>(null);
     const [productos, setProductos] = useState<Product[]>([]);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
 
     const handleSelectChange = (event) => {
         const selectedId = parseInt(event.target.value, 10);
@@ -63,6 +66,27 @@ const Categorias = () => {
         mostrarProductos();
     }, []);
 
+    useEffect(() => {
+        if (success) {
+            const timer = setTimeout(() => setSuccess(''), 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [success]);
+
+    useEffect(() => {
+        if (error) {
+            const timer = setTimeout(() => setError(''), 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [error]);
+
+    const handleOnSuccess=(message)=>{/*para obtener los datos del componente de productos al darse con exito algo*/
+        setSuccess(message)
+    };
+
+    const handleOnError=(message)=>{/*para obtener los datos del componente de productos al darse con fracaso algo*/
+        setError(message)
+    };
     return (
         <div className="Nuestros-productos-main-container">
             <div className="cabezera-productos">
@@ -99,6 +123,16 @@ const Categorias = () => {
 
             {categoriaSeleccionada !== null && (
                 <div className="contenedor-resultados">
+                    {
+                        success 
+                        && 
+                        <Alerta variant='success' description={success} onClose={()=>{setSuccess('')}} isFixed={true}/>
+                    }
+                    {
+                        error 
+                        && 
+                        <Alerta variant='danger' description={error} onClose={()=>{setError('')}} isFixed={true}/>
+                    }
                     {categoriaSeleccionada !== 0 && (
                         <h1 className='resultados-title'>Resultados de: {categorias.find(categoria => categoria.id === categoriaSeleccionada)?.name}</h1>
                     )}
@@ -116,6 +150,8 @@ const Categorias = () => {
                                 category={producto.category.name}
                                 material={producto.material.name}
                                 stock={producto.stock}
+                                onError={handleOnError}
+                                onSuccess={handleOnSuccess}
                             />
                         ))}
                     </div>

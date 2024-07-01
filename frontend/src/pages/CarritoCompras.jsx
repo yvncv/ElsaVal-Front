@@ -228,12 +228,12 @@ const CarritoCompras = () => {
             {
                 success 
                 && 
-                <Alerta variant='success' description={success}/>
+                <Alerta variant='success' description={success} onClose={()=>{setSuccess('')}}/>
             }
             {
                 error 
                 && 
-                <Alerta variant='danger' description={error}/>
+                <Alerta variant='danger' description={error}  onClose={()=>{setError('')}}/>
             }
             <h1 className="mt-5">Mi Carrito</h1>
             <Form.Group className="mt-3">
