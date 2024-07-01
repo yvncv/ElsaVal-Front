@@ -4,6 +4,7 @@ import { Client } from '../types/Client';
 import { Form, Button, FormLabel } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faCheck, faXmark, faEye } from '@fortawesome/free-solid-svg-icons';
+import Alerta from '../components/Alerta.tsx';
 import './InfoCuenta.css';
 
 const Detalles: React.FC = () => {
@@ -21,6 +22,8 @@ const Detalles: React.FC = () => {
   const [streetAddress, setStreetAddress] = useState('');
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   useEffect(() => {
     if (loggedInUser) {
@@ -42,9 +45,19 @@ const Detalles: React.FC = () => {
     }
   }, [loggedInUser]);
 
-  if (!clientData) {
-    return <p>Cargando...</p>;
-  }
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => setSuccess(''), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => setError(''), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   const handleClick = (nombreBoton) => {
     switch (nombreBoton) {
@@ -115,17 +128,31 @@ const Detalles: React.FC = () => {
     })
       .then(response => {
         if (response.ok) {
-          alert('Los cambios se guardaron correctamente');
+          setSuccess('Los cambios se guardaron correctamente');
         } else {
-          alert('Error al guardar los cambios');
+          setError('Error al guardar los cambios');
         }
       })
       .catch(error => console.error('Error al actualizar el cliente', error));
   };
 
+  if (!clientData) {
+    return <p>Cargando...</p>;
+  }
+
   return (
     <>
       <Form className='FormInfo'>
+        {
+          success 
+          && 
+          <Alerta variant='success' description={success} onClose={()=>{setSuccess('')}} isFixed={false}/>
+        }
+        {
+          error 
+          && 
+          <Alerta variant='danger' description={error} onClose={()=>{setError('')}} isFixed={false}/>
+        }
         <h1>Información de la Cuenta</h1>
         <Form.Group className='SeccionDatosPersonales'>
           <Form.Group className='GroupForm'>
@@ -221,5 +248,3 @@ const Detalles: React.FC = () => {
 };
 
 export default Detalles;
-
-

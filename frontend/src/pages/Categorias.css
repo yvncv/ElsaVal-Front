@@ -99,6 +99,7 @@
     width: 80%;
     background-color: transparent;
     color:#88525B;
+    position: relative;
   }
   /*div con el titulo de los productos*/
   .resultados-title{

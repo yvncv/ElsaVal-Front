@@ -1,5 +1,6 @@
 .FormInfo{
     font-family: "Urbanist", sans-serif!important;
+    position: relative;
     display: flex;
     flex-direction: column;
     margin-top:20px;
