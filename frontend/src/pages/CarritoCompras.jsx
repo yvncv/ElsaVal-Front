@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useMemo } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { Container, Row, Col, Button, Table, Alert, Form } from 'react-bootstrap';
+import Alerta from '../components/Alerta.tsx';
 import './CarritoCompras.css';
 
 const CarritoCompras = () => {
@@ -227,16 +228,12 @@ const CarritoCompras = () => {
             {
                 success 
                 && 
-                <Alert className="alert" variant="success" transition={true} dismissible onClose={()=>setSuccess('')}>
-                    {success}
-                </Alert>
+                <Alerta variant='success' description={success}/>
             }
             {
                 error 
                 && 
-                <Alert className="alert" variant="danger" transition={true} dismissible onClose={()=>setError('')} >
-                    {error}
-                </Alert>
+                <Alerta variant='danger' description={error}/>
             }
             <h1 className="mt-5">Mi Carrito</h1>
             <Form.Group className="mt-3">

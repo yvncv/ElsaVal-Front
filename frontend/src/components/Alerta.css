@@ -1,0 +1,23 @@
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.alert{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    animation: slideInRight 0.5s ease-out;
+}
+
+.alert .btn-close{
+    box-shadow: none !important; 
+    -webkit-box-shadow: none !important; /* Eliminar el contorno azul en Webkit (Chrome, Safari) */
+    -moz-box-shadow: none !important;
+}
