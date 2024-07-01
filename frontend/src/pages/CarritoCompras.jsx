@@ -58,6 +58,21 @@ const CarritoCompras = () => {
         fetchClientAddress();
     }, [loggedInUser, headers, apiUrl]);
     
+    useEffect(() => {
+        if (success) {
+            const timer = setTimeout(() => setSuccess(''), 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [success]);
+
+    useEffect(() => {
+        if (error) {
+            const timer = setTimeout(() => setError(''), 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [error]);
+
+
     const addToCart = async (productId, quantity, price) => {
         try {
             if (!token) {
@@ -209,9 +224,21 @@ const CarritoCompras = () => {
 
     return (
         <Container className='CartContainer'>
+            {
+                success 
+                && 
+                <Alert className="alert" variant="success" transition={true} dismissible onClose={()=>setSuccess('')}>
+                    {success}
+                </Alert>
+            }
+            {
+                error 
+                && 
+                <Alert className="alert" variant="danger" transition={true} dismissible onClose={()=>setError('')} >
+                    {error}
+                </Alert>
+            }
             <h1 className="mt-5">Mi Carrito</h1>
-            {success && <Alert variant="success">{success}</Alert>}
-            {error && <Alert variant="danger">{error}</Alert>}
             <Form.Group className="mt-3">
                 <Form.Label>Dirección de entrega</Form.Label>
                 <Form.Control
