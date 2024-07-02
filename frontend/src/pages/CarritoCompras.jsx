@@ -42,6 +42,60 @@ const CarritoCompras = () => {
         fetchCart();
     }, [token, headers]);
 
+    const limaDistricts = new Set([
+        'Ancón', 'Ate', 'Barranco', 'Carabayllo', 'Cercado de Lima', 'Chaclacayo',
+        'Chorrillos', 'Cieneguilla', 'Comas', 'El Agustino', 'Independencia',
+        'Jesús Maria', 'La Molina', 'La Victoria', 'Lince', 'Los Olivos',
+        'San Juan de Lurigancho', 'Lurín', 'Magdalena del Mar', 'Miraflores',
+        'Pachacamac', 'Pucusana', 'Pueblo Libre', 'Puente Piedra', 'Punta Hermosa',
+        'Punta Negra', 'Rímac', 'San Bartolo', 'San Borja', 'San Isidro',
+        'San Juan de Miraflores', 'San Luis', 'San Martin de Porres', 'San Miguel',
+        'Santa Anita', 'Santa María del Mar', 'Santiago de Surco', 'Surquillo',
+        'Villa el Salvador', 'Villa Maria del Triunfo'
+    ]);
+    const deliveryCosts = {
+        'Ancón': 30,
+        'Ate': 20,
+        'Barranco': 8,
+        'Carabayllo': 30,
+        'Cercado de Lima': 15,
+        'Chaclacayo': 30,
+        'Chorrillos': 10,
+        'Cieneguilla': 30,
+        'Comas': 30,
+        'El Agustino': 30,
+        'Independencia': 30,
+        'Jesús Maria': 12,
+        'La Molina': 15,
+        'La Victoria': 15,
+        'Lince': 15,
+        'Los Olivos': 30,
+        'San Juan de Lurigancho': 20,
+        'Lurín': 30,
+        'Magdalena del Mar': 12,
+        'Miraflores': 8,
+        'Pachacamac': 30,
+        'Pucusana': 30,
+        'Pueblo Libre': 12,
+        'Puente Piedra': 30,
+        'Punta Hermosa': 30,
+        'Punta Negra': 30,
+        'Rímac': 15,
+        'San Bartolo': 30,
+        'San Borja': 8,
+        'San Isidro': 8,
+        'San Juan de Miraflores': 15,
+        'San Luis': 12,
+        'San Martin de Porres': 30,
+        'San Miguel': 15,
+        'Santa Anita': 30,
+        'Santa María del Mar': 30,
+        'Santiago de Surco': 8,
+        'Surquillo': 10,
+        'Villa el Salvador': 20,
+        'Villa Maria del Triunfo': 20,
+    };
+    
     useEffect(() => {
         const fetchClientAddress = async () => {
             if (loggedInUser) {
@@ -176,6 +230,20 @@ const CarritoCompras = () => {
                 throw new Error('Usuario no autenticado.');
             }
     
+            // Validar dirección y obtener costo de entrega
+            let deliveryPrice = null;
+            const isValidAddress = Array.from(limaDistricts).some(district => {
+                if (deliveryAddress.includes(district)) {
+                    deliveryPrice = deliveryCosts[district];
+                    return true;
+                }
+                return false;
+            });
+    
+            if (!isValidAddress) {
+                throw new Error('La dirección de entrega debe estar dentro de un distrito de Lima válido.');
+            }
+    
             let orderStatus = 'processing';
     
             const orderProducts = items.map(item => ({
@@ -194,7 +262,7 @@ const CarritoCompras = () => {
             const response = await axios.post(`${apiUrl}/elsaval/orders`, {
                 client_id: loggedInUser.id,
                 status: orderStatus,
-                delivery_price: null,
+                delivery_price: deliveryPrice,
                 discount: null,
                 street_address: deliveryAddress,
                 details: details,
@@ -214,8 +282,7 @@ const CarritoCompras = () => {
             setError('Error al generar la orden.');
             console.error('Error al generar la orden:', error);
         }
-    };
-    
+    };    
     
     const handleContactNumberChange = (e) => {
         const value = e.target.value;
