@@ -40,6 +40,7 @@ export type Order = {
       quantity: number;
       total_price: string;
     }[];
+    file: File | null;
     created_at: string;
     updated_at: string;
   }
