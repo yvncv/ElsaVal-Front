@@ -133,7 +133,7 @@ const OrderDetailsPDF = ({ order }: { order: Order }) => {
           </View>
           <View style={styles.tableRow}>
             <Text style={styles.tableCell}>Detalles adicionales:</Text>
-            <Text style={styles.tableCellRight}>S/ {order.details}</Text>
+            <Text style={styles.tableCellRight}>{order.details}</Text>
           </View>
         </View>
       </Page>
