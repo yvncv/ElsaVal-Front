@@ -289,7 +289,7 @@ const CarritoCompras = () => {
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>ID</th>
+                                    {/* <th>ID</th> */}
                                     <th>Nombre</th>
                                     <th>Cantidad</th>
                                     <th>Precio</th>
@@ -301,7 +301,7 @@ const CarritoCompras = () => {
                                 {items.map((item, index) => (
                                     <tr key={item.id}>
                                         <td>{index + 1}</td>
-                                        <td>{item.product.id}</td>
+                                        {/* <td>{item.product.id}</td> */}
                                         <td>{item.product.name}</td>
                                         <td>
                                             <input
