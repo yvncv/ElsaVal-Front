@@ -11,6 +11,7 @@ import CarritoCompras from './pages/CarritoCompras';
 import InfoCuenta from './pages/InfoCuenta.tsx';
 import HistorialOrdenes from './pages/HistorialOrdenes.tsx';
 import DetallesOrden from './pages/DetallesOrden.tsx';
+import PasarelaPago from './pages/ProtoPasarela.tsx';
 import './App.css';
 import { DecodedToken } from './types/DecodedToken.ts';
 
@@ -53,6 +54,10 @@ function App() {
           <Route 
             path="/orden/:id" 
             element={loggedInUser?<DetallesOrden /> : <Navigate to="/login" replace />} />
+          <Route
+            path="/pago"
+            element={loggedInUser?<PasarelaPago/>:<Navigate to="/login" replace />}
+          />
         </Routes>
       </div>
     </Router>

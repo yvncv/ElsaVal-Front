@@ -34,15 +34,6 @@ const HistorialOrdenes = () => {
                             ...order,
                             status: stateMappings[order.status.toLowerCase()] || order.status//transforma el campo status
                             //fin nuevo
-                            /*products: order.products.map(product => ({
-                                name: product.product.name,
-                                quantity: product.quantity,
-                                unitPrice: product.unit_price,
-                                totalPrice: product.total_price
-                            })),
-                            subtotal_price: order.subtotal_price,
-                            delivery_price: order.delivery_price,
-                            total_price: order.total_price*/
                         })
                     );
                     setOrders(transformedOrders);

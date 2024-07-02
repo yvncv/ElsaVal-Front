@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Container, Row, Col, Button, Table, Alert, Form } from 'react-bootstrap';
 import Alerta from '../components/Alerta.tsx';
 import './CarritoCompras.css';
+import { Navigate } from 'react-router-dom';
 
 const CarritoCompras = () => {
     const [cart, setCart] = useState(null);
@@ -206,9 +207,7 @@ const CarritoCompras = () => {
             } else {
                 setSuccess('Orden generada correctamente.');
             }
-    
             deleteCart();
-    
         } catch (error) {
             setError('Error al generar la orden.');
             console.error('Error al generar la orden:', error);
