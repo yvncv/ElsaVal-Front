@@ -30,6 +30,7 @@ const CarritoCompras = () => {
                 }
 
                 const response = await axios.get(`${apiUrl}/carts/${localStorage.getItem('cartId')}`, { headers });
+                console.log(response)
                 setCart(response.data.data);
                 setItems(response.data.data.cart_items);
             } catch (error) {
@@ -285,7 +286,7 @@ const CarritoCompras = () => {
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Producto</th>
+                                    <th>Nombre</th>
                                     <th>Cantidad</th>
                                     <th>Precio</th>
                                     <th>Total</th>
@@ -296,7 +297,7 @@ const CarritoCompras = () => {
                                 {items.map((item, index) => (
                                     <tr key={item.id}>
                                         <td>{index + 1}</td>
-                                        <td>{item.id+1}</td>
+                                        <td>{item.product.name}</td>
                                         <td>
                                             <input
                                                 type="number"
