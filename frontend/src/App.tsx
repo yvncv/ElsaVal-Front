@@ -56,7 +56,7 @@ function App() {
             element={loggedInUser?<DetallesOrden /> : <Navigate to="/login" replace />} />
           <Route
             path="/pago"
-            element={loggedInUser?<PasarelaPago/>:<Navigate to="/login" replace />}
+            element={<PasarelaPago/>}
           />
         </Routes>
       </div>

@@ -1,0 +1,22 @@
+.pasarelaContainer{
+    padding:30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: "Urbanist", sans-serif!important;
+    color:#88525B;
+}
+.paragraphPayMethod{
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.tab-title-container{
+    color:#88525B;
+    font-weight: 500;
+    border-color: #752728!important;
+}
+
+.imgTitle{
+    height: 50px;
+}

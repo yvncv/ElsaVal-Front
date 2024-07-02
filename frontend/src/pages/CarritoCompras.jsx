@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext, useMemo } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
-import { Container, Row, Col, Button, Table, Alert, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button, Table, Form } from 'react-bootstrap';
 import Alerta from '../components/Alerta.tsx';
 import './CarritoCompras.css';
-import { Navigate } from 'react-router-dom';
 
 const CarritoCompras = () => {
     const [cart, setCart] = useState(null);
@@ -272,6 +271,10 @@ const CarritoCompras = () => {
                     </Button>
                     <Button onClick={generateOrder} className="btn-GenerarOrden ml-2">
                         Generar Orden
+                    </Button>
+
+                    <Button variant="primary" href='\pago'>
+                        Pagar
                     </Button>
                 </div>
             </Row>
