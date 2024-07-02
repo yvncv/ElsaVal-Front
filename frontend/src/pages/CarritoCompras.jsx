@@ -178,8 +178,13 @@ const CarritoCompras = () => {
     
             let orderStatus = 'processing';
     
+            const orderProducts = items.map(item => ({
+                product_id: item.product.id, // Asegúrate de usar el ID correcto del producto
+                quantity: item.quantity,
+            }));
+    
             for (const item of items) {
-                const isStockAvailable = await checkStock(item.product_id, item.quantity);
+                const isStockAvailable = await checkStock(item.product.id, item.quantity);
                 if (!isStockAvailable) {
                     orderStatus = 'new';
                     break;
@@ -192,12 +197,9 @@ const CarritoCompras = () => {
                 delivery_price: null,
                 discount: null,
                 street_address: deliveryAddress,
-                details: details, // Añadido el campo details
+                details: details,
                 contact_number: contactNumber,
-                order_products: items.map(item => ({
-                    product_id: item.product_id,
-                    quantity: item.quantity,
-                })),
+                order_products: orderProducts,
             }, { headers });
     
             console.log('Orden generada:', response.data);
@@ -213,6 +215,7 @@ const CarritoCompras = () => {
             console.error('Error al generar la orden:', error);
         }
     };
+    
     
     const handleContactNumberChange = (e) => {
         const value = e.target.value;
@@ -286,6 +289,7 @@ const CarritoCompras = () => {
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Cantidad</th>
                                     <th>Precio</th>
@@ -297,6 +301,7 @@ const CarritoCompras = () => {
                                 {items.map((item, index) => (
                                     <tr key={item.id}>
                                         <td>{index + 1}</td>
+                                        <td>{item.product.id}</td>
                                         <td>{item.product.name}</td>
                                         <td>
                                             <input
