@@ -21,7 +21,7 @@ const HistorialOrdenes = () => {
             try {
                 if (loggedInUser) {
                     const clientId = loggedInUser.id;//bien
-                    const apiUrl = `https://elsaval.com.pe/api/elsaval/orders/?client_id=${clientId}`;//bien
+                    const apiUrl = `https://elsaval.com.pe/api/orders/?client_id=${clientId}`;//bien
                     const response = await fetch(apiUrl, {
                         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },//bien
                     });//bien

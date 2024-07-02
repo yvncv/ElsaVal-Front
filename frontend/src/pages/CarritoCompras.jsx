@@ -259,7 +259,7 @@ const CarritoCompras = () => {
                 }
             }
     
-            const response = await axios.post(`${apiUrl}/elsaval/orders`, {
+            const response = await axios.post(`${apiUrl}/orders`, {
                 client_id: loggedInUser.id,
                 status: orderStatus,
                 delivery_price: deliveryPrice,
