@@ -20,7 +20,7 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
         }
     }, [stock]);
 
-    const addToCart = async (productId, quantity, price) => {
+    const addToCart = async (productId, quantity, price,name) => {
         try {
             const token = localStorage.getItem('token') ?? '';
             if (!token) {
@@ -31,7 +31,9 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
 
             let cartId = localStorage.getItem('cartId');
             if (!cartId) {
+                console.log("a")
                 const response = await axios.post(`${apiUrl}/carts`, {}, { headers });
+                console.log(response)
                 cartId = response.data.data.id;
                 localStorage.setItem('cartId', cartId);
             }
@@ -42,6 +44,7 @@ const Producto = ({ id, nombre, imagenes, precio, descripcion, category, materia
                 quantity: quantity,
                 price: price,
                 total: quantity * price,
+                name: name,
             }, { headers });
 
             /*alert('Producto añadido al carrito.');*/
