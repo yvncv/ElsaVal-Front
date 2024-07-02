@@ -196,7 +196,7 @@ const Detalles: React.FC = () => {
             />
           </Form.Group>
         </Form.Group>
-        <Button className="btnCambiarContraseña" onClick={() => { handleClick("btnCambiarContraseña") }}>Cambiar contraseña</Button>
+        {/*<Button className="btnCambiarContraseña" onClick={() => { handleClick("btnCambiarContraseña") }}>Cambiar contraseña</Button>*/}
         {
           // empieza la seccion de la contraseña
           cambiarContra === true && (

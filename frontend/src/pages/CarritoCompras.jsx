@@ -344,9 +344,9 @@ const CarritoCompras = () => {
                         Generar Orden
                     </Button>
 
-                    <Button variant="primary" href='\pago'>
+                    {/*<Button variant="primary" href='\pago'>
                         Pagar
-                    </Button>
+                    </Button>*/}
                 </div>
             </Row>
             <Row className="row-sheet">
