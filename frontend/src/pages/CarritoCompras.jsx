@@ -296,7 +296,7 @@ const CarritoCompras = () => {
                                 {items.map((item, index) => (
                                     <tr key={item.id}>
                                         <td>{index + 1}</td>
-                                        <td>{item.product_id}</td>
+                                        <td>{item.id+1}</td>
                                         <td>
                                             <input
                                                 type="number"

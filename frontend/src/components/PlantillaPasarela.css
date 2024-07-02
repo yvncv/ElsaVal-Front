@@ -1,0 +1,22 @@
+.payMethodContainer{
+    display: flex;
+    flex-direction: row;
+}
+.ways2payContainer{
+    width: 50%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+}
+.Subtitle{
+    font-size: 20px;
+    font-weight: 400;
+}
+.imagePay{
+    height: 400px!important;
+}
+.phone_text{
+    font-size: 25px;
+}

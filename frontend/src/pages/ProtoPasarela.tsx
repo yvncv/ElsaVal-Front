@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import ContentPayMethod from '../components/PlantillaPasarela.tsx';
 import './ProtoPasarela.css';
 const PasarelaPago=()=>{
     //estados de key
@@ -9,13 +10,13 @@ const PasarelaPago=()=>{
     const QRPayMethods=[
         //yape
         {
-            QRCode:"C:\\Users\\Edgar\\Desktop\\Elsaval front\\ElsaVal-Front\\frontend\\public\\images\\QR_Yape.jpg",
+            QRCode:"/images/QR_Yape.jpg",
             IconURL: '/images/Yape_logo.svg', 
             Name: 'Yape'
         },
         //Plin
         {
-            QRCode:"C:\\Users\\Edgar\\Desktop\\Elsaval front\\ElsaVal-Front\\frontend\\public\\images\\QR_Plin.jpg",
+            QRCode:"/images/QR_Plin.jpg",
             IconURL: '/images/Plin_logo.svg', 
             Name: 'Plin'
         }
@@ -45,7 +46,7 @@ const PasarelaPago=()=>{
                                 </div>
                             }
                             >
-                                Tab content for {paymethod.Name}
+                                <ContentPayMethod QRcode={paymethod.QRCode} name={paymethod.Name}/>
                             </Tab>
                         )
                     )
