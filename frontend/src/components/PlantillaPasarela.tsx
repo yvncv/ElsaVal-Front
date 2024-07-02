@@ -1,4 +1,5 @@
 import React from "react";
+import {Form} from 'react-bootstrap'
 import './PlantillaPasarela.css';
 const ContentPayMethod= ({QRcode,name})=>{
     return(
@@ -10,7 +11,8 @@ const ContentPayMethod= ({QRcode,name})=>{
                 <p className="phone_text">+51 997 166 933</p>
             </div>
             <div className="uploadContainer">
-
+                <h1 className="Subtitle">Luego adjunta una imagen del comprobante de pago</h1>
+                <Form.Control className="inputImagen" type="file" />
             </div>
         </div>
     );
