@@ -14,7 +14,7 @@ import DetallesOrden from './pages/DetallesOrden.tsx';
 import PasarelaPago from './pages/ProtoPasarela.tsx';
 import './App.css';
 import { DecodedToken } from './types/DecodedToken.ts';
-
+import ContentPayMethod from './components/PlantillaPasarela.tsx';
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState<DecodedToken['user'] | null>(null);
@@ -57,6 +57,10 @@ function App() {
           <Route
             path="/pago"
             element={<PasarelaPago/>}
+          />
+          <Route
+            path="/ContentPayMethod"
+            element={<ContentPayMethod QRcode="/images/QR_Yape.jpg" name="Yape" />} // Proporcionar las propiedades necesarias
           />
         </Routes>
       </div>
